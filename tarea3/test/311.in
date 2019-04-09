@@ -1,0 +1,27 @@
+# prueba de suma_ultimos_pares
+suma_ultimos_pares 0
+suma_ultimos_pares 1
+insertar_en_binario (2,g)
+suma_ultimos_pares 0
+suma_ultimos_pares 1
+suma_ultimos_pares 2
+insertar_en_binario (1,m)
+suma_ultimos_pares 0
+suma_ultimos_pares 1
+suma_ultimos_pares 2
+insertar_en_binario (4,s)
+suma_ultimos_pares 0
+suma_ultimos_pares 1
+suma_ultimos_pares 2
+insertar_en_binario (1,i)
+insertar_en_binario (-2,j)
+insertar_en_binario (1,k)
+insertar_en_binario (10,h)
+suma_ultimos_pares 2
+suma_ultimos_pares 3
+suma_ultimos_pares 4
+insertar_en_binario (3,d)
+suma_ultimos_pares 5
+insertar_en_binario (6,f)
+suma_ultimos_pares 5
+Fin

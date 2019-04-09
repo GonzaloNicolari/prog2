@@ -1,0 +1,21 @@
+# prueba de esAVL
+es_AVL
+insertar_en_binario (1,ab)
+insertar_en_binario (100,abc)
+es_AVL
+insertar_en_binario (10,aba)
+es_AVL
+insertar_en_binario (1,abb)
+es_AVL
+insertar_en_binario (1,abd)
+es_AVL
+insertar_en_binario (1,aaaaa)
+# los dos subarboles son no vacios y AVL. Pero el árbol no es AVL
+es_AVL
+insertar_en_binario (1,aaaab)
+insertar_en_binario (1,aaaaz)
+# las alturas de los subárboles son iguales. Pero el árbol no es AVL.
+es_AVL
+insertar_en_binario (1,a)
+es_AVL
+Fin

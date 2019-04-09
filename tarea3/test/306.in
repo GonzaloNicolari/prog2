@@ -1,0 +1,14 @@
+# prueba de linealizacion
+linealizacion
+insertar_en_binario (1,ab)
+insertar_en_binario (100,abc)
+insertar_en_binario (10,aba)
+insertar_en_binario (1,abb)
+linealizacion
+insertar_en_binario (1,abaa)
+insertar_en_binario (1,aaaaa)
+insertar_en_binario (1,aaaab)
+insertar_en_binario (1,aaaaz)
+insertar_en_binario (1,aaaza)
+linealizacion
+Fin

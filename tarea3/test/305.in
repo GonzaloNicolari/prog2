@@ -1,0 +1,29 @@
+# prueba de menores
+menores 5
+insertar_en_binario (5,g)
+menores 5
+menores 6
+insertar_en_binario (7,k)
+menores 5
+menores 6
+menores 8
+insertar_en_binario (4,c)
+menores 5	    
+menores 6
+menores 8
+insertar_en_binario (8,i)
+insertar_en_binario (8,h)
+insertar_en_binario (6,p)
+insertar_en_binario (4,m)
+imprimir_binario
+menores 7
+insertar_en_binario (1,e)
+menores 6
+menores 5
+insertar_en_binario (3,b)
+insertar_en_binario (9,a)
+menores 5
+insertar_en_binario (2,d)
+imprimir_binario
+menores 5
+Fin

@@ -1,0 +1,18 @@
+# prueba es_camino
+es_camino (-1, arbol) .
+insertar_en_binario (-1, arbol)
+es_camino (-1, arbol) .
+insertar_en_binario (1, mesa)
+es_camino (-1, arbol) (2, mesa) .
+insertar_en_binario (2, silla)
+es_camino (-1, arbol) (2, silla) .
+es_camino (-1, arbol) (2, mesa) .
+es_camino (1, mesa) (2, silla) .
+es_camino (-1, arbol) (1, mesa) (2, silla) .
+insertar_en_binario (-20, casa)
+insertar_en_binario (100, ancla)
+es_camino (-1, arbol) (1, ancla) .
+es_camino (-1, arbol) (100, ancla) .
+es_camino (-1, arbol) (100, ancla) (-20, casa) .
+es_camino (-1, arbol) (1, mesa) (-20, casa) .
+Fin

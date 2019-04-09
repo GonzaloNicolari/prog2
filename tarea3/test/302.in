@@ -1,0 +1,33 @@
+# prueba de izquierdo, derecho, altura_binario, imprimir_binario, buscar_subarbol
+altura_binario
+imprimir_binario
+insertar_en_binario (8,r)
+altura_binario
+imprimir_binario
+izquierdo
+derecho
+insertar_en_binario (6,y)
+altura_binario
+imprimir_binario
+izquierdo
+derecho
+insertar_en_binario (6,t)
+altura_binario
+insertar_en_binario (4,m)
+altura_binario
+imprimir_binario
+izquierdo
+derecho
+insertar_en_binario (4,g)
+insertar_en_binario (4,d)
+insertar_en_binario (4,h)
+insertar_en_binario (4,i)
+insertar_en_binario (4,j)
+altura_binario
+imprimir_binario
+izquierdo
+derecho
+Fin
+
+
+

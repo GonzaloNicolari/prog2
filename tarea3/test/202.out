@@ -1,0 +1,194 @@
+1>#  Prueba cadena.
+2>loc no válido.
+3>loc no es final de cad.
+4>loc no es incio de cad.
+5>cad vacia.
+6>Insertado al final.
+7>loc no válido.
+8>loc no es final de cad.
+9>loc no es incio de cad.
+10>cad no vacia.
+11>Localizador no válido.
+12>(1,a)
+13>Insertado al final.
+14>Localizador no válido.
+15>(1,a)(2,b)
+16>loc al inicio.
+17>loc válido.
+18>loc no es final de cad.
+19>loc es incio de cad.
+20>loc al final.
+21>loc válido.
+22>loc es final de cad.
+23>loc no es incio de cad.
+24>Insertado al final.
+25>Insertado al final.
+26>Insertado al final.
+27>Insertado al final.
+28>Insertado al final.
+29>Insertado al final.
+30>(1,a)(2,b)(3,c)(4,d)(5,e)(6,f)(8,h)(9,i)
+31>loc válido.
+32>loc no es final de cad.
+33>(2,b)
+34>loc al siguiente.
+35>loc al siguiente.
+36>loc al siguiente.
+37>loc al siguiente.
+38>loc al siguiente.
+39>loc al siguiente.
+40>loc válido.
+41>loc es final de cad.
+42>(9,i)
+43>loc al anterior.
+44>loc al anterior.
+45>loc válido.
+46>loc no es final de cad.
+47>(6,f)
+48>loc al siguiente.
+49>Insertado antes de loc.
+50>(1,a)(2,b)(3,c)(4,d)(5,e)(6,f)(7,g)(8,h)(9,i)
+51>(8,h)
+52>loc pertenece a cad.
+53>loc1 precede a loc.
+54>loc1 precede a loc.
+55>loc1 no precede a loc.
+56>loc en la posición 2.
+57>(2,b)
+58>loc en la posición 4.
+59>(4,d)
+60>loc en la posición 5.
+61>(5,e)
+62>loc en la posición 9.
+63>(9,i)
+64>loc avanzó hasta el menor.
+65>(9,i)
+66>loc en la posición 1.
+67>loc avanzó hasta el menor.
+68>(1,a)
+69>loc en la posición 5.
+70>loc avanzó hasta el menor.
+71>(5,e)
+72>Insertado antes de loc.
+73>Insertado antes de loc.
+74>loc en la posición 4.
+75>loc avanzó hasta el menor.
+76>(4,d)
+77>(1,a)(2,b)(3,c)(4,d)(4,dd)(5,ee)(5,e)(6,f)(7,g)(8,h)(9,i)
+78>loc avanzó buscando 7.
+79>(7,g)
+80>loc al inicio.
+81>loc avanzó buscando 2.
+82>(2,b)
+83>loc en la posición 5.
+84>Cambio.
+85>loc al siguiente.
+86>Cambio.
+87>(1,a)(2,b)(3,c)(4,d)(10,j)(11,k)(5,e)(6,f)(7,g)(8,h)(9,i)
+88>Intercambio.
+89>(1,a)(2,b)(3,c)(4,d)(11,k)(10,j)(5,e)(6,f)(7,g)(8,h)(9,i)
+90>Intercambio.
+91>Intercambio.
+92>Intercambio.
+93>Intercambio.
+94>Intercambio.
+95>(1,a)(2,b)(3,c)(4,d)(11,k)(5,e)(6,f)(7,g)(8,h)(9,i)(10,j)
+96>Intercambio.
+97>Intercambio.
+98>(1,a)(2,b)(3,c)(4,d)(8,h)(5,e)(6,f)(7,g)(10,j)(9,i)(11,k)
+99>Intercambio.
+100>Intercambio.
+101>Intercambio.
+102>Intercambio.
+103>(1,a)(2,b)(3,c)(4,d)(5,e)(6,f)(7,g)(8,h)(9,i)(10,j)(11,k)
+104>loc al final.
+105>Segmento insertado después de loc.
+106>(1,a)(2,b)(3,c)(4,d)(5,e)(6,f)(7,g)(8,h)(9,i)(10,j)(11,k)(12,l)(13,m)
+107>loc al inicio.
+108>loc al siguiente.
+109>Segmento insertado después de loc.
+110>(1,a)(2,b)(14,n)(15,0)(3,c)(4,d)(5,e)(6,f)(7,g)(8,h)(9,i)(10,j)(11,k)(12,l)(13,m)
+111>(1,a)(2,b)(3,c)(4,d)(5,e)(6,f)(7,g)(8,h)(9,i)(10,j)(11,k)(12,l)(13,m)
+112>(1,a)(2,b)(3,c)(4,d)(5,e)(6,f)(7,g)(8,h)(9,i)(10,j)
+113>(2,b)(3,c)(4,d)(5,e)(6,f)(7,g)(8,h)(9,i)(10,j)
+114>(2,b)(3,c)(4,d)
+115>(5,e)(6,f)(7,g)(8,h)(9,i)(10,j)
+116>(2,b)(3,c)(4,d)(5,e)(6,f)(7,g)(8,h)(9,i)(10,j)
+117>(2,b)
+118>Removido.
+119>(3,c)(4,d)(5,e)(6,f)(7,g)(8,h)(9,i)(10,j)
+120>loc no pertenece a cad.
+121>loc al inicio.
+122>loc al siguiente.
+123>loc al siguiente.
+124>loc al siguiente.
+125>loc al siguiente.
+126>(7,g)
+127>Removido.
+128>(3,c)(4,d)(5,e)(6,f)(8,h)(9,i)(10,j)
+129>loc al final.
+130>Removido.
+131>(3,c)(4,d)(5,e)(6,f)(8,h)(9,i)
+132>Estructuras reiniciadas.
+133>
+134>loc no válido.
+135>loc no es final de cad.
+136>loc no es incio de cad.
+137>cad vacia.
+138>Estructuras reiniciadas.
+139>#  Prueba uso_cadena.
+140>1 no pertenece a cad.
+141>Longitud: 0
+142>cad ordenada.
+143>Insertado al final.
+144>1 pertenece a cad.
+145>Longitud: 1
+146>Insertado al final.
+147>5 pertenece a cad.
+148>2 no pertenece a cad.
+149>Longitud: 2
+150>cad ordenada.
+151>Insertado al final.
+152>Insertado al final.
+153>Insertado al final.
+154>Insertado al final.
+155>Insertado al final.
+156>(1,a)(5,e)(3,c)(4,d)(6,f)(8,h)(9,i)
+157>Longitud: 7
+158>cad no ordenada.
+159>6 pertenece a cad.
+160>Ordenada.
+161>(1,a)(3,c)(4,d)(5,e)(6,f)(8,h)(9,i)
+162>(1,a)(2,bb)(3,c)(3,cc)(4,d)(5,e)(6,f)(6,ff)(8,h)(9,i)(9,ii)(10,jj)(11,kk)
+163>(1,a)(3,c)(4,d)(5,e)(6,f)(8,h)(9,i)
+164>(1,a)(3,c)(4,d)(5,e)(6,f)(8,h)(9,i)(10,j)(11,k)(12,l)(13,m)
+165>(1,a)(3,c)(4,d)(5,e)(6,f)(8,h)(9,i)
+166>Cambiados.
+167>(2,a)(3,c)(4,d)(5,e)(6,f)(8,h)(9,i)
+168>Cambiados.
+169>Cambiados.
+170>Cambiados.
+171>Cambiados.
+172>Cambiados.
+173>Cambiados.
+174>(2,a)(10,c)(10,d)(12,e)(10,f)(12,h)(14,i)
+175>Estructuras reiniciadas.
+176>cad vacia.
+177>Insertado al final.
+178>Insertado al final.
+179>Localizador no válido.
+180>loc al final.
+181>loc en la posición 2.
+182>(6,b)(7,a)
+183>Posición fuera de rango.
+184>(6,b)(7,a)
+185>Estructuras reiniciadas.
+186>1 no pertenece a cad.
+187>Insertado al final.
+188>1 pertenece a cad.
+189>Longitud: 1
+190>(1,a)(2,b)(5,c)(3,g)
+191>(1,a)
+192>Ordenada.
+193>(1,a)
+194>Fin.

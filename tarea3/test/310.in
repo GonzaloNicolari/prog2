@@ -1,0 +1,24 @@
+# prueba de nivel_en_binario
+nivel_en_binario 1
+insertar_en_binario (1,g)
+nivel_en_binario 1
+nivel_en_binario 2
+insertar_en_binario (2,d)
+nivel_en_binario 1
+nivel_en_binario 2
+nivel_en_binario 3
+insertar_en_binario (2,m)
+nivel_en_binario 2
+insertar_en_binario (3,k)
+insertar_en_binario (3,r)
+insertar_en_binario (3,b)
+insertar_en_binario (3,e)
+nivel_en_binario 3
+insertar_en_binario (4,a)
+insertar_en_binario (4,z)
+nivel_en_binario 1
+nivel_en_binario 2
+nivel_en_binario 3
+nivel_en_binario 4
+nivel_en_binario 5
+Fin

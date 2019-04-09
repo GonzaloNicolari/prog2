@@ -1,0 +1,21 @@
+1>#  prueba de esAVL.
+2>AVL.
+3>Insertado.
+4>Insertado.
+5>AVL.
+6>Insertado.
+7>No AVL.
+8>Insertado.
+9>No AVL.
+10>Insertado.
+11>No AVL.
+12>Insertado.
+13>#  los dos subarboles son no vacios y AVL. Pero el árbol no es AVL.
+14>No AVL.
+15>Insertado.
+16>Insertado.
+17>#  las alturas de los subárboles son iguales. Pero el árbol no es AVL..
+18>No AVL.
+19>Insertado.
+20>AVL.
+21>Fin.

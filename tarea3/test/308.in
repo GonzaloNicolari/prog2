@@ -1,0 +1,8 @@
+# prueba cadena_a_binario
+cadena_a_binario .
+cadena_a_binario (4,a) .
+cadena_a_binario (4,a) (2,b) (3,c) .
+cadena_a_binario (4,a) (2,b) (3,c) (7,d) .
+cadena_a_binario (4,a) (2,b) (3,c) (1,d) (5,e) (1,f) (7,g) (1,h) (4,i) (2,j) (3,k) (1,l) (5,m) (1,n) (7,o) .
+cadena_a_binario (4,a) (2,b) (3,c) (1,d) (5,e) (1,f) (7,g) (1,h) (4,i) (2,j) (3,k) (1,l) (5,m) (1,n) (7,o) (2,p) .
+Fin

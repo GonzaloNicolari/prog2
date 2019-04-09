@@ -1,0 +1,20 @@
+# prueba de es_vacio_binario, insertar_en_binario, raiz, cantidad_binario
+es_vacio_binario
+cantidad_binario
+insertar_en_binario (8,r)
+raiz
+es_vacio_binario
+cantidad_binario
+insertar_en_binario (6,y)
+insertar_en_binario (6,t)
+cantidad_binario
+insertar_en_binario (4,m)
+cantidad_binario
+insertar_en_binario (4,g)
+insertar_en_binario (4,d)
+insertar_en_binario (4,h)
+insertar_en_binario (4,i)
+insertar_en_binario (4,j)
+cantidad_binario
+raiz
+Fin

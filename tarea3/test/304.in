@@ -1,0 +1,35 @@
+# prueba de remover_de_binario
+insertar_en_binario (6,r)
+remover_de_binario r
+imprimir_binario
+insertar_en_binario (6,r)
+insertar_en_binario (6,y)
+remover_de_binario y
+imprimir_binario
+insertar_en_binario (6,m)
+remover_de_binario m
+imprimir_binario
+insertar_en_binario (6,y)
+remover_de_binario r
+imprimir_binario
+insertar_en_binario (6,m)
+remover_de_binario y
+imprimir_binario
+insertar_en_binario (6,d)
+insertar_en_binario (6,y)
+remover_de_binario m
+imprimir_binario
+insertar_en_binario (6,m)
+insertar_en_binario (6,r)
+insertar_en_binario (6,o)
+insertar_en_binario (6,p)
+insertar_en_binario (6,g)
+insertar_en_binario (6,j)
+insertar_en_binario (6,i)
+insertar_en_binario (6,h)
+insertar_en_binario (6,l)
+insertar_en_binario (6,k)
+imprimir_binario
+remover_de_binario m
+imprimir_binario
+Fin

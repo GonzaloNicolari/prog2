@@ -1,0 +1,261 @@
+# prueba de es_vacia_cadena, insertar_al_final, imprimir_cadena
+es_vacia_cadena
+imprimir_cadena
+insertar_al_final (1,a)
+es_vacia_cadena
+imprimir_cadena
+insertar_al_final (3,c)
+insertar_al_final (2,b)
+imprimir_cadena
+reiniciar
+# prueba de insertar_antes, inicio_cadena, final_cadena, kesimo, siguiente, anterior, es_localizador, es_inicio_cadena, es_final_cadena
+es_localizador
+inicio_cadena
+final_cadena
+es_inicio_cadena
+es_final_cadena
+insertar_al_final (1,a)
+es_inicio_cadena
+es_final_cadena
+inicio_cadena
+es_localizador
+es_inicio_cadena
+es_final_cadena
+insertar_antes (2,b)
+es_localizador
+es_inicio_cadena
+es_final_cadena
+imprimir_cadena
+final_cadena
+es_localizador
+es_inicio_cadena
+es_final_cadena
+insertar_antes (3,c)
+imprimir_cadena
+anterior
+es_localizador
+insertar_antes (4,d)
+imprimir_cadena
+inicio_cadena
+es_inicio_cadena
+es_final_cadena
+siguiente
+es_localizador
+insertar_antes (5,e)
+imprimir_cadena
+kesimo 3
+es_localizador
+es_inicio_cadena
+es_final_cadena
+insertar_antes (6,f)
+imprimir_cadena
+final_cadena
+siguiente
+es_localizador
+insertar_antes (6,f)
+inicio_cadena
+anterior
+es_localizador
+insertar_antes (6,f)
+reiniciar # prueba de remover_de_cadena, cambiar_en_cadena, intercambiar, info_cadena, localizador_en_cadena
+remover_de_cadena
+cambiar_en_cadena (1,a)
+insertar_al_final (1,a)
+remover_de_cadena
+inicio_cadena
+remover_de_cadena
+es_vacia_cadena
+remover_de_cadena
+insertar_al_final (2,b)
+insertar_al_final (3,c)
+inicio_cadena
+localizador_en_cadena
+remover_de_cadena
+localizador_en_cadena
+es_vacia_cadena
+imprimir_cadena
+insertar_al_final (4,d)
+final_cadena
+localizador_en_cadena
+remover_de_cadena
+localizador_en_cadena
+es_vacia_cadena
+imprimir_cadena
+insertar_al_final (5,e)
+final_cadena
+anterior
+remover_de_cadena
+imprimir_cadena
+insertar_al_final (6,f)
+insertar_al_final (7,g)
+insertar_al_final (8,h)
+imprimir_cadena
+kesimo 2
+localizador_en_cadena
+remover_de_cadena
+localizador_en_cadena
+info_cadena
+imprimir_cadena
+cambiar_en_cadena (1,a)
+inicio_cadena
+info_cadena
+cambiar_en_cadena (9,i)
+info_cadena
+imprimir_cadena
+final_cadena
+info_cadena
+cambiar_en_cadena (10,j)
+info_cadena
+imprimir_cadena
+kesimo 2
+info_cadena
+cambiar_en_cadena (11,k)
+info_cadena
+imprimir_cadena
+intercambiar 1 1
+imprimir_cadena
+intercambiar 2 2
+imprimir_cadena
+intercambiar 3 3
+imprimir_cadena
+intercambiar 1 2
+imprimir_cadena
+intercambiar 3 1
+imprimir_cadena
+intercambiar 2 3
+imprimir_cadena
+reiniciar # prueba de insertar_segmento_despues, copiar_segmento, cortar_segmento, precede_en_cadena, menor_en_cadena, siguiente_clave
+precede_en_cadena 1
+insertar_segmento_despues .
+es_vacia_cadena
+imprimir_cadena
+precede_en_cadena 1
+copiar_segmento 1 1
+cortar_segmento 1 1
+insertar_segmento_despues (1,a) .
+es_vacia_cadena
+imprimir_cadena
+copiar_segmento 1 1
+cortar_segmento 1 1
+insertar_segmento_despues (2,b) (3,c) (4,d) (5,e) .
+imprimir_cadena
+inicio_cadena
+precede_en_cadena 1
+precede_en_cadena 2
+siguiente
+insertar_segmento_despues .
+imprimir_cadena
+insertar_segmento_despues (6,f) .
+imprimir_cadena
+final_cadena
+precede_en_cadena 1
+precede_en_cadena 5
+insertar_segmento_despues (7,g) (8,h) .
+imprimir_cadena
+insertar_segmento_despues (9,i) (10,j) .
+precede_en_cadena 4
+precede_en_cadena 5
+precede_en_cadena 6
+imprimir_cadena
+copiar_segmento 1 1
+copiar_segmento 5 5
+copiar_segmento 9 9
+copiar_segmento 1 9
+copiar_segmento 2 8
+cortar_segmento 9 9
+cortar_segmento 1 1
+cortar_segmento 4 4
+cortar_segmento 4 6
+cortar_segmento 1 2
+cortar_segmento 1 1
+es_vacia_cadena
+insertar_segmento_despues (2,b) (3,c) (4,d) (1,a) .
+inicio_cadena
+info_cadena
+menor_en_cadena
+info_cadena
+insertar_segmento_despues (5,e) (6,f) (7,g) (0,0) (8,h) .
+menor_en_cadena
+info_cadena
+siguiente_clave 1
+es_localizador
+final_cadena
+menor_en_cadena
+info_cadena
+siguiente_clave 8
+es_localizador
+info_cadena
+kesimo 2
+siguiente_clave 3
+info_cadena
+siguiente_clave 7
+info_cadena
+reiniciar # prueba de pertenece, longitud, cambiar_todos, concatenar
+pertenece 1
+longitud
+cambiar_todos 5 6
+concatenar .
+concatenar (9,i) .
+insertar_al_final (5,e)
+concatenar .
+concatenar (9,i) .
+cambiar_todos 5 6
+imprimir_cadena
+cambiar_todos 6 5
+longitud
+pertenece 1
+pertenece 5
+final_cadena
+insertar_segmento_despues (2,a) (5,b) (1,c) (4,d) .
+concatenar .
+concatenar (9,i) .
+concatenar (9,i) (8,h) (7,g) (6,f) .
+longitud
+cambiar_todos 6 3
+pertenece 5
+pertenece 1
+pertenece 2
+pertenece 4
+pertenece 3
+pertenece 6
+cambiar_todos 5 6
+pertenece 5
+pertenece 6
+imprimir_cadena
+reiniciar # prueba de esta_ordenada, mezcla, ordenar
+esta_ordenada
+mezcla .
+ordenar
+imprimir_cadena
+mezcla (1,a) (2,b) (3,c) .
+insertar_al_final (10,j)
+esta_ordenada
+mezcla .
+ordenar
+imprimir_cadena
+mezcla (1,a) (2,b) (3,c) .
+final_cadena
+insertar_antes (1,z)
+esta_ordenada
+ordenar
+insertar_al_final (9,i)
+esta_ordenada
+ordenar
+esta_ordenada
+imprimir_cadena
+inicio_cadena
+insertar_segmento_despues (2,y) (5,x) (7,w) (8,v) .
+esta_ordenada
+imprimir_cadena
+mezcla .
+mezcla (6,f) (12,bb) (13,cc) .
+mezcla (1,a) (2,b) (3,c) .
+intercambiar 1 4
+intercambiar 3 7
+intercambiar 2 5
+imprimir_cadena
+esta_ordenada
+ordenar
+esta_ordenada
+imprimir_cadena
+Fin
