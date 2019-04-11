@@ -125,6 +125,78 @@ nat altura_binario(binario_t b){
 	}
 }
 
+nat cantidad_binario(binario_t b){
+	if (es_vacio_binario(b) return 0;
+	else 
+		return 1+cantidad_binario(izquierdo(b))+cantidad_binario(derecho(b));
+}
+
+/*
+  Devuelve la suma de los datos numéricos de los últimos `i' elementos
+  (considerados según la propiedad de orden de los árboles binario_t)
+  de `b' cuyos datos numéericos sean pares.
+  Si en `b' hay menos de `i' elementos con dato numérico par devuelve la
+  suma de todos los datos numéricos pares de `b'.
+  No se deben crear estructuras auxiliares.
+  No se deben visitar nuevos nodos después que se hayan encontrado los
+  `i' elementos.
+  El tiempo de ejecución es O(n), donde `n' es la cantidad de elementos de `b'.
+ */
+int suma_ultimos_pares(nat i, binario_t b){
+	if (es_vacio_binario(b)) return 0;
+	if (b =! NULL) {
+		//NOSE SI ESTA CORRECTO 
+		suma_ultimos_pares(i,izquierdo(b));
+		suma_ultimos_pares(i, derecho(b));
+	}
+	if (numero_info(b->dato) % 2 == 0)&&(i > 0){
+		i--;
+		return numero_info(b->dato);
+	}
+}
+
+/*
+  Devuelve una cadena_t con los elementos de `b' en orden lexicográfico
+  creciente según sus datos de texto.
+  La cadena_t devuelta no comparte memoria con `b'.
+  El tiempo de ejecución es O(n), donde `n' es la cantidad de elementos de `b'.
+ */
+cadena_t linealizacion(binario_t b){
+	if (b != NULL) {
+		linealizacion(derecho(b));
+		linealizacion(izquierdo(b));
+	};
+	//a terminar
+}
+
+/*
+  Devuelve un árbol balanceado cuyos elementos son los que están contenidos en
+  `cad'.
+  En esta función se dice que un árbol está balanceado si
+  a) es vacío;
+  o
+  b)
+    b1) el sub-árbol izquierdo tiene la misma cantidad de elementos o uno más
+      que el  subárbol derecho;
+    y
+    b2) los subárboles izquierdo y derecho están balanceados.
+
+  DEFINICIÓN ALTERNATIVA DE ÁRBOL BALANCEADO
+  En esta función se dice que un árbol esta balanceado si en cada nodo, la
+  cantidad de elementos de su subárbol izquierdo es igual a, o 1 más que, la
+  cantidad de elementos de su subárbol derecho.
+
+  Precondición: los elementos de `cad' están en orden lexicográfico creciente
+  estricto según sus datos de texto.
+  El árbol devuelto no comparte memoria con `cad'.
+  El tiempo de ejecución es O(n . log n), siendo `n` la cantidad de elementos
+  de `cad'.
+ */
+binario_t cadena_a_binario(cadena_t cad){
+	
+}
+
+
 
 static int absoluto(int n) { return (n >= 0) ? (n) : (-n); }
 
