@@ -161,12 +161,17 @@ int suma_ultimos_pares(nat i, binario_t b){
   La cadena_t devuelta no comparte memoria con `b'.
   El tiempo de ejecución es O(n), donde `n' es la cantidad de elementos de `b'.
  */
-cadena_t linealizacion(binario_t b){
-	if (b != NULL) {
-		linealizacion(derecho(b));
-		linealizacion(izquierdo(b));
-	};
-	//a terminar
+static void lin(binario_t b,cadena_t c){
+	if (b!=NULL){
+		lin(b->izq, c);
+		insertar_al_final(copia_info(b->dato),c);
+		lin(b->der, c);
+	}
+}
+cadena_t linealizacion(binario_t b){ 
+		cadena_t result=crear_cadena();
+		lin(b,result);
+		return result;
 }
 
 /*
@@ -193,7 +198,9 @@ cadena_t linealizacion(binario_t b){
   de `cad'.
  */
 binario_t cadena_a_binario(cadena_t cad){
-	
+		if (es_vacia_cadena(cad)) return crear_binario();
+		else 
+		//COMPLETAR	
 }
 
 
