@@ -80,6 +80,7 @@ binario_t remover_de_binario(const char *t, binario_t b) {
 			// TODO: A COMPLETAR BORRAR NOD
 		
 	}
+	return NULL;
 }
 
 binario_t liberar_binario(binario_t b) {
@@ -96,6 +97,17 @@ binario_t liberar_binario(binario_t b) {
 
 
 bool es_vacio_binario(binario_t b) { return b == NULL; }
+
+/*
+  Devuelve `true' si y sólo si cada nodo de `b' cumple la condición de balanceo
+  AVL. El árbol vacío cumple la condición.
+  Un nodo cumple la condición de balanceo AVL si el valor absoluto de la
+  diferencia de las alturas de sus subárboles izquierdo y derecho en menor o
+  igual a 1.
+  Cada nodo se puede visitar una sola vez.
+  El tiempo de ejecución es O(n), donde `n' es la cantidad de elementos de `b'.
+ */
+bool es_AVL(binario_t b) { return 0;}
 
 info_t raiz(binario_t b) { return (b -> dato); }
 
@@ -184,11 +196,52 @@ binario_t cadena_a_binario(cadena_t cad) {
 
 	if (es_vacia_cadena(cad)) return crear_binario();
 	else ;// TODO: COMPLETAR.
+	return NULL;
 }
 
-static int absoluto(int n) { return (n >= 0) ? (n) : (-n); }
+/*
+  Devuelve un árbol con copias de los elementos de `b' que cumplen la condición
+  "numero_info(elemento) < clave".
+  La estructura del árbol resultado debe ser análoga a la de `b'. Esto
+  significa que dados dos nodos `U' y `V' de `b' en los que se cumple la
+  condición y tal que `U' es ancestro de `V', en el árbol resultado la copia de
+  `U' debe ser ancestro de la copia de `V' cuando sea posible. Esto no siempre
+  se puede lograr y al mismo tiempo mantener la propiedad de orden del árbol
+  en el caso en el que en un nodo `V' no se cumple la condición y en sus dos
+  subárboles hay nodos en los que se cumple. En este caso, la copia del nodo
+  cuyo elemento es el mayor (según la propiedad de orden definida) de los que
+  cumplen la condición en el subárbol izquierdo de `V' deberá ser ancestro de
+  las copias de todos los descendientes de `V' que cumplen la condición.
+  (Ver ejemplos en LetraTarea3.pdf).
+  El árbol resultado no comparte memoria con `b'. *)
+  El tiempo de ejecución es O(n), donde `n' es la cantidad de elementos de `b'.
+ */
+binario_t menores(int clave, binario_t b) { return NULL; }
 
-static int maximo(nat n1, nat n2) { return (n1 >= n2) ? (n1) : (n2); }
+/*
+  Devuelve `true' si y solo si en `b' hay un camino desde la raiz hasta una
+  hoja que sea compatible con `c'.
+  Decimos que una cadena y un camino son compatibles si tienen la misma
+  longitud y al recorrer la cadena desde el inicio hasta el final y el camino
+  desde la raíz hasta la hoja las frases de los respectivos elementos son
+  iguales.
+  El tiempo de ejecución es O(log n) en promedio, donde `n' es la cantidad de
+  elementos de `b'.
+ */
+bool es_camino(cadena_t c, binario_t b) { return 0; }
+
+/*
+  Devuelve una cadena_t con los elementos del nivel `l' de 'b'.
+  La raíz es el nivel 1.
+  La cadena_t resultado debe estar ordenada de manera creciente según las
+  frases de sus elementos.
+  La cadena_t devuelta no comparte memoria con `b'.
+ */
+cadena_t nivel_en_binario(nat l, binario_t b) { return NULL; }
+
+//static int absoluto(int n) { return (n >= 0) ? (n) : (-n); }
+
+//static int maximo(nat n1, nat n2) { return (n1 >= n2) ? (n1) : (n2); }
 
 void imprimir_binario(binario_t b) {
 
