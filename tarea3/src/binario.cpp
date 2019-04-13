@@ -26,20 +26,16 @@ binario_t insertar_en_binario(info_t i, binario_t b) {
 		b->dato->frase = i->frase;
 		return b;
 	} else {
-		if (b->dato->frase < numero_info(i))
-			insertar_en_binario(i,derecho(b));
-		else if (b->dato->frase > numero_info(i))
-			insertar_en_binario(i,izquierdo(b));
+		if (numero_info(b->dato) <= numero_info(i)) insertar_en_binario(i, derecho(b));
+		else insertar_en_binario(i, izquierdo(b));
 	}
 	return b;
 }
 
 info_t mayor(binario_t b) {
 
-	if (derecho(b) != NULL)
-		mayor(b);
-	else
-		return (b -> dato);
+	if (derecho(b) != NULL) mayor(b);
+	else return (b -> dato);
 }
 
 binario_t remover_mayor(binario_t b) {
@@ -68,10 +64,8 @@ binario_t remover_mayor(binario_t b) {
  */
 binario_t remover_de_binario(const char *t, binario_t b) {
 
-	if (t < frase_info(b -> dato))
-		remover_de_binario (t, izquierdo(b));
-	else if (t > frase_info(b -> dato))
-		remover_de_binario (t, derecho(b));
+	if (t < frase_info(b -> dato)) remover_de_binario (t, izquierdo(b));
+	else if (t > frase_info(b -> dato)) remover_de_binario (t, derecho(b));
 	else if (t == frase_info(b -> dato)) {
 
 			// TODO: A COMPLETAR BORRAR NODO
@@ -114,6 +108,7 @@ binario_t buscar_subarbol(const char *t, binario_t b) {
 }
 
 nat altura_binario(binario_t b) {
+
 	if (es_vacio_binario(b)) return 0;
 	else return 1 + maximo(altura_binario(izquierdo(b)), altura_binario(derecho(b)));
 }
