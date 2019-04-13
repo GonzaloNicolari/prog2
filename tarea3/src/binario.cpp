@@ -19,29 +19,27 @@ struct rep_binario {
 
 binario_t crear_binario() { return NULL; }
 
-binario_t insertar_en_binario(info_t i, binario_t b){
+binario_t insertar_en_binario(info_t i, binario_t b) {
 
-	if(es_vacio_binario(b)){
+	if (es_vacio_binario(b)) {
 		b = new rep_binario;
-		b -> dato -> frase = i -> frase;
+		b->dato->frase = i->frase;
 		return b;
-	}else{
-		if (b -> dato -> frase < numero_info(i)){
-			
+	} else {
+		if (b->dato->frase < numero_info(i))
 			insertar_en_binario(i,derecho(b));
-		}else if (b -> dato -> frase > numero_info(i)){
+		else if (b->dato->frase > numero_info(i))
 			insertar_en_binario(i,izquierdo(b));
-        }
 	}
 	return b;
 }
 
-info_t mayor(binario_t b){
-	if (derecho(b) != NULL){
+info_t mayor(binario_t b) {
+
+	if (derecho(b) != NULL)
 		mayor(b);
-	}else{
+	else
 		return (b -> dato);
-	}
 }
 
 binario_t remover_mayor(binario_t b) {
@@ -68,14 +66,15 @@ binario_t remover_mayor(binario_t b) {
   El tiempo de ejecución es O(log n) en promedio, donde `n' es la cantidad de
   elementos de `b'.
  */
-binario_t remover_de_binario(const char *t, binario_t b){
-	if(t < frase_info(b -> dato)){
-		remover_de_binario (t, izquierdo(b));
-	}else if (t > frase_info(b -> dato)){
-		remover_de_binario (t, derecho(b));
-	}else if (t == frase_info(b -> dato)){
+binario_t remover_de_binario(const char *t, binario_t b) {
 
-			//A COMPLETAR BORRAR NODO
+	if (t < frase_info(b -> dato))
+		remover_de_binario (t, izquierdo(b));
+	else if (t > frase_info(b -> dato))
+		remover_de_binario (t, derecho(b));
+	else if (t == frase_info(b -> dato)) {
+
+			// TODO: A COMPLETAR BORRAR NODO
 			
 	}
 }
@@ -95,15 +94,11 @@ binario_t liberar_binario(binario_t b) {
 
 bool es_vacio_binario(binario_t b) { return b == NULL; }
 
+info_t raiz(binario_t b) { return (b -> dato); }
 
+binario_t izquierdo(binario_t b) { return (b -> izq); }
 
-
-info_t raiz(binario_t b) {return (b -> dato);}
-
-
-binario_t izquierdo(binario_t b) {return (b -> izq);}
-
-binario_t derecho(binario_t b) {return (b -> der);}
+binario_t derecho(binario_t b) { return (b -> der); }
 
 binario_t buscar_subarbol(const char *t, binario_t b) {
 
@@ -117,18 +112,16 @@ binario_t buscar_subarbol(const char *t, binario_t b) {
 	}
 	return res;
 }
-o
-nat altura_binario(binario_t b){
+
+nat altura_binario(binario_t b) {
 	if (es_vacio_binario(b)) return 0;
-	else{
-		return 1+maximo(altura_binario(izquierdo(b)), altura_binario(derecho(b)));
-	}
+	else return 1 + maximo(altura_binario(izquierdo(b)), altura_binario(derecho(b)));
 }
 
-nat cantidad_binario(binario_t b){
+nat cantidad_binario(binario_t b) {
+
 	if (es_vacio_binario(b) return 0;
-	else 
-		return 1+cantidad_binario(izquierdo(b))+cantidad_binario(derecho(b));
+	else return 1 + cantidad_binario(izquierdo(b)) + cantidad_binario(derecho(b));
 }
 
 /*
@@ -142,14 +135,15 @@ nat cantidad_binario(binario_t b){
   `i' elementos.
   El tiempo de ejecución es O(n), donde `n' es la cantidad de elementos de `b'.
  */
-int suma_ultimos_pares(nat i, binario_t b){
+int suma_ultimos_pares(nat i, binario_t b) {
+
 	if (es_vacio_binario(b)) return 0;
 	if (b =! NULL) {
-		//NOSE SI ESTA CORRECTO 
+		// NOSE SI ESTA CORRECTO.
 		suma_ultimos_pares(i,izquierdo(b));
 		suma_ultimos_pares(i, derecho(b));
 	}
-	if (numero_info(b->dato) % 2 == 0)&&(i > 0){
+	if (numero_info(b->dato) % 2 == 0) && (i > 0) {
 		i--;
 		return numero_info(b->dato);
 	}
@@ -161,17 +155,20 @@ int suma_ultimos_pares(nat i, binario_t b){
   La cadena_t devuelta no comparte memoria con `b'.
   El tiempo de ejecución es O(n), donde `n' es la cantidad de elementos de `b'.
  */
-static void lin(binario_t b,cadena_t c){
-	if (b!=NULL){
+static void lin(binario_t b,cadena_t c) {
+
+	if (b != NULL) {
 		lin(b->izq, c);
-		insertar_al_final(copia_info(b->dato),c);
+		insertar_al_final(copia_info(b->dato), c);
 		lin(b->der, c);
 	}
 }
-cadena_t linealizacion(binario_t b){ 
-		cadena_t result=crear_cadena();
-		lin(b,result);
-		return result;
+
+cadena_t linealizacion(binario_t b) {
+
+	cadena_t result = crear_cadena();
+	lin(b, result);
+	return result;
 }
 
 /*
@@ -197,23 +194,21 @@ cadena_t linealizacion(binario_t b){
   El tiempo de ejecución es O(n . log n), siendo `n` la cantidad de elementos
   de `cad'.
  */
-binario_t cadena_a_binario(cadena_t cad){
-		if (es_vacia_cadena(cad)) return crear_binario();
-		else 
-		//COMPLETAR	
+binario_t cadena_a_binario(cadena_t cad) {
+
+	if (es_vacia_cadena(cad)) return crear_binario();
+	else ;// TODO: COMPLETAR.
 }
-
-
 
 static int absoluto(int n) { return (n >= 0) ? (n) : (-n); }
 
 static int maximo(nat n1, nat n2) { return (n1 >= n2) ? (n1) : (n2); }
 
+void imprimir_binario(binario_t b) {
 
-void imprimir_binario(binario_t b){
 	if (b != NULL) {
 		imprimir_binario(derecho(b));
-		printf(info_a_texto(b -> dato));
+		printf(info_a_texto(b->dato));
 		imprimir_binario(izquierdo(b));
-	};
-};
+	}
+}
