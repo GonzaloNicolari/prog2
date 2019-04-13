@@ -26,7 +26,7 @@ binario_t insertar_en_binario(info_t i, binario_t b) {
 		b->dato->frase = i->frase;
 		return b;
 	} else {
-		if (numero_info(b->dato) <= numero_info(i)) insertar_en_binario(i, derecho(b));
+		if (strcmp(frase_info(b -> dato), frase_info(i)) < 0) insertar_en_binario(i, derecho(b));
 		else insertar_en_binario(i, izquierdo(b));
 	}
 	return b;
@@ -62,14 +62,23 @@ binario_t remover_mayor(binario_t b) {
   El tiempo de ejecución es O(log n) en promedio, donde `n' es la cantidad de
   elementos de `b'.
  */
+static void auxRemover(const char *t, binario_t b, binario_t padre){
+	insertar_al_final(mayor(izquierdo(b)));
+	
+	
+}
 binario_t remover_de_binario(const char *t, binario_t b) {
 
-	if (t < frase_info(b -> dato)) remover_de_binario (t, izquierdo(b));
-	else if (t > frase_info(b -> dato)) remover_de_binario (t, derecho(b));
-	else if (t == frase_info(b -> dato)) {
-
-			// TODO: A COMPLETAR BORRAR NODO
-			
+	if (t < frase_info(b -> dato)) {
+		binario_t prev = b;
+		remover_de_binario (t, izquierdo(b));
+		//ACA HAGO ALGO CON EL PADRE prev
+		
+	} else if (t > frase_info(b -> dato)) remover_de_binario (t, derecho(b));
+	else if (t == frase_info(b -> dato)) { 
+		
+			// TODO: A COMPLETAR BORRAR NOD
+		
 	}
 }
 
@@ -119,37 +128,20 @@ nat cantidad_binario(binario_t b) {
 	else return 1 + cantidad_binario(izquierdo(b)) + cantidad_binario(derecho(b));
 }
 
-/*
-  Devuelve la suma de los datos numéricos de los últimos `i' elementos
-  (considerados según la propiedad de orden de los árboles binario_t)
-  de `b' cuyos datos numéericos sean pares.
-  Si en `b' hay menos de `i' elementos con dato numérico par devuelve la
-  suma de todos los datos numéricos pares de `b'.
-  No se deben crear estructuras auxiliares.
-  No se deben visitar nuevos nodos después que se hayan encontrado los
-  `i' elementos.
-  El tiempo de ejecución es O(n), donde `n' es la cantidad de elementos de `b'.
- */
 int suma_ultimos_pares(nat i, binario_t b) {
 
 	if (es_vacio_binario(b)) return 0;
 	if (b =! NULL) {
-		// NOSE SI ESTA CORRECTO.
-		suma_ultimos_pares(i,izquierdo(b));
 		suma_ultimos_pares(i, derecho(b));
-	}
-	if (numero_info(b->dato) % 2 == 0) && (i > 0) {
-		i--;
+		suma_ultimos_pares(i, izquierdo(b));
+		if (numero_info(b->dato) % 2 == 0) && (i > 0) {
+			i--;
 		return numero_info(b->dato);
+		}
 	}
+	
 }
 
-/*
-  Devuelve una cadena_t con los elementos de `b' en orden lexicográfico
-  creciente según sus datos de texto.
-  La cadena_t devuelta no comparte memoria con `b'.
-  El tiempo de ejecución es O(n), donde `n' es la cantidad de elementos de `b'.
- */
 static void lin(binario_t b,cadena_t c) {
 
 	if (b != NULL) {
@@ -158,7 +150,6 @@ static void lin(binario_t b,cadena_t c) {
 		lin(b->der, c);
 	}
 }
-
 cadena_t linealizacion(binario_t b) {
 
 	cadena_t result = crear_cadena();
