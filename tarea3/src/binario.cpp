@@ -205,17 +205,6 @@ binario_t cadena_a_binario(cadena_t cad) {
 
 binario_t menores(int clave, binario_t b) { return NULL; }
 
-
-/*
-  Devuelve `true' si y solo si en `b' hay un camino desde la raiz hasta una
-  hoja que sea compatible con `c'.
-  Decimos que una cadena y un camino son compatibles si tienen la misma
-  longitud y al recorrer la cadena desde el inicio hasta el final y el camino
-  desde la raíz hasta la hoja las frases de los respectivos elementos son
-  iguales.
-  El tiempo de ejecución es O(log n) en promedio, donde `n' es la cantidad de
-  elementos de `b'.
- */
 static int auxCamino(binario_t b, cadena_t c, localizador_t loc){
 	//se fija si empiezan igual 
 	if (strcmp(frase_info(info_cadena(loc, c)), frase_info(b -> dato)) == 0 ){
