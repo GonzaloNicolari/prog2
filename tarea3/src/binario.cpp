@@ -12,6 +12,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+
 struct rep_binario {
 	info_t dato;
 	rep_binario *izq;
@@ -100,7 +101,27 @@ bool es_vacio_binario(binario_t b) { return b == NULL; }
   Cada nodo se puede visitar una sola vez.
   El tiempo de ejecución es O(n), donde `n' es la cantidad de elementos de `b'.
  */
-bool es_AVL(binario_t b) { return 0;}
+static bool avlAux(binario_t b, int diffL, int diffR){
+  if (izquierdo(b) =! NULL){
+    return avlAux(izquierdo(b), diffL, diffR);
+  }else{
+    diffL++;
+  }
+  if (derecho(b) =! NULL){
+    return avlAux(derecho(b), diffL, diffR);
+  }else{
+    diffR++;
+  }
+  if ((absoluto(diffL-diffR)==0) || (absoluto(diffL-diffR)==1) )return true;
+  else return false;
+}
+bool es_AVL(binario_t b) { 
+  
+  if(es_vacio_binario(b)) return true;
+  else {
+    int i = 0;
+    return avlAux(b, i, i);
+}
 
 info_t raiz(binario_t b) { return (b -> dato); }
 
@@ -119,7 +140,7 @@ binario_t buscar_subarbol(const char *t, binario_t b) {
 	}
 	return res;
 }
-//static int absoluto(int n) { return (n >= 0) ? (n) : (-n); }
+static int absoluto(int n) { return (n >= 0) ? (n) : (-n); }
 
 static int maximo(nat n1, nat n2) { return (n1 >= n2) ? (n1) : (n2); }
 nat altura_binario(binario_t b) {
@@ -226,19 +247,22 @@ bool es_camino(cadena_t c, binario_t b) {
 	return (result == longitud(c));
 }
 
-/*
-
-  Devuelve una cadena_t con los elementos del nivel `l' de 'b'.
-  La raíz es el nivel 1.
-  La cadena_t resultado debe estar ordenada de manera creciente según las
-  frases de sus elementos.
-  La cadena_t devuelta no comparte memoria con `b'.
- */
-
+static void auxNivel(nat actual, nat l, binario_t b, cadena_t cad, localizador_t loc){
+  if (actual != l){
+    auxNivel(actual+1, l, b->izq, cad, loc);
+    auxNivel(actual+1, l, b->der, cad, loc);
+  }
+  else {
+    cad = insertar_al_final(copia_info(b -> dato), cad);
+  }
+}
+//NOSE SI TENGO QUE LIBERAR LOC O OTRA COSA
 cadena_t nivel_en_binario(nat l, binario_t b) { 
-	
-	
-	return NULL; }
+  cadena_t cad = crear_cadena();
+  localizador_t loc = inicio_cadena(cad);
+  auxNivel(1, l, b, cad, loc);
+	return cad; 
+}
 
 void imprimir_binario(binario_t b) {
 	if (b != NULL) {
