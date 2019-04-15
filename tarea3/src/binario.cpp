@@ -92,15 +92,6 @@ binario_t liberar_binario(binario_t b) {
 
 bool es_vacio_binario(binario_t b) { return b == NULL; }
 
-/*
-  Devuelve `true' si y sólo si cada nodo de `b' cumple la condición de balanceo
-  AVL. El árbol vacío cumple la condición.
-  Un nodo cumple la condición de balanceo AVL si el valor absoluto de la
-  diferencia de las alturas de sus subárboles izquierdo y derecho en menor o
-  igual a 1.
-  Cada nodo se puede visitar una sola vez.
-  El tiempo de ejecución es O(n), donde `n' es la cantidad de elementos de `b'.
- */
 static bool avlAux(binario_t b, int diffL, int diffR){
   if (izquierdo(b) =! NULL){
     return avlAux(izquierdo(b), diffL, diffR);
