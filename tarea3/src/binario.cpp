@@ -76,8 +76,8 @@ static binario_t auxRemover(const char *&t,binario_t &padre, binario_t &hijo) {
 static binario_t auxBorrar(binario_t &b, binario_t &aux) {
 	// CASO SI TIENE NODO IZQ.
 	if (!es_vacio_binario(izquierdo(b))) {
-		aux = mayor(izquierdo(b));
-		aux->der = b->der;
+		aux			= mayor(izquierdo(b));
+		aux->der	= b->der;
 		liberar_info(b->dato);
 		b->dato = aux->dato;
 		return b;
@@ -85,7 +85,7 @@ static binario_t auxBorrar(binario_t &b, binario_t &aux) {
 	} else if (!es_vacio_binario(derecho(b)) {
 		aux = derecho(b);
 		liberar_info(b->dato);
-		b->dato = aux->dato;
+		b->dato	= aux->dato;
 		b->der	= aux->der;
 		return b;
 	// CASO SI NO TIENE IZQ Y DER.
@@ -96,14 +96,13 @@ static binario_t auxBorrar(binario_t &b, binario_t &aux) {
 }
 
 binario_t remover_de_binario(const char *t, binario_t b) {
-	binario_t raiz = crear_binario();
-	raiz = b;
-	binario_t aux = crear_binario();
+	binario_t aux	= crear_binario();
+	binario_t raiz	= crear_binario();
+	raiz			= b;
 	// CASO SI LA RAIZ ES EL NODO A BORRAR.
-	if (frase_info(b->dato) == t) {
-		b = auxBorrar(b, aux);	
+	if (frase_info(b->dato) == t)		b = auxBorrar(b, aux);
 	// CASOS SI NO ES LA RAIZ.
-	} else if (frase_info(b->dato) < t) b = auxRemover(t, b, derecho(b));
+	else if (frase_info(b->dato) < t)	b = auxRemover(t, b, derecho(b));
 	else if (frase_info(b->dato) > t)	b = auxRemover(t, b, izquierdo(b));
 	
 	return raiz;
@@ -124,25 +123,20 @@ binario_t liberar_binario(binario_t b) {
 bool es_vacio_binario(binario_t b) { return b == NULL; }
 
 static bool avlAux(binario_t b, int diffL, int diffR) {
-	if (izquierdo(b) =! NULL) {
-		return avlAux(izquierdo(b), diffL, diffR);
-	} else {
-		diffL++;
-	}
-	if (derecho(b) =! NULL) {
-		return avlAux(derecho(b), diffL, diffR);
-	} else {
-		diffR++;
-	}
+	if (izquierdo(b) =! NULL) return avlAux(izquierdo(b), diffL, diffR);
+	else diffL++;
+	if (derecho(b) =! NULL) return avlAux(derecho(b), diffL, diffR);
+	else diffR++;
 	if ((absoluto(diffL - diffR) == 0) || (absoluto(diffL - diffR) == 1)) return true;
 	else return false;
 }
 
 bool es_AVL(binario_t b) {
-	if(es_vacio_binario(b)) return true;
+	if (es_vacio_binario(b)) return true;
 	else {
 		int i = 0;
 		return avlAux(b, i, i);
+	}
 }
 
 info_t raiz(binario_t b) { return (b -> dato); }
@@ -182,9 +176,7 @@ int suma_ultimos_pares(nat i, binario_t b) {
 	else {
 		suma_ultimos_pares(i, derecho(b));
 		suma_ultimos_pares(i, izquierdo(b));
-		if (((numero_info(b->dato) % 2) == 0) && (i > 0)) {
-			i--;
-		}
+		if (((numero_info(b->dato) % 2) == 0) && (i > 0)) i--;
 	}
 	return numero_info(b->dato);
 }
@@ -255,11 +247,10 @@ static int auxCamino(binario_t b, cadena_t c, localizador_t loc) {
 	// se fija si empiezan igual 
 	if (strcmp(frase_info(info_cadena(loc, c)), frase_info(b->dato)) == 0) {
 		// se fija si debe avanzar a la izquierda o derecha en el arbol
-		if (strcmp(frase_info(info_cadena(siguiente(loc, c), c)), frase_info(b->dato)) > 0) {
+		if (strcmp(frase_info(info_cadena(siguiente(loc, c), c)), frase_info(b->dato)) > 0)
 			auxCamino(derecho(b), c, siguiente(loc, c));
-		} else {
-			auxCamino(derecho(b), c, siguiente(loc, c));
-		}
+		else
+			auxCamino(izquierdo(b), c, siguiente(loc, c));
 	} else return 0;
 	return 1;
 }
@@ -267,9 +258,9 @@ static int auxCamino(binario_t b, cadena_t c, localizador_t loc) {
 bool es_camino(cadena_t c, binario_t b) {
 	// Caso si son de distinto largo.
 	if (altura_binario(b) != longitud(c)) return false;
-	localizador_t loc = inicio_cadena(c);
-	int result = auxCamino(b, c, loc);
-	return (result == longitud(c));
+	localizador_t loc	= inicio_cadena(c);
+	int result			= auxCamino(b, c, loc);
+	return result == longitud(c);
 }
 
 static void auxNivel(nat actual, nat l, binario_t b, cadena_t cad, localizador_t loc) {
@@ -279,10 +270,11 @@ static void auxNivel(nat actual, nat l, binario_t b, cadena_t cad, localizador_t
 	} else
 		cad = insertar_al_final(copia_info(b->dato), cad);
 }
+
 // NOSE SI TENGO QUE LIBERAR LOC O OTRA COSA.
 cadena_t nivel_en_binario(nat l, binario_t b) {
-	cadena_t cad = crear_cadena();
-	localizador_t loc = inicio_cadena(cad);
+	cadena_t cad		= crear_cadena();
+	localizador_t loc	= inicio_cadena(cad);
 	auxNivel(1, l, b, cad, loc);
 	return cad;
 }
