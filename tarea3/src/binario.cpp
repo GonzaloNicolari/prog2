@@ -99,7 +99,7 @@ static binario_t auxBorrar(binario_t &b, binario_t &aux) {
 }
 
 binario_t remover_de_binario(const char *t, binario_t b) {
-	binario_t aux	= crear_binario(); // @TODO: Revisar si es necesario definirlo acá o en auxBorrar (acá no se usa).
+	binario_t aux	= crear_binario(); // @TODO: Revisar si es necesario definir aux acá o en auxBorrar (acá no se usa).
 	binario_t raiz	= crear_binario();
 	raiz			= b;
 
