@@ -51,65 +51,63 @@ binario_t remover_mayor(binario_t b) {
 }
 
 /*
-  Remueve de `b' el nodo en el que el dato de texto de su elemento es `t'.
-  Si los dos subárboles del nodo a remover son no vacíos, en sustitución del
-  elemento removido debe quedar el que es el mayor (segun la propiedad de orden
-  definida) en el subárbol izquierdo.
-  Devuelve `b'.
-  Precondición: !es_vacio_binario(buscar_subarbol(frase_info(i), b).
-  Libera la memoria del nodo y del elemento.
-  El tiempo de ejecución es O(log n) en promedio, donde `n' es la cantidad de
-  elementos de `b'.
+	Remueve de `b' el nodo en el que el dato de texto de su elemento es `t'.
+	Si los dos subárboles del nodo a remover son no vacíos, en sustitución del
+	elemento removido debe quedar el que es el mayor (segun la propiedad de orden
+	definida) en el subárbol izquierdo.
+	Devuelve `b'.
+	Precondición: !es_vacio_binario(buscar_subarbol(frase_info(i), b).
+	Libera la memoria del nodo y del elemento.
+	El tiempo de ejecución es O(log n) en promedio, donde `n' es la cantidad de
+	elementos de `b'.
  */
 
-//static void auxRemover(const char *t, binario_t b, binario_t padre) {
-	//insertar_al_final(mayor(izquierdo(b), ));
-//}
-static binario_t auxRemover(const char *&t,binario_t &padre, binario_t &hijo){
+static binario_t auxRemover(const char *&t,binario_t &padre, binario_t &hijo) {
 	if (frase_info(hijo->dato) < t) return auxRemover(t, b, derecho(b));
 	else if (frase_info(hijo->dato) > t) return auxRemover(t, b, izquierdo(b));
-	else
-	{
-		//REFERENCIO AL PADRE CON EL HIJO BORRADO SEGUN SI ES HIJO IZQ O DER
-		if (hijo == derecho(padre))	padre -> der = auxBorrar(hijo);
-		else padre -> izq = auxBorrar(hijo);
+	else {
+		// REFERENCIO AL PADRE CON EL HIJO BORRADO SEGUN SI ES HIJO IZQ O DER.
+		if (hijo == derecho(padre))	padre->der = auxBorrar(hijo);
+		else padre->izq = auxBorrar(hijo);
 		return padre;
 	}
 }
-static binario_t auxBorrar(binario_t &b, binario_t &aux){
-	//CASO SI TIENE NODO IZQ
-		if (!es_vacio_binario(izquierdo(b))){
-			aux = mayor(izquierdo(b));
-			aux -> der = b -> der; 
-			liberar_info(b->dato);
-			b->dato = aux-> dato;
-			return b;
-		//CASO SI TIENE NODO DER
-		}else if(!es_vacio_binario(derecho(b)){
-			aux = derecho(b);
-			liberar_info(b->dato);
-			b->dato = aux-> dato;
-			b->der  = aux->der;
-			return b;
-		//CASO SI NO TIENE IZQ Y DER
-		}else{
-			liberar_info(b->dato);
-			return b;
-		}
+
+static binario_t auxBorrar(binario_t &b, binario_t &aux) {
+	// CASO SI TIENE NODO IZQ.
+	if (!es_vacio_binario(izquierdo(b))) {
+		aux = mayor(izquierdo(b));
+		aux->der = b->der;
+		liberar_info(b->dato);
+		b->dato = aux->dato;
+		return b;
+	// CASO SI TIENE NODO DER.
+	} else if (!es_vacio_binario(derecho(b)) {
+		aux = derecho(b);
+		liberar_info(b->dato);
+		b->dato = aux->dato;
+		b->der	= aux->der;
+		return b;
+	// CASO SI NO TIENE IZQ Y DER.
+	} else {
+		liberar_info(b->dato);
+		return b;
+	}
 }
+
 binario_t remover_de_binario(const char *t, binario_t b) {
 	binario_t raiz = crear_binario();
 	raiz = b;
 	binario_t aux = crear_binario();
-	//CASO SI LA RAIZ ES EL NODO A BORRAR
+	// CASO SI LA RAIZ ES EL NODO A BORRAR.
 	if (frase_info(b->dato) == t) {
 		b = auxBorrar(b, aux);	
-	//CASOS SI NO ES LA RAIZ
-	}else if (frase_info(b->dato) < t) b = auxRemover(t, b, derecho(b));
-	else if (frase_info(b->dato) > t)  b = auxRemover(t, b, izquierdo(b));
+	// CASOS SI NO ES LA RAIZ.
+	} else if (frase_info(b->dato) < t) b = auxRemover(t, b, derecho(b));
+	else if (frase_info(b->dato) > t)	b = auxRemover(t, b, izquierdo(b));
 	
 	return raiz;
-	//o return b
+	// O return b.
 }
 
 binario_t liberar_binario(binario_t b) {
@@ -125,26 +123,26 @@ binario_t liberar_binario(binario_t b) {
 
 bool es_vacio_binario(binario_t b) { return b == NULL; }
 
-static bool avlAux(binario_t b, int diffL, int diffR){
-  if (izquierdo(b) =! NULL){
-    return avlAux(izquierdo(b), diffL, diffR);
-  }else{
-    diffL++;
-  }
-  if (derecho(b) =! NULL){
-    return avlAux(derecho(b), diffL, diffR);
-  }else{
-    diffR++;
-  }
-  if ((absoluto(diffL-diffR)==0) || (absoluto(diffL-diffR)==1) )return true;
-  else return false;
+static bool avlAux(binario_t b, int diffL, int diffR) {
+	if (izquierdo(b) =! NULL) {
+		return avlAux(izquierdo(b), diffL, diffR);
+	} else {
+		diffL++;
+	}
+	if (derecho(b) =! NULL) {
+		return avlAux(derecho(b), diffL, diffR);
+	} else {
+		diffR++;
+	}
+	if ((absoluto(diffL - diffR) == 0) || (absoluto(diffL - diffR) == 1)) return true;
+	else return false;
 }
-bool es_AVL(binario_t b) { 
-  
-  if(es_vacio_binario(b)) return true;
-  else {
-    int i = 0;
-    return avlAux(b, i, i);
+
+bool es_AVL(binario_t b) {
+	if(es_vacio_binario(b)) return true;
+	else {
+		int i = 0;
+		return avlAux(b, i, i);
 }
 
 info_t raiz(binario_t b) { return (b -> dato); }
@@ -164,9 +162,11 @@ binario_t buscar_subarbol(const char *t, binario_t b) {
 	}
 	return res;
 }
+
 static int absoluto(int n) { return (n >= 0) ? (n) : (-n); }
 
 static int maximo(nat n1, nat n2) { return (n1 >= n2) ? (n1) : (n2); }
+
 nat altura_binario(binario_t b) {
 	if (es_vacio_binario(b)) return 0;
 	else return 1 + maximo(altura_binario(izquierdo(b)), altura_binario(derecho(b)));
@@ -191,11 +191,12 @@ int suma_ultimos_pares(nat i, binario_t b) {
 
 static void lin(binario_t b,cadena_t c) {
 	if (!es_vacio_binario(b)) {
-		lin(b -> izq, c);
-		insertar_al_final(copia_info(b -> dato), c);
-		lin(b -> der, c);
+		lin(b->izq, c);
+		insertar_al_final(copia_info(b->dato), c);
+		lin(b->der, c);
 	}
 }
+
 cadena_t linealizacion(binario_t b) {
 	cadena_t result = crear_cadena();
 	lin(b, result);
@@ -203,25 +204,25 @@ cadena_t linealizacion(binario_t b) {
 }
 
 /*
-  Devuelve un árbol balanceado cuyos elementos son los que están contenidos en
-  `cad'.
-  En esta función se dice que un árbol está balanceado si
-  a) es vacío;
-  o
-  b)
-    b1) el sub-árbol izquierdo tiene la misma cantidad de elementos o uno más
-      que el  subárbol derecho;
-    y
-    b2) los subárboles izquierdo y derecho están balanceados.
-  DEFINICIÓN ALTERNATIVA DE ÁRBOL BALANCEADO
-  En esta función se dice que un árbol esta balanceado si en cada nodo, la
-  cantidad de elementos de su subárbol izquierdo es igual a, o 1 más que, la
-  cantidad de elementos de su subárbol derecho.
-  Precondición: los elementos de `cad' están en orden lexicográfico creciente
-  estricto según sus datos de texto.
-  El árbol devuelto no comparte memoria con `cad'.
-  El tiempo de ejecución es O(n . log n), siendo `n` la cantidad de elementos
-  de `cad'.
+	Devuelve un árbol balanceado cuyos elementos son los que están contenidos en
+	`cad'.
+	En esta función se dice que un árbol está balanceado si
+	a) es vacío;
+	o
+	b)
+		b1) el sub-árbol izquierdo tiene la misma cantidad de elementos o uno más
+			que el	subárbol derecho;
+		y
+		b2) los subárboles izquierdo y derecho están balanceados.
+	DEFINICIÓN ALTERNATIVA DE ÁRBOL BALANCEADO
+	En esta función se dice que un árbol esta balanceado si en cada nodo, la
+	cantidad de elementos de su subárbol izquierdo es igual a, o 1 más que, la
+	cantidad de elementos de su subárbol derecho.
+	Precondición: los elementos de `cad' están en orden lexicográfico creciente
+	estricto según sus datos de texto.
+	El árbol devuelto no comparte memoria con `cad'.
+	El tiempo de ejecución es O(n . log n), siendo `n` la cantidad de elementos
+	de `cad'.
  */
 
 binario_t cadena_a_binario(cadena_t cad) {
@@ -231,61 +232,59 @@ binario_t cadena_a_binario(cadena_t cad) {
 }
 
 /*
-  Devuelve un árbol con copias de los elementos de `b' que cumplen la condición
-  "numero_info(elemento) < clave".
-  La estructura del árbol resultado debe ser análoga a la de `b'. Esto
-  significa que dados dos nodos `U' y `V' de `b' en los que se cumple la
-  condición y tal que `U' es ancestro de `V', en el árbol resultado la copia de
-  `U' debe ser ancestro de la copia de `V' cuando sea posible. Esto no siempre
-  se puede lograr y al mismo tiempo mantener la propiedad de orden del árbol
-  en el caso en el que en un nodo `V' no se cumple la condición y en sus dos
-  subárboles hay nodos en los que se cumple. En este caso, la copia del nodo
-  cuyo elemento es el mayor (según la propiedad de orden definida) de los que
-  cumplen la condición en el subárbol izquierdo de `V' deberá ser ancestro de
-  las copias de todos los descendientes de `V' que cumplen la condición.
-  (Ver ejemplos en LetraTarea3.pdf).
-  El árbol resultado no comparte memoria con `b'. *)
-  El tiempo de ejecución es O(n), donde `n' es la cantidad de elementos de `b'.
+	Devuelve un árbol con copias de los elementos de `b' que cumplen la condición
+	"numero_info(elemento) < clave".
+	La estructura del árbol resultado debe ser análoga a la de `b'. Esto
+	significa que dados dos nodos `U' y `V' de `b' en los que se cumple la
+	condición y tal que `U' es ancestro de `V', en el árbol resultado la copia de
+	`U' debe ser ancestro de la copia de `V' cuando sea posible. Esto no siempre
+	se puede lograr y al mismo tiempo mantener la propiedad de orden del árbol
+	en el caso en el que en un nodo `V' no se cumple la condición y en sus dos
+	subárboles hay nodos en los que se cumple. En este caso, la copia del nodo
+	cuyo elemento es el mayor (según la propiedad de orden definida) de los que
+	cumplen la condición en el subárbol izquierdo de `V' deberá ser ancestro de
+	las copias de todos los descendientes de `V' que cumplen la condición.
+	(Ver ejemplos en LetraTarea3.pdf).
+	El árbol resultado no comparte memoria con `b'. *)
+	El tiempo de ejecución es O(n), donde `n' es la cantidad de elementos de `b'.
  */
 
 binario_t menores(int clave, binario_t b) { return NULL; }
 
-static int auxCamino(binario_t b, cadena_t c, localizador_t loc){
-	//se fija si empiezan igual 
-	if (strcmp(frase_info(info_cadena(loc, c)), frase_info(b -> dato)) == 0 ){
-		//se fija si debe avanzar a la izquierda o derecha en el arbol
-		if (strcmp(frase_info(info_cadena(siguiente(loc, c), c)), frase_info(b -> dato)) > 0 ){
+static int auxCamino(binario_t b, cadena_t c, localizador_t loc) {
+	// se fija si empiezan igual 
+	if (strcmp(frase_info(info_cadena(loc, c)), frase_info(b->dato)) == 0) {
+		// se fija si debe avanzar a la izquierda o derecha en el arbol
+		if (strcmp(frase_info(info_cadena(siguiente(loc, c), c)), frase_info(b->dato)) > 0) {
 			auxCamino(derecho(b), c, siguiente(loc, c));
-		}else{
+		} else {
 			auxCamino(derecho(b), c, siguiente(loc, c));
 		}
-	}else return 0;
+	} else return 0;
 	return 1;
 }
 
-bool es_camino(cadena_t c, binario_t b) { 
-	//caso si son de distinto largo
+bool es_camino(cadena_t c, binario_t b) {
+	// Caso si son de distinto largo.
 	if (altura_binario(b) != longitud(c)) return false;
 	localizador_t loc = inicio_cadena(c);
 	int result = auxCamino(b, c, loc);
 	return (result == longitud(c));
 }
 
-static void auxNivel(nat actual, nat l, binario_t b, cadena_t cad, localizador_t loc){
-  if (actual != l){
-    auxNivel(actual+1, l, b->izq, cad, loc);
-    auxNivel(actual+1, l, b->der, cad, loc);
-  }
-  else {
-    cad = insertar_al_final(copia_info(b -> dato), cad);
-  }
+static void auxNivel(nat actual, nat l, binario_t b, cadena_t cad, localizador_t loc) {
+	if (actual != l) {
+		auxNivel(actual+1, l, b->izq, cad, loc);
+		auxNivel(actual+1, l, b->der, cad, loc);
+	} else
+		cad = insertar_al_final(copia_info(b->dato), cad);
 }
-//NOSE SI TENGO QUE LIBERAR LOC O OTRA COSA
-cadena_t nivel_en_binario(nat l, binario_t b) { 
-  cadena_t cad = crear_cadena();
-  localizador_t loc = inicio_cadena(cad);
-  auxNivel(1, l, b, cad, loc);
-	return cad; 
+// NOSE SI TENGO QUE LIBERAR LOC O OTRA COSA.
+cadena_t nivel_en_binario(nat l, binario_t b) {
+	cadena_t cad = crear_cadena();
+	localizador_t loc = inicio_cadena(cad);
+	auxNivel(1, l, b, cad, loc);
+	return cad;
 }
 
 void imprimir_binario(binario_t b) {
