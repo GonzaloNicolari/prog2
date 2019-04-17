@@ -73,7 +73,7 @@ static binario_t auxRemover(const char *&t,binario_t &padre, binario_t &hijo) {
 }
 
 static binario_t auxBorrar(binario_t &b, binario_t &aux) {
-	// CASO SI TIENE NODO IZQ.
+	// Si tiene nodo izq.
 	if (!es_vacio_binario(izquierdo(b))) {
 		aux			= mayor(izquierdo(b)); // aux->der == null por ser el mayor.
 		aux->der	= b->der;
@@ -83,7 +83,7 @@ static binario_t auxBorrar(binario_t &b, binario_t &aux) {
 		// @TODO: Falta acomodar el lado izquierdo de aux.
 		// @TODO: Volver a enganchar el padre de aux con el resto de la cadena.
 		return b;
-	// CASO SI TIENE NODO DER.
+	// Si tiene nodo der.
 	} else if (!es_vacio_binario(derecho(b)) {
 		aux = derecho(b);
 		liberar_info(b->dato);
@@ -91,7 +91,7 @@ static binario_t auxBorrar(binario_t &b, binario_t &aux) {
 		b->der	= aux->der;
 		// @TODO: Falta acomodar el lado izquierdo de b (b->izq	= aux->izq;).
 		return b;
-	// CASO SI NO TIENE IZQ Y DER.
+	// SI no tiene izq ni der.
 	} else {
 		liberar_info(b->dato);
 		return b;
@@ -103,9 +103,9 @@ binario_t remover_de_binario(const char *t, binario_t b) {
 	binario_t raiz	= crear_binario();
 	raiz			= b;
 
-	// CASO SI LA RAIZ ES EL NODO A BORRAR.
+	// Si la raíz es el nodo a borrar.
 	if (strcmp(frase_info(b->dato), t) == 0)		b = auxBorrar(b, aux);
-	// CASOS SI NO ES LA RAIZ.
+	// Si no es la raíz.
 	else if (strcmp(frase_info(b->dato), t) < 0)	b = auxRemover(t, b, derecho(b));
 	else if (strcmp(frase_info(b->dato), t) > 0)	b = auxRemover(t, b, izquierdo(b));
 	
