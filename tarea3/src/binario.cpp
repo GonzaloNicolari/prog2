@@ -65,7 +65,7 @@ static binario_t auxRemover(const char *&t,binario_t &padre, binario_t &hijo) {
 	if (frase_info(hijo->dato) < t) return auxRemover(t, b, derecho(b));
 	else if (frase_info(hijo->dato) > t) return auxRemover(t, b, izquierdo(b));
 	else {
-		// REFERENCIO AL PADRE CON EL HIJO BORRADO SEGUN SI ES HIJO IZQ O DER.
+	// Referencio al padre con el hijo borrado según si es hijo izq o der.
 		if (hijo == derecho(padre))	padre->der = auxBorrar(hijo);
 		else padre->izq = auxBorrar(hijo);
 		return padre;
@@ -91,7 +91,7 @@ static binario_t auxBorrar(binario_t &b, binario_t &aux) {
 		b->der	= aux->der;
 		// @TODO: Falta acomodar el lado izquierdo de b (b->izq	= aux->izq;).
 		return b;
-	// SI no tiene izq ni der.
+	// Si no tiene izq ni der.
 	} else {
 		liberar_info(b->dato);
 		return b;
@@ -222,7 +222,7 @@ cadena_t linealizacion(binario_t b) {
 
 binario_t cadena_a_binario(cadena_t cad) {
 	if (es_vacia_cadena(cad)) return crear_binario();
-	else ;// @TODO: COMPLETAR.
+	else ;// @TODO: Completar.
 	return NULL;
 }
 
@@ -247,9 +247,9 @@ binario_t cadena_a_binario(cadena_t cad) {
 binario_t menores(int clave, binario_t b) { return NULL; }
 
 static int auxCamino(binario_t b, cadena_t c, localizador_t loc) {
-	// se fija si empiezan igual 
+	// Si empiezan igual.
 	if (strcmp(frase_info(info_cadena(loc, c)), frase_info(b->dato)) == 0) {
-		// se fija si debe avanzar a la izquierda o derecha en el arbol
+		// Si debe avanzar a la izquierda o derecha en el árbol.
 		if (strcmp(frase_info(info_cadena(siguiente(loc, c), c)), frase_info(b->dato)) > 0)
 			auxCamino(derecho(b), c, siguiente(loc, c));
 		else
@@ -259,7 +259,7 @@ static int auxCamino(binario_t b, cadena_t c, localizador_t loc) {
 }
 
 bool es_camino(cadena_t c, binario_t b) {
-	// Caso si son de distinto largo.
+	// Si son de distinto largo.
 	if (altura_binario(b) != longitud(c)) return false;
 	localizador_t loc	= inicio_cadena(c);
 	int result			= auxCamino(b, c, loc);
@@ -274,7 +274,7 @@ static void auxNivel(nat actual, nat l, binario_t b, cadena_t cad, localizador_t
 		cad = insertar_al_final(copia_info(b->dato), cad);
 }
 
-// NOSE SI TENGO QUE LIBERAR LOC O OTRA COSA.
+// @TODO: Revisar, no se si tengo que liberar loc u otra cosa.
 cadena_t nivel_en_binario(nat l, binario_t b) {
 	cadena_t cad		= crear_cadena();
 	localizador_t loc	= inicio_cadena(cad);
