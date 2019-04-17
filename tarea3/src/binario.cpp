@@ -109,7 +109,7 @@ binario_t remover_de_binario(const char *t, binario_t b) {
 	else if (strcmp(frase_info(b->dato), t) > 0)	b = auxRemover(t, b, izquierdo(b));
 	
 	return raiz;
-	// O return b.
+	// @TODO: Revisar si es return b o raiz.
 }
 
 binario_t liberar_binario(binario_t b) {
