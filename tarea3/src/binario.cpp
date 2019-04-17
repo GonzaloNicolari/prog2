@@ -1,6 +1,6 @@
 /* 46450368			- 48579580 */
-// Nicol�s Saliba	- Gonzalo Nicolari.
-// Instituto de Computaci�n - Facultad de Ingenier�a, Laboratorio de Programaci�n 2.
+// Nicolás Saliba	- Gonzalo Nicolari.
+// Instituto de Computación - Facultad de Ingeniería, Laboratorio de Programación 2.
 
 #include "../include/binario.h"
 #include "../include/cadena.h"
@@ -75,10 +75,13 @@ static binario_t auxRemover(const char *&t,binario_t &padre, binario_t &hijo) {
 static binario_t auxBorrar(binario_t &b, binario_t &aux) {
 	// CASO SI TIENE NODO IZQ.
 	if (!es_vacio_binario(izquierdo(b))) {
-		aux			= mayor(izquierdo(b));
+		aux			= mayor(izquierdo(b)); // aux->der == null por ser el mayor.
 		aux->der	= b->der;
 		liberar_info(b->dato);
 		b->dato = aux->dato;
+		// @NOTA: Actualmente solo se está poniendo a la derecha del hijo más grande del sub árbol izquierdo, el sub árbol derecho del nodo a borrar.
+		// @TODO: Falta acomodar el lado izquierdo de aux.
+		// @TODO: Volver a enganchar el padre de aux con el resto de la cadena.
 		return b;
 	// CASO SI TIENE NODO DER.
 	} else if (!es_vacio_binario(derecho(b)) {
@@ -95,7 +98,7 @@ static binario_t auxBorrar(binario_t &b, binario_t &aux) {
 }
 
 binario_t remover_de_binario(const char *t, binario_t b) {
-	binario_t aux	= crear_binario();
+	binario_t aux	= crear_binario(); // @TODO: Revisar si es necesario definirlo acá o en auxBorrar (acá no se usa).
 	binario_t raiz	= crear_binario();
 	raiz			= b;
 	// CASO SI LA RAIZ ES EL NODO A BORRAR.
@@ -218,7 +221,7 @@ cadena_t linealizacion(binario_t b) {
 
 binario_t cadena_a_binario(cadena_t cad) {
 	if (es_vacia_cadena(cad)) return crear_binario();
-	else ;// TODO: COMPLETAR.
+	else ;// @TODO: COMPLETAR.
 	return NULL;
 }
 
@@ -234,7 +237,7 @@ binario_t cadena_a_binario(cadena_t cad) {
 	subárboles hay nodos en los que se cumple. En este caso, la copia del nodo
 	cuyo elemento es el mayor (según la propiedad de orden definida) de los que
 	cumplen la condición en el subárbol izquierdo de `V' deberá ser ancestro de
-	las copias de todos los descendientes de `V' que cumplen la condición.
+	las copias de @TODOs los descendientes de `V' que cumplen la condición.
 	(Ver ejemplos en LetraTarea3.pdf).
 	El árbol resultado no comparte memoria con `b'. *)
 	El tiempo de ejecución es O(n), donde `n' es la cantidad de elementos de `b'.
