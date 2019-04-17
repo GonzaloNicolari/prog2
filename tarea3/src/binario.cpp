@@ -105,8 +105,8 @@ binario_t remover_de_binario(const char *t, binario_t b) {
 	// CASO SI LA RAIZ ES EL NODO A BORRAR.
 	if (frase_info(b->dato) == t)		b = auxBorrar(b, aux);
 	// CASOS SI NO ES LA RAIZ.
-	else if (frase_info(b->dato) < t)	b = auxRemover(t, b, derecho(b));
-	else if (frase_info(b->dato) > t)	b = auxRemover(t, b, izquierdo(b));
+	else if (strcmp(frase_info(b->dato), t) < 0)	b = auxRemover(t, b, derecho(b));
+	else if (strcmp(frase_info(b->dato), t) > 0)	b = auxRemover(t, b, izquierdo(b));
 	
 	return raiz;
 	// O return b.
