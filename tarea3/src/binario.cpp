@@ -61,7 +61,7 @@ binario_t remover_mayor(binario_t b) {
 	elementos de `b'.
  */
 
-static binario_t auxRemover(const char *&t,binario_t &padre, binario_t &hijo) {
+static binario_t auxRemover(const char *&t, binario_t &padre, binario_t &hijo) {
 	if (frase_info(hijo->dato) < t) return auxRemover(t, b, derecho(b));
 	else if (frase_info(hijo->dato) > t) return auxRemover(t, b, izquierdo(b));
 	else {
@@ -222,7 +222,7 @@ cadena_t linealizacion(binario_t b) {
 
 binario_t cadena_a_binario(cadena_t cad) {
 	if (es_vacia_cadena(cad)) return crear_binario();
-	else ;// @TODO: Completar.
+	else ; // @TODO: Completar.
 	return NULL;
 }
 
