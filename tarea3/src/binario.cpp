@@ -102,14 +102,14 @@ binario_t remover_de_binario(const char *t, binario_t b) {
 	binario_t aux	= crear_binario(); // @TODO: Revisar si es necesario definirlo acá o en auxBorrar (acá no se usa).
 	binario_t raiz	= crear_binario();
 	raiz			= b;
+
 	// CASO SI LA RAIZ ES EL NODO A BORRAR.
-	if (frase_info(b->dato) == t)		b = auxBorrar(b, aux);
+	if (strcmp(frase_info(b->dato), t) == 0)		b = auxBorrar(b, aux);
 	// CASOS SI NO ES LA RAIZ.
 	else if (strcmp(frase_info(b->dato), t) < 0)	b = auxRemover(t, b, derecho(b));
 	else if (strcmp(frase_info(b->dato), t) > 0)	b = auxRemover(t, b, izquierdo(b));
 	
-	return raiz;
-	// @TODO: Revisar si es return b o raiz.
+	return raiz; // @TODO: Revisar si es return b o raiz.
 }
 
 binario_t liberar_binario(binario_t b) {
