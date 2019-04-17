@@ -89,6 +89,7 @@ static binario_t auxBorrar(binario_t &b, binario_t &aux) {
 		liberar_info(b->dato);
 		b->dato	= aux->dato;
 		b->der	= aux->der;
+		// @TODO: Falta acomodar el lado izquierdo de b (b->izq	= aux->izq;).
 		return b;
 	// CASO SI NO TIENE IZQ Y DER.
 	} else {
