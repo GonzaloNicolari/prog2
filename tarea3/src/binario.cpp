@@ -12,7 +12,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-
 struct rep_binario {
 	info_t dato;
 	rep_binario *izq;
