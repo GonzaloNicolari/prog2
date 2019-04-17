@@ -65,18 +65,51 @@ binario_t remover_mayor(binario_t b) {
 //static void auxRemover(const char *t, binario_t b, binario_t padre) {
 	//insertar_al_final(mayor(izquierdo(b), ));
 //}
-
-binario_t remover_de_binario(const char *t, binario_t b) {
-	if (t < frase_info(b -> dato)) {
-		//binario_t prev = b;
-		remover_de_binario (t, izquierdo(b));
-		//ACA HAGO ALGO CON EL PADRE prev
-
-	} else if (t > frase_info(b -> dato)) remover_de_binario (t, derecho(b));
-	else if (t == frase_info(b -> dato)) { 
-			// TODO: A COMPLETAR BORRAR NOD
+static binario_t auxRemover(const char *&t,binario_t &padre, binario_t &hijo){
+	if (frase_info(hijo->dato) < t) return auxRemover(t, b, derecho(b));
+	else if (frase_info(hijo->dato) > t) return auxRemover(t, b, izquierdo(b));
+	else
+	{
+		//REFERENCIO AL PADRE CON EL HIJO BORRADO SEGUN SI ES HIJO IZQ O DER
+		if (hijo == derecho(padre))	padre -> der = auxBorrar(hijo);
+		else padre -> izq = auxBorrar(hijo);
+		return padre;
 	}
-	return NULL;
+}
+static binario_t auxBorrar(binario_t &b, binario_t &aux){
+	//CASO SI TIENE NODO IZQ
+		if (!es_vacio_binario(izquierdo(b))){
+			aux = mayor(izquierdo(b));
+			aux -> der = b -> der; 
+			liberar_info(b->dato);
+			b->dato = aux-> dato;
+			return b;
+		//CASO SI TIENE NODO DER
+		}else if(!es_vacio_binario(derecho(b)){
+			aux = derecho(b);
+			liberar_info(b->dato);
+			b->dato = aux-> dato;
+			b->der  = aux->der;
+			return b;
+		//CASO SI NO TIENE IZQ Y DER
+		}else{
+			liberar_info(b->dato);
+			return b;
+		}
+}
+binario_t remover_de_binario(const char *t, binario_t b) {
+	binario_t raiz = crear_binario();
+	raiz = b;
+	binario_t aux = crear_binario();
+	//CASO SI LA RAIZ ES EL NODO A BORRAR
+	if (frase_info(b->dato) == t) {
+		b = auxBorrar(b, aux);	
+	//CASOS SI NO ES LA RAIZ
+	}else if (frase_info(b->dato) < t) b = auxRemover(t, b, derecho(b));
+	else if (frase_info(b->dato) > t)  b = auxRemover(t, b, izquierdo(b));
+	
+	return raiz;
+	//o return b
 }
 
 binario_t liberar_binario(binario_t b) {
