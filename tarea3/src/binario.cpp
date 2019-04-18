@@ -315,44 +315,31 @@ cadena_t linealizacion(binario_t b) {
 /*
 	Devuelve la raíz del árbol con el nuevo elemento insertado.
 */
-binario_t insertarElementoDeCadenaEnBinario(binario_t raiz, info_t elem) {
+binario_t insertarElementoDeCadenaEnBinario(binario_t raiz, cadena_t cad) {
 
-	//b = insertar_en_binario(elem, b);
-	
 	// Se resuelve mediante el método de bipartición.
-	// Voy al elemento posicionado en la mitad de la cadena si la misma es de largo impar, o al anterior a éste si es par.
-	// Ese elemento será la raíz del árbol.
-	// Separo la cadena en dos partes (al medio) haciendo lo mismo para cada segmento obtenido.
+	// Voy al elemento posicionado en la mitad de la cadena si la misma es de largo impar, o al anterior a éste si es par. Ese elemento será la raíz del árbol.
+	localizador_t loc;
+	int i = longitud(cad);
+	if ((i % 2) == 0) loc = kesimo(i- 1, cad);
+	else loc = kesimo(i, cad);
 
-	
+	raiz->dato = info_cadena(loc, cad);
+
+	// Separo la cadena en dos partes (al medio) haciendo lo mismo para cada segmento obtenido.
+	cadena_t cad1	= copiar_segmento(inicio_cadena(cad), loc, cad);
+	cadena_t cad2	= copiar_segmento(loc, final_cadena(loc), cad);
+
+	if (!es_vacia_cadena(cad1)) raiz = insertarElementoDeCadenaEnBinario(b, cad1);
+	if (!es_vacia_cadena(cad2)) raiz = insertarElementoDeCadenaEnBinario(b, cad2);
+	return raiz;
 }
 
 binario_t cadena_a_binario(cadena_t cad) {
 
 	binario_t b = crear_binario();
 	if (es_vacia_cadena(cad)) return b;
-	else {
-		// @TODO: Completar.
-		//return NULL;
-
-		// Voy al elemento posicionado en la mitad de la cadena si la misma es de largo impar, o al anterior a éste si es par.
-		localizador_t loc;
-		int i = longitud(cad);
-		if ((i % 2) == 0) loc = kesimo(i- 1, cad);
-		else loc = kesimo(i, cad);
-
-		b->dato = info_cadena(loc, cad);
-
-		cadena_t cad1	= copiar_segmento(inicio_cadena(cad), loc, cad);
-		cadena_t cad2	= copiar_segmento(loc, final_cadena(loc), cad);
-
-		cadena_a_binario(cad1);
-		cadena_a_binario(cad2);
-
-		insertarElementoDeCadenaEnBinario(b, cad, info_cadena(loc, cad));
-		b = insertar_en_binario(elem, b);
-		}
-	}
+	else return insertarElementoDeCadenaEnBinario(b, cad);
 }
 
 /*
