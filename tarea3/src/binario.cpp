@@ -315,7 +315,7 @@ cadena_t linealizacion(binario_t b) {
 /*
 	Devuelve la raíz del árbol con el nuevo elemento insertado.
 */
-binario_t insertarElementoDeCadenaEnBinario(binario_t raiz, cadena_t cad) {
+binario_t insertarElementoDeCadenaEnBinario(binario_t raiz, binario_t *padre, binario_t *actual; cadena_t cad) {
 
 	// Se resuelve mediante el método de bipartición.
 	// Voy al elemento posicionado en la mitad de la cadena si la misma es de largo impar, o al anterior a éste si es par. Ese elemento será la raíz del árbol.
@@ -324,14 +324,29 @@ binario_t insertarElementoDeCadenaEnBinario(binario_t raiz, cadena_t cad) {
 	if ((i % 2) == 0) loc = kesimo(i- 1, cad);
 	else loc = kesimo(i, cad);
 
-	raiz->dato = info_cadena(loc, cad);
+	actual->dato = info_cadena(loc, cad);
 
 	// Separo la cadena en dos partes (al medio) haciendo lo mismo para cada segmento obtenido.
 	cadena_t cad1	= copiar_segmento(inicio_cadena(cad), loc, cad);
-	cadena_t cad2	= copiar_segmento(loc, final_cadena(loc), cad);
+	cadena_t cad2	= copiar_segmento(loc, final_cadena(cad), cad);
 
-	if (!es_vacia_cadena(cad1)) raiz = insertarElementoDeCadenaEnBinario(b, cad1);
-	if (!es_vacia_cadena(cad2)) raiz = insertarElementoDeCadenaEnBinario(b, cad2);
+	if (!es_vacio_binario(padre)) {
+		if (!es_vacia_cadena(cad1)) {
+			padre->izq	= actual;
+			actual->izq	= insertarElementoDeCadenaEnBinario(b, padre, actual, cad1);
+		}
+		if (!es_vacia_cadena(cad2)) {
+			padre->der	= actual;
+			actual->der	= insertarElementoDeCadenaEnBinario(b, padre, actual, cad1);
+		}
+	} else {
+		// TODO: Completar para el caso en que es la primera ejecución.
+		
+	}
+
+	liberar_cadena(cad1);
+	liberar_cadena(cad2);
+
 	return raiz;
 }
 
@@ -339,7 +354,7 @@ binario_t cadena_a_binario(cadena_t cad) {
 
 	binario_t b = crear_binario();
 	if (es_vacia_cadena(cad)) return b;
-	else return insertarElementoDeCadenaEnBinario(b, cad);
+	else return insertarElementoDeCadenaEnBinario(b, NULL, b, cad);
 }
 
 /*
