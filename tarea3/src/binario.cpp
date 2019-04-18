@@ -103,6 +103,7 @@ binario_t remover_de_binario(const char *t, binario_t b) {
 	if (strcmp(frase_info(b->dato), t) == 0) {
 		// Si tiene nodo izq.
 		if (!es_vacio_binario(izquierdo(b))) {
+			// TODO: Buscar a mano el mayor y guardar la referencia al padre.
 			binario_t aux	= mayor(izquierdo(b)); // aux->der == null por ser el mayor.
 			aux->der		= b->der;
 			liberar_info(b->dato);
