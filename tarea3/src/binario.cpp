@@ -277,7 +277,10 @@ binario_t cadena_a_binario(cadena_t cad) {
 	El tiempo de ejecución es O(n), donde `n' es la cantidad de elementos de `b'.
  */
 
-binario_t menores(int clave, binario_t b) { return NULL; }
+binario_t menores(int clave, binario_t b) {
+	// TODO: Completar.
+	return NULL;
+	}
 
 static bool auxCamino(binario_t b, cadena_t c, localizador_t loc) {
 	// Si empiezan igual.
