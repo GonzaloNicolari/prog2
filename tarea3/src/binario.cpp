@@ -26,26 +26,26 @@ binario_t insertar_en_binario(info_t i, binario_t b) {
 		b->dato = i;
 		return b;
 	} else {
-		if (strcmp(frase_info(b->dato), frase_info(i)) < 0) insertar_en_binario(i, derecho(b));
+		if (strcmp(frase_info(raiz(b)), frase_info(i)) < 0) insertar_en_binario(i, derecho(b));
 		else insertar_en_binario(i, izquierdo(b));
 	}
 	return b;
 }
 
 info_t mayor(binario_t b) {
-	if (derecho(b) != NULL) mayor(derecho(b));
+	if (!es_vacio_binario(derecho(b))) mayor(derecho(b));
 	else mayor(izquierdo(b));
-	return (b->dato);
+	return (raiz(b));
 }
 
 binario_t remover_mayor(binario_t b) {
 	assert(!es_vacio_binario(n));
-	if (b->der == NULL) {
-		binario_t izq = b->izq;
+	if (derecho(b) == NULL) {
+		binario_t izq = izquierdo(b);
 		delete(b);
 		b = izq;
 	} else
-		b->der = remover_mayor(b->der);
+		b->der = remover_mayor(derecho(b));
 	return b;
 }
 
@@ -194,8 +194,8 @@ binario_t remover_de_binario(const char *t, binario_t b) {
 
 binario_t liberar_binario(binario_t b) {
 	if (b != NULL) {
-		b->izq	= liberar_binario(b->izq);
-		b->der	= liberar_binario(b->der);
+		b->izq	= liberar_binario(izquierdo(b));
+		b->der	= liberar_binario(derecho(b));
 		liberar_info(b->dato);
 		delete b;
 		b = NULL;
@@ -271,16 +271,16 @@ int suma_ultimos_pares(nat i, binario_t b) {
 	else {
 		suma_ultimos_pares(i, derecho(b));
 		suma_ultimos_pares(i, izquierdo(b));
-		if (((numero_info(b->dato) % 2) == 0) && (i > 0)) i--;
+		if (((numero_info(raiz(b)) % 2) == 0) && (i > 0)) i--;
 	}
-	return numero_info(b->dato);
+	return numero_info(raiz(b));
 }
 
 static void lin(binario_t b,cadena_t c) {
 	if (!es_vacio_binario(b)) {
-		lin(b->izq, c);
-		insertar_al_final(copia_info(b->dato), c);
-		lin(b->der, c);
+		lin(izquierdo(b), c);
+		insertar_al_final(copia_info(raiz(b)), c);
+		lin(derecho(b), c);
 	}
 }
 
@@ -343,11 +343,11 @@ binario_t menores(int clave, binario_t b) {
 
 static bool auxCamino(binario_t b, cadena_t c, localizador_t loc) {
 	// Si empiezan igual.
-	if (strcmp(frase_info(info_cadena(loc, c)), frase_info(b->dato)) == 0) {
+	if (strcmp(frase_info(info_cadena(loc, c)), frase_info(raiz(b))) == 0) {
 		// Compruebo si hay mas letras en la cadena.
 		if (es_localizador(siguiente(loc, c))) {
 			// Si debe avanzar a la izquierda o derecha en el árbol.
-			if (strcmp(frase_info(info_cadena(siguiente(loc, c), c)), frase_info(b->dato)) > 0)
+			if (strcmp(frase_info(info_cadena(siguiente(loc, c), c)), frase_info(raiz(b))) > 0)
 				auxCamino(derecho(b), c, siguiente(loc, c));
 			else
 				auxCamino(izquierdo(b), c, siguiente(loc, c));
@@ -375,10 +375,10 @@ static void auxNivel(nat actual, nat l, binario_t b, cadena_t cad, localizador_t
 	if (actual != l) {
 		// Sigo buscando.
 		actual++;
-		auxNivel(actual, l, b->izq, cad, loc);
-		auxNivel(actual, l, b->der, cad, loc);
+		auxNivel(actual, l, izquierdo(b), cad, loc);
+		auxNivel(actual, l, derecho(b), cad, loc);
 	} else
-		cad = insertar_al_final(copia_info(b->dato), cad);
+		cad = insertar_al_final(copia_info(raiz(b)), cad);
 }
 
 cadena_t nivel_en_binario(nat l, binario_t b) {
@@ -390,9 +390,9 @@ cadena_t nivel_en_binario(nat l, binario_t b) {
 }
 
 void imprimir_binario(binario_t b) {
-	if (b != NULL) {
+	if (!es_vacio_binario(b)) {
 		imprimir_binario(derecho(b));
-		printf("%s", info_a_texto(b->dato));
+		printf("%s", info_a_texto(raiz(b)));
 		imprimir_binario(izquierdo(b));
 	}
 }
