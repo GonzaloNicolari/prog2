@@ -313,9 +313,21 @@ cadena_t linealizacion(binario_t b) {
  */
 
 binario_t cadena_a_binario(cadena_t cad) {
-	if (es_vacia_cadena(cad)) return crear_binario();
-	else ; // @TODO: Completar.
-	return NULL;
+
+	binario_t b = crear_binario();
+	if (es_vacia_cadena(cad)) return b;
+	else {
+		// @TODO: Completar.
+		//return NULL;
+
+		// Recorro la cadena desde el inicio (elemento más chico) insertando en el árbol.
+		localizador_t loc = inicio_cadena(cad);
+		while (es_localizador(loc)) {
+			b = insertar_en_binario(info_cadena(loc, cad), b);
+			// TODO: Revisar, si la cadena está ordenada entonces puedo siempre agregar los nuevos elementos a la derecho y dejar todos los izq vacíos; en ese caso no preciso insertar_en_binario, directamente lo agrego a mano a la derecha.
+			loc = siguiente(loc);
+		}
+	}
 }
 
 /*
