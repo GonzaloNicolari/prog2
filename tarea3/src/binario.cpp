@@ -141,7 +141,6 @@ binario_t remover_de_binario(const char *t, binario_t b) {
 	binario_t actual	= b;
 	binario_t padre		= crear_binario();
 	binario_t aux;
-	binario_t aux2;
 
 	// Busco el nodo a remover.
 	while (!es_vacio_binario(actual)) {
@@ -178,9 +177,9 @@ binario_t remover_de_binario(const char *t, binario_t b) {
 						aux		= izquierdo(actual);
 					}
 				}
-				aux2			= actual->dato;
+				int value		= actual->dato;
 				actual->dato	= aux->dato;
-				aux->dato		= aux2;
+				aux->dato		= value;
 				actual			= aux;
 			}
 		} else {
