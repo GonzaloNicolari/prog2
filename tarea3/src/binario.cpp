@@ -315,12 +315,12 @@ cadena_t linealizacion(binario_t b) {
 	static binario_t auxCadABin(info_t arr[], binario_t b, int max, int inicio){
 	
 	if es_vacio_binario(b){
-		insertar_en_binario(arr[ceil((max+inicio)/2)]);
-		if (inicio > max) return b;
+		b = insertar_en_binario(arr[ceil((max+inicio)/2)]);
+		if (inicio >= max) return b;
 	}
 	else{
-			auxCadABin(arr, derecho(b), max, ceil((max+inicio)/2)+1);
-			auxCadABin(arr, izquierdo(b), ceil((max+inicio)/2)-1, inicio);
+			auxCadABin(arr, derecho(b), max, ceil((max+inicio)/2));
+			auxCadABin(arr, izquierdo(b), ceil((max+inicio)/2), inicio);
 	}
 }
 
@@ -335,8 +335,7 @@ binario_t cadena_a_binario(cadena_t cad) {
 			loc    = siguiente(loc);
 		}
 		binario_t b = crear_binario();
-		int inicio = 0
-		return auxCadABin(arr, b, largo, inicio);
+		return auxCadABin(arr, b, largo, 0);
 	} 
 }
 			    
