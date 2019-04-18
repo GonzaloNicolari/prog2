@@ -61,6 +61,7 @@ binario_t remover_mayor(binario_t b) {
 	elementos de `b'.
  */
 
+/* 
 static binario_t auxRemover(const char *&t, binario_t &padre, binario_t &hijo) {
 	if		(strcmp(frase_info(hijo->dato), t) < 0) return auxRemover(t, b, derecho(b));
 	else if	(strcmp(frase_info(hijo->dato), t) > 0) return auxRemover(t, b, izquierdo(b));
@@ -131,6 +132,64 @@ binario_t remover_de_binario(const char *t, binario_t b) {
 	} else if	(strcmp(frase_info(b->dato), t) < 0)	b = auxRemover(t, b, derecho(b));
 	else if		(strcmp(frase_info(b->dato), t) > 0)	b = auxRemover(t, b, izquierdo(b));
 
+	return b;
+}
+*/
+
+binario_t remover_de_binario(const char *t, binario_t b) {
+
+	binario_t actual	= b;
+	binario_t padre		= crear_binario();
+	binario_t aux;
+	binario_t aux2;
+
+	// Busco el nodo a remover.
+	while (!es_vacio_binario(actual)) {
+		// Si encontré el valor.
+		if (strcmp(t, frase_info(actual->dato) == 0) {
+			// Si no tiene hijos.
+			if (es_vacio_binario(derecho(b)) && es_vacio_binario(izquierdo(b))) {
+				// Si no es la raíz.
+				if (!es_vacio_binario(padre)) {
+					if (derecho(padre) == actual) padre->der = NULL;
+					else {
+						assert(izquierdo(padre) == actual);
+						padre->izq == NULL;
+					}
+				}
+				delete actual;
+				actual = NULL;
+				return b;
+			} else {
+				// Si tiene hijos.
+				padre = actual;
+				// Busco el mayor en el subárbol izquierdo.
+				if (!es_vacio_binario(izquierdo(actual))) {
+					aux = izquierdo(actual);
+					while (!es_vacio_binario(derecho(aux))) {
+						padre	= aux;
+						aux		= derecho(aux);
+					}
+				} else {
+					// Busco el menor en el subárbol derecho.
+					aux = derecho(actual);
+					while (!es_vacio_binario(izquierdo(actual))) {
+						padre	= aux;
+						aux		= izquierdo(actual);
+					}
+				}
+				aux2			= actual->dato;
+				actual->dato	= aux->dato;
+				aux->dato		= aux2;
+				actual			= aux;
+			}
+		} else {
+			// Sigo buscando.
+			padre = actual;
+			if (strcmp(t, frase_info(actual->dato) > 0) actual = derecho(actual);
+			else actual = izquierdo(actual);
+		}
+	}
 	return b;
 }
 
