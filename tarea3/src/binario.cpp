@@ -317,8 +317,14 @@ cadena_t linealizacion(binario_t b) {
 */
 binario_t insertarElementoDeCadenaEnBinario(binario_t raiz, info_t elem) {
 
-	b = insertar_en_binario(elem, b);
-	// TODO: Controlar AVL.
+	//b = insertar_en_binario(elem, b);
+	
+	// Se resuelve mediante el método de bipartición.
+	// Voy al elemento posicionado en la mitad de la cadena si la misma es de largo impar, o al anterior a éste si es par.
+	// Ese elemento será la raíz del árbol.
+	// Separo la cadena en dos partes (al medio) haciendo lo mismo para cada segmento obtenido.
+
+	
 }
 
 binario_t cadena_a_binario(cadena_t cad) {
@@ -329,8 +335,11 @@ binario_t cadena_a_binario(cadena_t cad) {
 		// @TODO: Completar.
 		//return NULL;
 
-		localizador_t loc = inicio_cadena(cad);
-		// Recorro la cadena desde el inicio (elemento más chico) insertando en el árbol.
+		localizador_t loc;
+		int i = longitud(cad);
+		if ((i % 2) == 0) loc = kesimo(i, cad);
+		else loc = kesimo(i - 1, cad);
+		
 		while (es_localizador(loc)) {
 			insertarElementoDeCadenaEnBinario(b, cad, info_cadena(loc, cad));
 			b = insertar_en_binario(elem, b);
