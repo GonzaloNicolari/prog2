@@ -341,7 +341,8 @@ binario_t insertarElementoDeCadenaEnBinario(binario_t raiz, binario_t *padre, bi
 		}
 	} else {
 		// TODO: Completar para el caso en que es la primera ejecución.
-		
+		if (!es_vacia_cadena(cad1)) actual->izq	= insertarElementoDeCadenaEnBinario(b, padre, actual, cad1);
+		if (!es_vacia_cadena(cad2)) actual->der	= insertarElementoDeCadenaEnBinario(b, padre, actual, cad1);
 	}
 
 	liberar_cadena(cad1);
