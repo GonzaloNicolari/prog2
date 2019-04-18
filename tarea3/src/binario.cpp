@@ -146,6 +146,7 @@ binario_t liberar_binario(binario_t b) {
 
 bool es_vacio_binario(binario_t b) { return b == NULL; }
 
+/* 
 static bool avlAux(binario_t b, int diffL, int diffR) {
 	if (izquierdo(b) =! NULL) return avlAux(izquierdo(b), diffL, diffR);
 	else diffL++;
@@ -153,6 +154,18 @@ static bool avlAux(binario_t b, int diffL, int diffR) {
 	else diffR++;
 	if ((absoluto(diffL - diffR) == 0) || (absoluto(diffL - diffR) == 1)) return true;
 	else return false;
+}
+ */
+static bool avlAux(binario_t b, int diffL, int diffR) {
+	if (izquierdo(b) =! NULL) {
+		diffL++;
+		return avlAux(izquierdo(b), diffL, diffR);
+	}
+	if (derecho(b) =! NULL) {
+		diffR++;
+		return avlAux(derecho(b), diffL, diffR);
+	}
+	return (absoluto(diffL - diffR) == 0) || (absoluto(diffL - diffR) == 1);
 }
 
 bool es_AVL(binario_t b) {
