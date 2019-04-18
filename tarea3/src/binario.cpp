@@ -216,11 +216,11 @@ static bool avlAux(binario_t b, int diffL, int diffR) {
 }
  */
 static bool avlAux(binario_t b, int diffL, int diffR) {
-	if (izquierdo(b) =! NULL) {
+	if (!es_vacio_binario(izquierdo(b))) {
 		diffL++;
 		return avlAux(izquierdo(b), diffL, diffR);
 	}
-	if (derecho(b) =! NULL) {
+	if (!es_vacio_binario(derecho(b))) {
 		diffR++;
 		return avlAux(derecho(b), diffL, diffR);
 	}
