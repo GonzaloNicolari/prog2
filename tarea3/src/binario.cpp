@@ -26,7 +26,7 @@ binario_t insertar_en_binario(info_t i, binario_t b) {
 		b->dato = i;
 		return b;
 	} else {
-		if (strcmp(frase_info(b -> dato), frase_info(i)) < 0) insertar_en_binario(i, derecho(b));
+		if (strcmp(frase_info(b->dato), frase_info(i)) < 0) insertar_en_binario(i, derecho(b));
 		else insertar_en_binario(i, izquierdo(b));
 	}
 	return b;
@@ -62,8 +62,8 @@ binario_t remover_mayor(binario_t b) {
  */
 
 static binario_t auxRemover(const char *&t, binario_t &padre, binario_t &hijo) {
-	if (frase_info(hijo->dato) < t) return auxRemover(t, b, derecho(b));
-	else if (frase_info(hijo->dato) > t) return auxRemover(t, b, izquierdo(b));
+	if		(strcmp(frase_info(hijo->dato), t) < 0) return auxRemover(t, b, derecho(b));
+	else if	(strcmp(frase_info(hijo->dato), t) > 0) return auxRemover(t, b, izquierdo(b));
 	else {
 	// Referencio al padre con el hijo borrado según si es hijo izq o der.
 		if (hijo == derecho(padre))	padre->der = auxBorrar(hijo);
@@ -99,17 +99,43 @@ static binario_t auxBorrar(binario_t &b, binario_t &aux) {
 }
 
 binario_t remover_de_binario(const char *t, binario_t b) {
-	binario_t aux	= crear_binario(); // @TODO: Revisar si es necesario definir aux acá o en auxBorrar (acá no se usa).
-	binario_t raiz	= crear_binario();
-	raiz			= b;
+	//binario_t aux	= crear_binario(); // @TODO: Revisar si es necesario definir aux acá o en auxBorrar (acá no se usa); o si debo hacerlo en el if "Si la raíz es el nodo a borrar".
+	//binario_t raiz	= crear_binario();
+	//raiz			= b;
 
 	// Si la raíz es el nodo a borrar.
-	if (strcmp(frase_info(b->dato), t) == 0)		b = auxBorrar(b, aux);
+	if (strcmp(frase_info(b->dato), t) == 0) {
+		// Si tiene nodo izq.
+		if (!es_vacio_binario(izquierdo(b))) {
+			binario_t aux	= mayor(izquierdo(b)); // aux->der == null por ser el mayor.
+			aux->der		= b->der;
+			liberar_info(b->dato);
+			b->dato = aux->dato;
+			// @NOTA: Actualmente solo se está poniendo a la derecha del hijo más grande del sub árbol izquierdo, el sub árbol derecho del nodo a borrar.
+			// @TODO: Falta acomodar el lado izquierdo de aux.
+			// @TODO: Volver a enganchar el padre de aux con el resto de la cadena (hijos de aux).
+			// @NOTA: Al obtener aux con la función "mayor" perdemos referencia del padre del elemento que devuelve; y el cual necesito volver a enganchar.
+			return b;
+		// Si tiene nodo der.
+		} else if (!es_vacio_binario(derecho(b)) {
+			binario_t aux = derecho(b);
+			liberar_info(b->dato);
+			b->dato	= aux->dato;
+			b->der	= aux->der;
+			b->izq	= aux->izq; // @TODO: Falta acomodar el lado izquierdo de b (b->izq	= aux->izq;).
+			return b;
+		// Si no tiene izq ni der.
+		} else {
+			liberar_info(b->dato);
+			return b;
+		}
+		//b = auxBorrar(b, aux);
 	// Si no es la raíz.
-	else if (strcmp(frase_info(b->dato), t) < 0)	b = auxRemover(t, b, derecho(b));
-	else if (strcmp(frase_info(b->dato), t) > 0)	b = auxRemover(t, b, izquierdo(b));
+	} else if	(strcmp(frase_info(b->dato), t) < 0)	b = auxRemover(t, b, derecho(b));
+	else if		(strcmp(frase_info(b->dato), t) > 0)	b = auxRemover(t, b, izquierdo(b));
 	
-	return raiz; // @TODO: Revisar si es return b o raiz.
+	//return raiz; // @TODO: Revisar si es return b o raiz.
+	return b;
 }
 
 binario_t liberar_binario(binario_t b) {
