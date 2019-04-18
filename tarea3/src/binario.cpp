@@ -114,7 +114,7 @@ binario_t remover_de_binario(const char *t, binario_t b) {
 			// @NOTA: Actualmente solo se está poniendo a la derecha del hijo más grande del sub árbol izquierdo, el sub árbol derecho del nodo a borrar.
 			// @TODO: Falta acomodar el lado izquierdo de aux.
 			// @TODO: Volver a enganchar el padre de aux con el resto de la cadena (hijos de aux).
-			// @NOTA: Al obtener aux con la función "mayor" perdemos referencia del padre del elemento que devuelve; y el cual necesito volver a enganchar.
+			// @NOTA: Actualmente al obtener aux con la función "mayor" perdemos referencia del padre del elemento que devuelve; y el cual necesito volver a enganchar.
 			return b;
 		// Si tiene nodo der.
 		} else if (!es_vacio_binario(derecho(b)) {
