@@ -122,7 +122,7 @@ binario_t remover_de_binario(const char *t, binario_t b) {
 			liberar_info(b->dato);
 			b->dato	= aux->dato;
 			b->der	= aux->der;
-			b->izq	= aux->izq; // @TODO: Falta acomodar el lado izquierdo de b (b->izq	= aux->izq;).
+			b->izq	= aux->izq;
 			return b;
 		// Si no tiene izq ni der.
 		} else {
