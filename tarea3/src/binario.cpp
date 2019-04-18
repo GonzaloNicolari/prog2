@@ -279,17 +279,21 @@ binario_t cadena_a_binario(cadena_t cad) {
 
 binario_t menores(int clave, binario_t b) { return NULL; }
 
-// FIXME: Implementar contador de letras de la cadena para comparar con el de recorrido del árbol y retornar en la funnción principal.
-static int auxCamino(binario_t b, cadena_t c, localizador_t loc) {
+static bool auxCamino(binario_t b, cadena_t c, localizador_t loc) {
 	// Si empiezan igual.
 	if (strcmp(frase_info(info_cadena(loc, c)), frase_info(b->dato)) == 0) {
-		// Si debe avanzar a la izquierda o derecha en el árbol.
-		if (strcmp(frase_info(info_cadena(siguiente(loc, c), c)), frase_info(b->dato)) > 0)
-			auxCamino(derecho(b), c, siguiente(loc, c));
-		else
-			auxCamino(izquierdo(b), c, siguiente(loc, c));
-	} else return 0;
-	return 1;
+		// Compruebo si hay mas letras en la cadena.
+		if (es_localizador(siguiente(loc, c))) {
+			// Si debe avanzar a la izquierda o derecha en el árbol.
+			if (strcmp(frase_info(info_cadena(siguiente(loc, c), c)), frase_info(b->dato)) > 0)
+				auxCamino(derecho(b), c, siguiente(loc, c));
+			else
+				auxCamino(izquierdo(b), c, siguiente(loc, c));
+
+		// Compruebo si terminé en una hoja.
+		} else if (es_vacio_binario(derecho(b)) && es_vacio_binario(izquierdo(b))) return true;
+	}
+	return false;
 }
 
 bool es_camino(cadena_t c, binario_t b) {
@@ -298,11 +302,11 @@ bool es_camino(cadena_t c, binario_t b) {
 	// Esto no lo podemos usar acá porque el tiempo de ejecución de altura_binario es O(n) y el de es_camino debe ser O(log n).
 	// (O(n) > O(log n)).
 
-	int result = auxCamino(b, c, inicio_cadena(c));
+	//int result = auxCamino(b, c, inicio_cadena(c));
 	//return result == longitud(c);
 	// Esto no lo podemos usar acá porque el tiempo de ejecución de longitud es O(n) y el de es_camino debe ser O(log n).
 	// (O(n) > O(log n)).
-	return result;
+	return auxCamino(b, c, inicio_cadena(c));
 }
 
 static void auxNivel(nat actual, nat l, binario_t b, cadena_t cad, localizador_t loc) {
