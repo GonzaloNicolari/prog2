@@ -61,7 +61,7 @@ binario_t remover_mayor(binario_t b) {
 	elementos de `b'.
  */
 
-/* 
+/*
 static binario_t auxRemover(const char *&t, binario_t &padre, binario_t &hijo) {
 	if		(strcmp(frase_info(hijo->dato), t) < 0) return auxRemover(t, b, derecho(b));
 	else if	(strcmp(frase_info(hijo->dato), t) > 0) return auxRemover(t, b, izquierdo(b));
@@ -311,6 +311,35 @@ cadena_t linealizacion(binario_t b) {
 	El tiempo de ejecución es O(n . log n), siendo `n` la cantidad de elementos
 	de `cad'.
  */
+	//OTRO EJEMPLO DE CADENA A BINARIO
+	static binario_t auxCadABin(info_t arr[], binario_t b, int max, int inicio){
+	
+	if es_vacio_binario(b){
+		insertar_en_binario(arr[ceil((max+inicio)/2)]);
+		if (inicio > max) return b;
+	}
+	else{
+			auxCadABin(arr, derecho(b), max, ceil((max+inicio)/2)+1);
+			auxCadABin(arr, izquierdo(b), ceil((max+inicio)/2)-1, inicio);
+	}
+}
+
+binario_t cadena_a_binario(cadena_t cad) {
+	if (es_vacia_cadena(cad)) return crear_binario();
+	else{
+		int largo = longitud(cad);
+		info_t arr [largo];
+		localizador_t loc = inicio_cadena (cad);
+		for (int i = 0; i < largo; i++){
+			arr[i] = info_cadena(loc, cad);
+			loc    = siguiente(loc);
+		}
+		binario_t b = crear_binario();
+		int inicio = 0
+		return auxCadABin(arr, b, largo, inicio);
+	} 
+}
+			    
 
 /*
 	Devuelve la raíz del árbol con el nuevo elemento insertado.
