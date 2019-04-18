@@ -335,15 +335,22 @@ binario_t cadena_a_binario(cadena_t cad) {
 		// @TODO: Completar.
 		//return NULL;
 
+		// Voy al elemento posicionado en la mitad de la cadena si la misma es de largo impar, o al anterior a éste si es par.
 		localizador_t loc;
 		int i = longitud(cad);
-		if ((i % 2) == 0) loc = kesimo(i, cad);
-		else loc = kesimo(i - 1, cad);
-		
-		while (es_localizador(loc)) {
-			insertarElementoDeCadenaEnBinario(b, cad, info_cadena(loc, cad));
-			b = insertar_en_binario(elem, b);
-			loc = siguiente(loc);
+		if ((i % 2) == 0) loc = kesimo(i- 1, cad);
+		else loc = kesimo(i, cad);
+
+		b->dato = info_cadena(loc, cad);
+
+		cadena_t cad1	= copiar_segmento(inicio_cadena(cad), loc, cad);
+		cadena_t cad2	= copiar_segmento(loc, final_cadena(loc), cad);
+
+		cadena_a_binario(cad1);
+		cadena_a_binario(cad2);
+
+		insertarElementoDeCadenaEnBinario(b, cad, info_cadena(loc, cad));
+		b = insertar_en_binario(elem, b);
 		}
 	}
 }
