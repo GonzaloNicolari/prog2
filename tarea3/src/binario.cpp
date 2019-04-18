@@ -312,6 +312,15 @@ cadena_t linealizacion(binario_t b) {
 	de `cad'.
  */
 
+/*
+	Devuelve la raíz del árbol con el nuevo elemento insertado.
+*/
+binario_t insertarElementoDeCadenaEnBinario(binario_t raiz, info_t elem) {
+
+	b = insertar_en_binario(elem, b);
+	// TODO: Controlar AVL.
+}
+
 binario_t cadena_a_binario(cadena_t cad) {
 
 	binario_t b = crear_binario();
@@ -320,11 +329,11 @@ binario_t cadena_a_binario(cadena_t cad) {
 		// @TODO: Completar.
 		//return NULL;
 
-		// Recorro la cadena desde el inicio (elemento más chico) insertando en el árbol.
 		localizador_t loc = inicio_cadena(cad);
+		// Recorro la cadena desde el inicio (elemento más chico) insertando en el árbol.
 		while (es_localizador(loc)) {
-			b = insertar_en_binario(info_cadena(loc, cad), b);
-			// TODO: Revisar, si la cadena está ordenada entonces puedo siempre agregar los nuevos elementos a la derecho y dejar todos los izq vacíos; en ese caso no preciso insertar_en_binario, directamente lo agrego a mano a la derecha.
+			insertarElementoDeCadenaEnBinario(b, cad, info_cadena(loc, cad));
+			b = insertar_en_binario(elem, b);
 			loc = siguiente(loc);
 		}
 	}
