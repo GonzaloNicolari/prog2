@@ -138,15 +138,15 @@ binario_t remover_de_binario(const char *t, binario_t b) {
 
 binario_t remover_de_binario(const char *t, binario_t b) {
 
-	binario_t actual	= b;
-	binario_t padre		= crear_binario();
-	binario_t aux;
+	binario_t *actual	= b;
+	binario_t *padre	= crear_binario();
+	binario_t *aux;
 
 	// Busco el nodo a remover.
 	while (!es_vacio_binario(actual)) {
 		// Si encontré el valor.
-		if (strcmp(t, frase_info(actual->dato) == 0) {
-			// Si no tiene hijos.
+		if (strcmp(t, frase_info(raiz(actual)) == 0) {
+			// Si no tiene hijos (es una hoja).
 			if (es_vacio_binario(derecho(b)) && es_vacio_binario(izquierdo(b))) {
 				// Si no es la raíz.
 				if (!es_vacio_binario(padre)) {
@@ -177,15 +177,15 @@ binario_t remover_de_binario(const char *t, binario_t b) {
 						aux		= izquierdo(actual);
 					}
 				}
-				int value		= actual->dato;
-				actual->dato	= aux->dato;
+				int value		= raiz(actual);
+				actual->dato	= raiz(aux);
 				aux->dato		= value;
 				actual			= aux;
 			}
 		} else {
 			// Sigo buscando.
 			padre = actual;
-			if (strcmp(t, frase_info(actual->dato) > 0) actual = derecho(actual);
+			if (strcmp(t, frase_info(raiz(actual)) > 0) actual = derecho(actual);
 			else actual = izquierdo(actual);
 		}
 	}
@@ -235,11 +235,11 @@ bool es_AVL(binario_t b) {
 	}
 }
 
-info_t raiz(binario_t b) { return (b -> dato); }
+info_t raiz(binario_t b) { return (b->dato); }
 
-binario_t izquierdo(binario_t b) { return (b -> izq); }
+binario_t izquierdo(binario_t b) { return (b->izq); }
 
-binario_t derecho(binario_t b) { return (b -> der); }
+binario_t derecho(binario_t b) { return (b->der); }
 
 binario_t buscar_subarbol(const char *t, binario_t b) {
 	binario_t res;
