@@ -99,10 +99,6 @@ static binario_t auxBorrar(binario_t &b, binario_t &aux) {
 }
 
 binario_t remover_de_binario(const char *t, binario_t b) {
-	//binario_t aux	= crear_binario(); // @TODO: Revisar si es necesario definir aux acá o en auxBorrar (acá no se usa); o si debo hacerlo en el if "Si la raíz es el nodo a borrar".
-	//binario_t raiz	= crear_binario();
-	//raiz			= b;
-
 	// Si la raíz es el nodo a borrar.
 	if (strcmp(frase_info(b->dato), t) == 0) {
 		// Si tiene nodo izq.
@@ -133,8 +129,7 @@ binario_t remover_de_binario(const char *t, binario_t b) {
 	// Si no es la raíz.
 	} else if	(strcmp(frase_info(b->dato), t) < 0)	b = auxRemover(t, b, derecho(b));
 	else if		(strcmp(frase_info(b->dato), t) > 0)	b = auxRemover(t, b, izquierdo(b));
-	
-	//return raiz; // @TODO: Revisar si es return b o raiz.
+
 	return b;
 }
 
