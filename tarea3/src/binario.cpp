@@ -245,8 +245,8 @@ binario_t buscar_subarbol(const char *t, binario_t b) {
 	binario_t res;
 	if (es_vacio_binario(b)) res = crear_binario();
 	else {
-		if (strcmp(t, frase_info(raiz(b))) < 0) res = buscar_subarbol(t, izquierdo(b));
-		else if (strcmp(t, frase_info(raiz(b))) > 0) res = buscar_subarbol(t, derecho(b));
+		if		(strcmp(t, frase_info(raiz(b))) < 0)	res = buscar_subarbol(t, izquierdo(b));
+		else if	(strcmp(t, frase_info(raiz(b))) > 0)	res = buscar_subarbol(t, derecho(b));
 		else res = b;
 	}
 	return res;
