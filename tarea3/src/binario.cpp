@@ -301,17 +301,19 @@ bool es_camino(cadena_t c, binario_t b) {
 
 static void auxNivel(nat actual, nat l, binario_t b, cadena_t cad, localizador_t loc) {
 	if (actual != l) {
-		auxNivel(actual+1, l, b->izq, cad, loc);
-		auxNivel(actual+1, l, b->der, cad, loc);
+		// Sigo buscando.
+		actual++;
+		auxNivel(actual, l, b->izq, cad, loc);
+		auxNivel(actual, l, b->der, cad, loc);
 	} else
 		cad = insertar_al_final(copia_info(b->dato), cad);
 }
 
-// @TODO: Revisar, no se si tengo que liberar loc u otra cosa.
 cadena_t nivel_en_binario(nat l, binario_t b) {
 	cadena_t cad		= crear_cadena();
 	localizador_t loc	= inicio_cadena(cad);
 	auxNivel(1, l, b, cad, loc);
+	loc = NULL;
 	return cad;
 }
 
