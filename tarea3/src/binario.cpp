@@ -11,6 +11,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>       /* ceil */
+
 
 struct rep_binario {
 	info_t dato;
@@ -49,103 +51,16 @@ binario_t remover_mayor(binario_t b) {
 	return b;
 }
 
-/*
-	Remueve de `b' el nodo en el que el dato de texto de su elemento es `t'.
-	Si los dos subárboles del nodo a remover son no vacíos, en sustitución del
-	elemento removido debe quedar el que es el mayor (segun la propiedad de orden
-	definida) en el subárbol izquierdo.
-	Devuelve `b'.
-	Precondición: !es_vacio_binario(buscar_subarbol(frase_info(i), b).
-	Libera la memoria del nodo y del elemento.
-	El tiempo de ejecución es O(log n) en promedio, donde `n' es la cantidad de
-	elementos de `b'.
- */
-
-/*
-static binario_t auxRemover(const char *&t, binario_t &padre, binario_t &hijo) {
-	if		(strcmp(frase_info(hijo->dato), t) < 0) return auxRemover(t, b, derecho(b));
-	else if	(strcmp(frase_info(hijo->dato), t) > 0) return auxRemover(t, b, izquierdo(b));
-	else {
-	// Referencio al padre con el hijo borrado según si es hijo izq o der.
-		if (hijo == derecho(padre))	padre->der = auxBorrar(hijo);
-		else padre->izq = auxBorrar(hijo);
-		return padre;
-	}
-}
-
-static binario_t auxBorrar(binario_t &b, binario_t &aux) {
-	// Si tiene nodo izq.
-	if (!es_vacio_binario(izquierdo(b))) {
-		aux			= mayor(izquierdo(b)); // aux->der == null por ser el mayor.
-		aux->der	= b->der;
-		liberar_info(b->dato);
-		b->dato = aux->dato;
-		// @NOTA: Actualmente solo se está poniendo a la derecha del hijo más grande del sub árbol izquierdo, el sub árbol derecho del nodo a borrar.
-		// @TODO: Falta acomodar el lado izquierdo de aux.
-		// @TODO: Volver a enganchar el padre de aux con el resto de la cadena.
-		return b;
-	// Si tiene nodo der.
-	} else if (!es_vacio_binario(derecho(b)) {
-		aux = derecho(b);
-		liberar_info(b->dato);
-		b->dato	= aux->dato;
-		b->der	= aux->der;
-		// @TODO: Falta acomodar el lado izquierdo de b (b->izq	= aux->izq;).
-		return b;
-	// Si no tiene izq ni der.
-	} else {
-		liberar_info(b->dato);
-		return b;
-	}
-}
-
-binario_t remover_de_binario(const char *t, binario_t b) {
-	// Si la raíz es el nodo a borrar.
-	if (strcmp(frase_info(b->dato), t) == 0) {
-		// Si tiene nodo izq.
-		if (!es_vacio_binario(izquierdo(b))) {
-			// TODO: Buscar a mano el mayor y guardar la referencia al padre.
-			binario_t aux	= mayor(izquierdo(b)); // aux->der == null por ser el mayor.
-			aux->der		= b->der;
-			liberar_info(b->dato);
-			b->dato = aux->dato;
-			// @NOTA: Actualmente solo se está poniendo a la derecha del hijo más grande del sub árbol izquierdo, el sub árbol derecho del nodo a borrar.
-			// @TODO: Falta acomodar el lado izquierdo de aux.
-			// @TODO: Volver a enganchar el padre de aux con el resto de la cadena (hijos de aux).
-			// @NOTA: Actualmente al obtener aux con la función "mayor" perdemos referencia del padre del elemento que devuelve; y el cual necesito volver a enganchar.
-			return b;
-		// Si tiene nodo der.
-		} else if (!es_vacio_binario(derecho(b)) {
-			binario_t aux = derecho(b);
-			liberar_info(b->dato);
-			b->dato	= aux->dato;
-			b->der	= aux->der;
-			b->izq	= aux->izq;
-			return b;
-		// Si no tiene izq ni der.
-		} else {
-			liberar_info(b->dato);
-			return b;
-		}
-		//b = auxBorrar(b, aux);
-	// Si no es la raíz.
-	} else if	(strcmp(frase_info(b->dato), t) < 0)	b = auxRemover(t, b, derecho(b));
-	else if		(strcmp(frase_info(b->dato), t) > 0)	b = auxRemover(t, b, izquierdo(b));
-
-	return b;
-}
-*/
-
 binario_t remover_de_binario(const char *t, binario_t b) {
 
-	binario_t *actual	= b;
-	binario_t *padre	= crear_binario();
-	binario_t *aux;
+	binario_t actual	= b;
+	binario_t padre		= crear_binario();
+	binario_t aux;
 
 	// Busco el nodo a remover.
 	while (!es_vacio_binario(actual)) {
 		// Si encontré el valor.
-		if (strcmp(t, frase_info(raiz(actual)) == 0) {
+		if (strcmp(t, frase_info(raiz(actual))) == 0) {
 			// Si no tiene hijos (es una hoja).
 			if (es_vacio_binario(derecho(b)) && es_vacio_binario(izquierdo(b))) {
 				// Si no es la raíz.
@@ -153,7 +68,7 @@ binario_t remover_de_binario(const char *t, binario_t b) {
 					if (derecho(padre) == actual) padre->der = NULL;
 					else {
 						assert(izquierdo(padre) == actual);
-						padre->izq == NULL;
+						padre->izq = NULL;
 					}
 				}
 				delete actual;
@@ -177,7 +92,7 @@ binario_t remover_de_binario(const char *t, binario_t b) {
 						aux		= izquierdo(actual);
 					}
 				}
-				int value		= raiz(actual);
+				info_t value		= raiz(actual);
 				actual->dato	= raiz(aux);
 				aux->dato		= value;
 				actual			= aux;
@@ -185,18 +100,20 @@ binario_t remover_de_binario(const char *t, binario_t b) {
 		} else {
 			// Sigo buscando.
 			padre = actual;
-			if (strcmp(t, frase_info(raiz(actual)) > 0) actual = derecho(actual);
+			if (strcmp(t, frase_info(raiz(actual))) > 0) actual = derecho(actual);
 			else actual = izquierdo(actual);
 		}
 	}
 	return b;
 }
 
+
 binario_t liberar_binario(binario_t b) {
 	if (b != NULL) {
 		b->izq	= liberar_binario(izquierdo(b));
 		b->der	= liberar_binario(derecho(b));
-		liberar_info(raiz(b));
+		info_t a_borrar = raiz(b);
+		liberar_info(a_borrar);
 		delete b;
 		b = NULL;
 	}
@@ -215,6 +132,8 @@ static bool avlAux(binario_t b, int diffL, int diffR) {
 	else return false;
 }
  */
+static int absoluto(int n) { return (n >= 0) ? (n) : (-n); }
+
 static bool avlAux(binario_t b, int diffL, int diffR) {
 	if (!es_vacio_binario(izquierdo(b))) {
 		diffL++;
@@ -251,8 +170,6 @@ binario_t buscar_subarbol(const char *t, binario_t b) {
 	}
 	return res;
 }
-
-static int absoluto(int n) { return (n >= 0) ? (n) : (-n); }
 
 static int maximo(nat n1, nat n2) { return (n1 >= n2) ? (n1) : (n2); }
 
@@ -311,46 +228,18 @@ cadena_t linealizacion(binario_t b) {
 	El tiempo de ejecución es O(n . log n), siendo `n` la cantidad de elementos
 	de `cad'.
  */
-	//OTRO EJEMPLO DE CADENA A BINARIO
-	static binario_t auxCadABin(info_t arr[], binario_t b, int max, int inicio){
-	
-	if es_vacio_binario(b){
-		b = insertar_en_binario(arr[ceil((max+inicio)/2)]);
-		if (inicio >= max) return b;
-	}
-	else{
-			auxCadABin(arr, derecho(b), max, ceil((max+inicio)/2));
-			auxCadABin(arr, izquierdo(b), ceil((max+inicio)/2), inicio);
-	}
-}
-
-binario_t cadena_a_binario(cadena_t cad) {
-	if (es_vacia_cadena(cad)) return crear_binario();
-	else{
-		int largo = longitud(cad);
-		info_t arr [largo];
-		localizador_t loc = inicio_cadena (cad);
-		for (int i = 0; i < largo; i++){
-			arr[i] = info_cadena(loc, cad);
-			loc    = siguiente(loc);
-		}
-		binario_t b = crear_binario();
-		return auxCadABin(arr, b, largo, 0);
-	} 
-}
-			    
-
-/*
-	Devuelve la raíz del árbol con el nuevo elemento insertado.
-*/
-binario_t insertarElementoDeCadenaEnBinario(binario_t raiz, binario_t *padre, binario_t *actual; cadena_t cad) {
+/*	
+static binario_t insertarElementoDeCadenaEnBinario(binario_t raiz, binario_t *padre, binario_t *actual; cadena_t cad) {
 
 	// Se resuelve mediante el método de bipartición.
-	// Voy al elemento posicionado en la mitad de la cadena si la misma es de largo impar, o al anterior a éste si es par. Ese elemento será la raíz del árbol.
 	localizador_t loc;
-	int i = longitud(cad);
-	if ((i % 2) == 0) loc = kesimo(i- 1, cad);
-	else loc = kesimo(i, cad);
+	// Si hay mas de un elemento.
+	if (largo > 1) {
+		// Voy al elemento posicionado en la mitad de la cadena si la misma es de largo impar, o al anterior a éste si es par. Ese elemento será la raíz del árbol.
+		if ((i % 2) == 0) loc = kesimo(i - 1, cad);
+		else loc = kesimo(i, cad);
+		i--;
+	}
 
 	actual->dato = info_cadena(loc, cad);
 
@@ -378,12 +267,157 @@ binario_t insertarElementoDeCadenaEnBinario(binario_t raiz, binario_t *padre, bi
 
 	return raiz;
 }
+*/
+/*
+static binario_t auxCadABin(binario_t raiz, cadena_t cad, binario_t actual, nat largo, int cont) {
+	if (es_vacio_binario(actual)) actual = insertar_en_binario(kesimo(ceil((largo + cont) / 2), cad));
+	else {
+		actual	= auxCadABin(raiz, cad, derecho(actual), largo, ceil((largo + cont) / 2) + 1);
+		actual	= auxCadABin(raiz, cad, izquierdo(actual), ceil((largo + cont) / 2) - 1, cont);
+	}
+	return raiz;
+}
 
+binario_t cadena_a_binario(cadena_t cad) {
+	binario_t b = crear_binario()
+	if (es_vacia_cadena(cad)) return b;
+	else return auxCadABin(b, cad, b, longitud(cad), 0);
+}
+*/
+/*
 binario_t cadena_a_binario(cadena_t cad) {
 
 	binario_t b = crear_binario();
 	if (es_vacia_cadena(cad)) return b;
-	else return insertarElementoDeCadenaEnBinario(b, NULL, b, cad);
+	else return aux_cadena_a_binario(b, cad, longitud(cad));
+}
+*/
+
+/*
+static binario_t aux_CadABin_izq(binario_t raiz, cadena_t cad, localizador_t loc, nat padre, nat largo) {
+	if (padre > 1) {
+		if ((padre % 2) == 0) actual = padre / 2;
+		else actual = ceil(largo / 2);
+
+		loc		= kesimo(actual, cad);
+		b->dato	= info_cadena(loc, cad);
+
+		if (((actual > 0) raiz = aux_CadABin_izq(raiz, cad, loc, actual, largo);
+		if (((padre - actual) / 2) > 0) raiz = aux_CadABin_der(raiz, cad, loc, actual, largo);
+	}
+	return raiz;
+}
+
+static binario_t aux_CadABin_der(binario_t raiz, cadena_t cad, localizador_t loc, nat prev, nat largo) {
+	if (padre < largo) {
+		if (((padre + largo) % 2) == 0) actual	= (padre + largo) / 2;	
+		else actual	= ceil((largo + padre) / 2);
+
+		loc		= kesimo(actual, cad);
+		b->dato	= info_cadena(loc, cad);
+
+		if (((actual < 0) raiz = aux_CadABin_izq(raiz, cad, loc, actual);
+		if (((padre - actual) / 2) > 0) raiz = aux_CadABin_der(raiz, cad, loc, actual);
+	}
+	return raiz;
+}
+
+binario_t cadena_a_binario(cadena_t cad) {
+	binario_t raiz = crear_binario();
+	if (es_vacia_cadena(cad)) return raiz;
+	else {
+		localizador_t loc = inicio_cadena(cad);
+		// Si cad tiene solo un elemento.
+		if (!es_localizador(siguiente(loc))) {
+			raiz->dato	= info_cadena(loc, cad);
+			loc			= NULL;
+			return raiz;
+		} else {
+			// Si hay más de un elemento en cad.
+			// Voy al elemento posicionado en la mitad de la cadena si la misma es de largo impar, o al anterior a éste si es par. Ese elemento será la raíz del árbol.
+			nat largo = longitud(cad);
+			nat actual;
+			if ((largo % 2) == 0) {
+				actual = largo / 2;
+				loc = kesimo(actual, cad);
+			} else {
+				actual	= ceil(largo / 2);
+				loc		= kesimo(actual, cad);
+			}
+
+			raiz->dato	= info_cadena(loc, cad);
+			raiz->izq	= aux_CadABin_izq(crear_binario(), cad, loc, actual, largo);
+			raiz->der	= aux_CadABin_der(crear_binario(), cad, loc, actual, largo);
+		}
+	}
+	return raiz;
+}
+*/
+
+/*
+static binario_t auxCadABin(info_t arr[], binario_t b, int max, int inicio) {
+	if (es_vacio_binario(b)) {
+		b = insertar_en_binario(arr[ceil((max + inicio) / 2)]);
+		if (inicio >= max) return b;
+	} else {
+		b->der = auxCadABin(arr, derecho(b), max, ceil((max+inicio)/2));
+		b->izq = auxCadABin(arr, izquierdo(b), ceil((max+inicio)/2), inicio);
+	}
+}
+
+binario_t cadena_a_binario(cadena_t cad) {
+	if (es_vacia_cadena(cad)) return crear_binario();
+	else {
+		int largo = longitud(cad);
+		info_t arr [largo];
+		localizador_t loc = inicio_cadena (cad);
+		for (int i = 0; i < largo; i++) {
+			arr[i] = info_cadena(loc, cad);
+			loc    = siguiente(loc);
+		}
+		binario_t b = crear_binario();
+		return auxCadABin(arr, b, largo, 0);
+	} 
+}
+*/
+
+static binario_t auxCadABin(cadena_t cad, binario_t b, int max, int inicio) {
+	if (es_vacio_binario(b)) {
+		b = insertar_en_binario(info_cadena(kesimo(ceil((max + inicio) / 2), cad), cad), b);
+		if (inicio >= max) return b;
+	} else {
+		b->der = auxCadABin(cad, derecho(b), max, ceil((max + inicio) / 2));
+		b->izq = auxCadABin(cad, izquierdo(b), ceil((max + inicio) / 2), inicio);
+	}
+	return b;
+}
+
+binario_t cadena_a_binario(cadena_t cad) {
+	binario_t raiz = crear_binario();
+	if (es_vacia_cadena(cad)) return raiz;
+	else {
+		localizador_t loc = inicio_cadena(cad);
+		// Si cad tiene solo un elemento.
+		if (!es_localizador(siguiente(loc, cad))) {
+			raiz->dato	= info_cadena(loc, cad);
+			loc			= NULL;
+			return raiz;
+		} else {
+			// Si hay más de un elemento en cad.
+			// Voy al elemento posicionado en la mitad de la cadena si la misma es de largo impar, o al anterior a éste si es par. Ese elemento será la raíz del árbol.
+			nat largo = longitud(cad);
+			nat actual;
+			if ((largo % 2) == 0) {
+				actual = largo / 2;
+				loc = kesimo(actual, cad);
+			} else {
+				actual	= ceil(largo / 2);
+				loc		= kesimo(actual, cad);
+			}
+			raiz = auxCadABin(cad, raiz, largo, 0);
+		}
+	}
+	return raiz;
 }
 
 /*
