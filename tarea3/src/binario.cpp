@@ -538,30 +538,17 @@ cadena_t nivel_en_binario(nat l, binario_t b) {
 	return cad;
 }
 
-/*
-void imprimir_binario(binario_t b) {
-	if (!es_vacio_binario(b)) {
-		if (!es_vacio_binario(derecho(b))) imprimir_binario(derecho(b));
-		char *infoText = info_a_texto(raiz(b));
-		printf("%s", infoText);
-		delete[] infoText;
-		if (!es_vacio_binario(izquierdo(b))) imprimir_binario(izquierdo(b));
-	}
-	printf("\n");
-}
-*/
-
-static void auxImprimirBin(binario_t b, int cont) {
-	cont++;
-	if (!es_vacio_binario(derecho(b))) imprimir_binario(derecho(b));
+static void auxImprimirBinario(binario_t b, int cont) {
+	if (!es_vacio_binario(derecho(b))) auxImprimirBinario(derecho(b), cont + 1);
 	char *infoText = info_a_texto(raiz(b));
-	for (int i = 1; i < cont; i++) printf("-");
-	printf("%s\n", infoText);
+	for (int i = 0; i < cont; i++) printf("-");
+	printf("%s", infoText);
+	printf("\n");
 	delete[] infoText;
-	if (!es_vacio_binario(izquierdo(b))) imprimir_binario(izquierdo(b));
+	if (!es_vacio_binario(izquierdo(b))) auxImprimirBinario(izquierdo(b), cont + 1);
 }
 
 void imprimir_binario(binario_t b) {
-	if (!es_vacio_binario(b)) auxImprimirBin(b, 0);
 	printf("\n");
+	if (!es_vacio_binario(b)) auxImprimirBinario(b, 0);
 }
