@@ -59,6 +59,7 @@ binario_t insertar_en_binario(info_t i, binario_t b) {
 }
 */
 
+/*
 binario_t insertar_en_binario(info_t i, binario_t b) {
 	if (es_vacio_binario(b)) {
 		b				= new rep_binario;
@@ -71,6 +72,7 @@ binario_t insertar_en_binario(info_t i, binario_t b) {
 	}
 	return b;
 }
+*/
 
 /*
 binario_t insertar_en_binario(info_t i, binario_t b) {
@@ -91,6 +93,201 @@ binario_t insertar_en_binario(info_t i, binario_t b) {
 	else if(i > padre->dato) padre->derecho = new Nodo(i);
 }
 */
+
+/*
+static binario_t auxInsertEnBin(binario_t braiz, binario_t actual, info_t i) {
+	if (es_vacio_binario(actual)) {
+		rep_binario *nuevo = new rep_binario;
+		nuevo->dato	= i;
+		nuevo->der	= NULL;
+		nuevo->izq	= NULL;
+
+		actual = nuevo;
+		//delete(nuevo);
+	} else {
+		if (strcmp(frase_info(raiz(actual)), frase_info(i)) < 0) braiz = auxInsertEnBin(braiz, derecho(actual), i);
+		else braiz = auxInsertEnBin(braiz, izquierdo(actual), i);
+	}
+
+	return braiz;
+}
+
+binario_t insertar_en_binario(info_t i, binario_t b) {
+	return auxInsertEnBin(b, b, i);
+}
+*/
+
+/*
+static binario_t auxInsEnBin_getPadre(binario_t b, info_t i) {
+	if (strcmp(frase_info(raiz(b)), frase_info(i)) < 0) b = auxInsEnBin_getPadre(derecho(actual), i);
+	else b = auxInsertEnBin(izquierdo(actual), i);
+	return b;
+}
+
+binario_t insertar_en_binario(info_t i, binario_t b) {
+	rep_binario *nuevo	= new rep_binario;
+	nuevo->dato			= i;
+	nuevo->der			= NULL;
+	nuevo->izq			= NULL;
+
+	if (es_vacio_binario(b)) b = nuevo;
+	else {
+		binario_ t padre = auxInsEnBin_getPadre(b);
+		if (es_vacio_binario(izquierdo(b))) padre->izq = nuevo;
+		else padre->der = nuevo;
+	}
+
+	return b
+}
+*/
+
+/*
+binario_t insertar_en_binario(info_t i, binario_t b) {
+	binario_t nuevo	= new(struct rep_binario);
+	nuevo->dato		= i;
+	nuevo->izq		= NULL;
+	nuevo->der		= NULL;
+
+	binario_t actual = b;
+	if (!es_vacio_binario(b)) {
+		while (strcmp(frase_info(i), frase_info(raiz(actual))) < 0) {
+			if (!es_vacia_cadena(izquierdo(b))) actual = izquierdo(b);
+		}
+		while (strcmp(frase_info(i), frase_info(raiz(actual))) > 0) {
+			if (!es_vacia_cadena(izquierdo(b))) actual = derecho(b);
+		}
+	}
+	actual = nuevo;
+
+	return b;
+}
+*/
+
+/*
+static auxInsertarEnBinario(b, i) {
+	if (strcmp(frase_info(i), frase_info(raiz(b))) < 0) {
+		if (es_vacio_binario(izquierdo(b))) {
+			binario_t nuevo	= new(struct rep_binario);
+			nuevo->dato		= i;
+			nuevo->izq		= NULL;
+			nuevo->der		= NULL;
+			b->izq = nuevo;
+		} else b = izquierdo(b);
+	} else {
+		if (es_vacio_binario(derecho(b))) {
+			binario_t nuevo	= new(struct rep_binario);
+			nuevo->dato		= i;
+			nuevo->izq		= NULL;
+			nuevo->der		= NULL;
+			b->der = nuevo;
+		} else b = derecho(b);
+	}
+	return b;
+}
+
+binario_t insertar_en_binario(info_t i, binario_t b) {
+	if (!es_vacio_binario(b)) {
+		// Tengo que buscar el padre donde colocar en der o izq el elemento i.
+		if (strcmp(frase_info(i), frase_info(raiz(b))) < 0) {
+			b = auxInsertarEnBinario(b, i);
+			if (es_vacio_binario(izquierdo(b))) {
+				binario_t nuevo	= new(struct rep_binario);
+				nuevo->dato		= i;
+				nuevo->izq		= NULL;
+				nuevo->der		= NULL;
+				b->izq = nuevo;
+			} else {
+				b = insertar_en_binario(i, izquierdo(b));
+			}
+		} else {
+			if (es_vacio_binario(derecho(b))) {
+				binario_t nuevo	= new(struct rep_binario);
+				nuevo->dato		= i;
+				nuevo->izq		= NULL;
+				nuevo->der		= NULL;
+				b->der = nuevo;
+			} else {
+				b = insertar_en_binario(i, derecho(b));
+			}
+		}
+	} else {
+		binario_t nuevo	= new(struct rep_binario);
+		nuevo->dato		= i;
+		nuevo->izq		= NULL;
+		nuevo->der		= NULL;
+		b = nuevo;
+	}
+	return b;
+}
+*/
+
+/*
+static binario_t auxInsertarEnBinario(binario_t padre, binario_t actual, info_t i) {
+	if (strcmp(frase_info(i), frase_info(raiz(actual))) < 0) {
+		
+		padre = auxInsertarEnBinario(actual, izquierdo(actual), i);
+	} else padre = auxInsertarEnBinario(actual, derecho(actual), i);
+	return padre;
+}
+
+binario_t insertar_en_binario(info_t i, binario_t b) {
+	if (!es_vacio_binario(b)) {
+		// Recursión.
+		auxInsertarEnBinario(NULL, b, i);
+	} else {
+		binario_t nuevo	= new(struct rep_binario);
+		nuevo->dato		= i;
+		nuevo->izq		= NULL;
+		nuevo->der		= NULL;
+		b = nuevo;
+	}
+	return b;
+}
+*/
+
+/*
+void insertar(binario_t &b, info_t i) {
+    
+	if (es_vacio_binario(b)) {
+        b		= new rep_binario;
+        b->dato	= i;
+        b->izq	= NULL;
+		b->der	= NULL;
+    } else if (strcmp(frase_info(i), frase_info(raiz(b))) < 0) {
+		
+		insertar(izquierdo(b), i);
+	} else if (strcmp(frase_info(i), frase_info(raiz(b))) < 0) {
+		
+		insertar(derecho(b), i);
+	}
+}
+
+binario_t insertar_en_binario(info_t i, binario_t b) {
+	insertar(&b, i);
+	return b;
+}
+*/
+
+binario_t insertar_en_binario(info_t i, binario_t b) {    
+    if (es_vacio_binario(b)) {
+		b		= new rep_binario;
+		b->dato	= i;
+		b->izq	= b->der = NULL;
+    } else {
+        binario_t aux = b;
+        
+        while (!es_vacio_binario(aux))
+            if (strcmp(frase_info(i), frase_info(raiz(b))) < 0)
+				aux = izquierdo(aux);
+			else if (strcmp(frase_info(i), frase_info(raiz(b))) > 0)
+				aux = derecho(aux);
+
+		aux			= new rep_binario;
+		aux->dato	= i;
+		aux->izq	= aux->der = NULL;
+    }
+	return b;
+}
 
 info_t mayor(binario_t b) {
 	if (!es_vacio_binario(derecho(b))) mayor(derecho(b));
