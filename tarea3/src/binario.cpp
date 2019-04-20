@@ -22,17 +22,75 @@ struct rep_binario {
 
 binario_t crear_binario() { return NULL; }
 
+/*
+static binario_t auxInsertEnBin(binario_t braiz, binario_t padre, binario_t actual, info_t i) {
+	
+	if (es_vacio_binario(actual)) {
+		binario_t nuevo	= new rep_binario();
+		nuevo->dato		= i;
+		nuevo->izq		= NULL;
+		nuevo->der		= NULL;
+		actual			= nuevo;
+	} else {
+		if (strcmp(frase_info(raiz(actual)), frase_info(i)) < 0) braiz = auxInsertEnBin(braiz, actual, derecho(actual), i);
+		else braiz = auxInsertEnBin(braiz, actual, izquierdo(actual), i);
+	}
+	return braiz;
+}
+
+binario_t insertar_en_binario(info_t i, binario_t b) {
+	return auxInsertEnBin(b, b, i);
+}
+*/
+
+/*
 binario_t insertar_en_binario(info_t i, binario_t b) {
 	if (es_vacio_binario(b)) {
-		b = new rep_binario;
-		b->dato = i;
-		return b;
+		rep_binario *nuevo	= new (struct rep_binario);
+		nuevo->dato			= i;
+		nuevo->izq			= NULL;
+		nuevo->der			= NULL;
+		b					= nuevo;
 	} else {
-		if (strcmp(frase_info(raiz(b)), frase_info(i)) < 0) insertar_en_binario(i, derecho(b));
-		else insertar_en_binario(i, izquierdo(b));
+		if (strcmp(frase_info(raiz(b)), frase_info(i)) < 0) b = insertar_en_binario(i, derecho(b));
+		else b = insertar_en_binario(i, izquierdo(b));
 	}
 	return b;
 }
+*/
+
+binario_t insertar_en_binario(info_t i, binario_t b) {
+	if (es_vacio_binario(b)) {
+		b				= new rep_binario;
+		b->dato			= i;
+		b->izq			= NULL;
+		b->der			= NULL;
+	} else {
+		if (strcmp(frase_info(raiz(b)), frase_info(i)) < 0) b = insertar_en_binario(i, derecho(b));
+		else b = insertar_en_binario(i, izquierdo(b));
+	}
+	return b;
+}
+
+/*
+binario_t insertar_en_binario(info_t i, binario_t b) {
+	binario_t padre		= crear_binario();
+	binario_t actual	= b;
+
+	while(!es_vacio_binario(actual) && strcmp(frase_info(i), frase_info(raiz(actual))) != 0) {
+		padre = actual;
+		if (strcmp(frase_info(i), frase_info(raiz(actual))) > 0) actual = derecho(actual);
+		else actual = izquierdo(actual);
+	}
+
+	// Si padre es NULL, entonces el árbol estaba vacío, el nuevo nodo será el nodo raiz.
+	if(es_vacio_binario(padre)) raiz = new Nodo(i);
+	// Si el int es menor que el que contiene el nodo padre, lo insertamos en la rama izquierda.
+	else if(i < padre->dato) padre->izquierdo = new Nodo(i);
+	// Si el int es mayor que el que contiene el nodo padre, lo insertamos en la rama derecha.
+	else if(i > padre->dato) padre->derecho = new Nodo(i);
+}
+*/
 
 info_t mayor(binario_t b) {
 	if (!es_vacio_binario(derecho(b))) mayor(derecho(b));
@@ -178,9 +236,39 @@ nat altura_binario(binario_t b) {
 	else return 1 + maximo(altura_binario(izquierdo(b)), altura_binario(derecho(b)));
 }
 
+/*
+static int auxCantBin(binario_t b, int &cont) {
+	if (!es_vacio_binario(b)) {
+		cont++;
+		if (!es_vacio_binario(izquierdo(b)))	cont = auxCantBin(izquierdo(b), cont);
+		if (!es_vacio_binario(derecho(b)))		cont = auxCantBin(derecho(b), cont);
+	}
+	//printf("%d", cont);
+	return cont;
+}
+
+nat cantidad_binario(binario_t b) {
+	int cont	= 0;
+	cont		= auxCantBin(b, cont);
+	return cont;
+}
+*/
+
+static int auxCantBin(binario_t b, int cont) {
+	if (!es_vacio_binario(izquierdo(b))) {
+		cont++;
+		cont = auxCantBin(izquierdo(b), cont);
+	}
+	if (!es_vacio_binario(derecho(b))) {
+		cont++;
+		cont = auxCantBin(derecho(b), cont);
+	}
+	return cont;
+}
+
 nat cantidad_binario(binario_t b) {
 	if (es_vacio_binario(b)) return 0;
-	else return 1 + cantidad_binario(izquierdo(b)) + cantidad_binario(derecho(b));
+	else return auxCantBin(b, 1);
 }
 
 int suma_ultimos_pares(nat i, binario_t b) {
@@ -438,10 +526,28 @@ binario_t cadena_a_binario(cadena_t cad) {
 	El tiempo de ejecución es O(n), donde `n' es la cantidad de elementos de `b'.
  */
 
+static binario_t auxMenores(binario_t braiz, binario_t actual, int clave) {
+	braiz = insertar_en_binario(copia_info(raiz(actual)), braiz);
+
+	if (!es_vacio_binario(derecho(actual)))			braiz = auxMenores(braiz, derecho(actual), clave);
+	else if (!es_vacio_binario(izquierdo(actual)))	braiz = auxMenores(braiz, izquierdo(actual), clave);
+
+	return braiz;
+}
+
 binario_t menores(int clave, binario_t b) {
-	// TODO: Completar.
-	return NULL;
+	// Si la raíz es mayor o igual a clave, entonces busco en el subárbol izquierdo.
+	if (clave >= numero_info(raiz(b))) {
+		if (!es_vacio_binario(izquierdo(b))) b = menores(clave, izquierdo(b));
+
+	// Encontré un elemento (b) menor que clave, a partir de él todos deben agregarse.
+	} else {
+		binario_t res = auxMenores(b, b, clave);
+		return res;
 	}
+	return NULL;
+	// TODO: Completar.
+}
 
 static bool auxCamino(binario_t b, cadena_t c, localizador_t loc) {
 	// Si empiezan igual.
@@ -484,17 +590,35 @@ static void auxNivel(nat actual, nat l, binario_t b, cadena_t cad, localizador_t
 }
 
 cadena_t nivel_en_binario(nat l, binario_t b) {
-	cadena_t cad		= crear_cadena();
-	localizador_t loc	= inicio_cadena(cad);
-	auxNivel(1, l, b, cad, loc);
-	loc = NULL;
+	cadena_t cad = crear_cadena();
+	auxNivel(1, l, b, cad, inicio_cadena(cad));
 	return cad;
 }
 
+/*
 void imprimir_binario(binario_t b) {
 	if (!es_vacio_binario(b)) {
-		imprimir_binario(derecho(b));
-		printf("%s", info_a_texto(raiz(b)));
-		imprimir_binario(izquierdo(b));
+		if (!es_vacio_binario(derecho(b))) imprimir_binario(derecho(b));
+		char *infoText = info_a_texto(raiz(b));
+		printf("%s", infoText);
+		delete[] infoText;
+		if (!es_vacio_binario(izquierdo(b))) imprimir_binario(izquierdo(b));
 	}
+	printf("\n");
+}
+*/
+
+static void auxImprimirBin(binario_t b, int cont) {
+	cont++;
+	if (!es_vacio_binario(derecho(b))) imprimir_binario(derecho(b));
+	char *infoText = info_a_texto(raiz(b));
+	for (int i = 1; i < cont; i++) printf("-");
+	printf("%s\n", infoText);
+	delete[] infoText;
+	if (!es_vacio_binario(izquierdo(b))) imprimir_binario(izquierdo(b));
+}
+
+void imprimir_binario(binario_t b) {
+	if (!es_vacio_binario(b)) auxImprimirBin(b, 0);
+	printf("\n");
 }
