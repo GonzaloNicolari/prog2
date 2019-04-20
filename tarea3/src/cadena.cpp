@@ -1,6 +1,6 @@
 /* 46450368			- 48579580 */
-// Nicolás Saliba	- Gonzalo Nicolari.
-// Instituto de Computación - Facultad de Ingeniería, Laboratorio de Programación 2.
+// NicolÃ¡s Saliba	- Gonzalo Nicolari.
+// Instituto de ComputaciÃ³n - Facultad de IngenierÃ­a, Laboratorio de ProgramaciÃ³n 2.
 
 #include "../include/cadena.h"
 #include "../include/info.h"
@@ -104,7 +104,7 @@ cadena_t copiar_segmento(localizador_t desde, localizador_t hasta, cadena_t cad)
 
 cadena_t cortar_segmento(localizador_t desde, localizador_t hasta, cadena_t cad) {
 
-	// Si es vacìa.
+	// Si es vacÃ¬a.
 	if (es_vacia_cadena(cad)) return cad;
 
 	// Si solo se corta un elemento.
@@ -113,7 +113,7 @@ cadena_t cortar_segmento(localizador_t desde, localizador_t hasta, cadena_t cad)
 	// Si el segmento a cortar es toda la cadena.
 	else if (es_inicio_cadena(desde, cad) && es_final_cadena(hasta, cad)) return liberar_cadena(cad);
 
-	// Si el segmento a cortar está al inicio.
+	// Si el segmento a cortar estÃ¡ al inicio.
 	else if (es_inicio_cadena(desde, cad)) {
 		cad->inicio				= siguiente(hasta, cad);
 		cad->inicio->anterior	= NULL;
@@ -128,7 +128,7 @@ cadena_t cortar_segmento(localizador_t desde, localizador_t hasta, cadena_t cad)
 		return cad;
 
 	} else if (es_final_cadena(hasta, cad)) {
-		// Si el segmento a cortar està al final.
+		// Si el segmento a cortar estÃ  al final.
 		cad->final				= anterior(desde, cad);
 		cad->final->siguiente	= NULL;
 		localizador_t loc		= desde;
@@ -139,23 +139,22 @@ cadena_t cortar_segmento(localizador_t desde, localizador_t hasta, cadena_t cad)
 			delete(a_borrar);
 		}
 		return cad;
-	}
 
-	// Si el segmento està al medio.
-	localizador_t loc1	= anterior(desde, cad);
-	localizador_t loc2	= siguiente(hasta, cad);
-	loc1->siguiente		= loc2;
-	loc2->anterior		= loc1;
-	localizador_t loc	= desde;
-	while (es_localizador(loc)) {
-		nodo *a_borrar	= loc;
-		cad->inicio		= NULL;
-		cad->final		= NULL;
-		loc				= siguiente(loc, cad);
-		liberar_info(a_borrar->dato);
-		delete(a_borrar);
+	} else {
+		// Si el segmento estÃ  al medio.
+		localizador_t loc1	= anterior(desde, cad);
+		localizador_t loc2	= siguiente(hasta, cad);
+		loc1->siguiente		= loc2;
+		loc2->anterior		= loc1;
+		localizador_t loc	= desde;
+		while (loc != loc2) {
+			nodo *a_borrar	= loc;
+			loc				= siguiente(loc, cad);
+			liberar_info(a_borrar->dato);
+			delete(a_borrar);
+		}
+		return cad;
 	}
-	return cad;
 }
 
 cadena_t remover_de_cadena(localizador_t &loc, cadena_t cad) {
@@ -163,19 +162,19 @@ cadena_t remover_de_cadena(localizador_t &loc, cadena_t cad) {
 	nodo *a_borrar = loc;
 
 	if (es_inicio_cadena(loc, cad) && es_final_cadena(loc, cad)) {
-		// Si es el único elemento.
+		// Si es el Ãºnico elemento.
 		cad->inicio	= NULL;
 		cad->final	= NULL;
 	} else if (es_inicio_cadena(loc, cad)) {
-		// Si está al inicio.
+		// Si estÃ¡ al inicio.
 		cad->inicio				= siguiente(loc, cad);
 		cad->inicio->anterior	= NULL;
 	} else if (es_final_cadena(loc, cad)) {
-		// Si está al final.
+		// Si estÃ¡ al final.
 		cad->final				= anterior(loc, cad);
 		cad->final->siguiente	= NULL;
 	} else {
-		// Si está en el medio.
+		// Si estÃ¡ en el medio.
 		loc->anterior->siguiente	= siguiente(loc, cad);
 		loc->siguiente->anterior	= anterior(loc, cad);
 	}
