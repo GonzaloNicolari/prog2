@@ -316,8 +316,14 @@ nat cantidad_binario(binario_t b) {
 */
 
 static int auxCantBin(binario_t b, int cont) {
-	if (!es_vacio_binario(izquierdo(b)))	cont = auxCantBin(izquierdo(b), cont + 1);
-	if (!es_vacio_binario(derecho(b)))		cont = auxCantBin(derecho(b), cont + 1);
+	if (!es_vacio_binario(izquierdo(b))) {
+		cont++;
+		cont = auxCantBin(izquierdo(b), cont);
+	}
+	if (!es_vacio_binario(derecho(b))) {
+		cont++;
+		cont = auxCantBin(derecho(b), cont);
+	}
 	return cont;
 }
 
@@ -551,8 +557,8 @@ binario_t cadena_a_binario(cadena_t cad) {
 			nat largo = longitud(cad);
 			nat actual;
 			if ((largo % 2) == 0) {
-				actual	= largo / 2;
-				loc		= kesimo(actual, cad);
+				actual = largo / 2;
+				loc = kesimo(actual, cad);
 			} else {
 				actual	= ceil(largo / 2);
 				loc		= kesimo(actual, cad);
@@ -611,9 +617,9 @@ static bool auxCamino(binario_t b, cadena_t c, localizador_t loc) {
 		if (es_localizador(siguiente(loc, c))) {
 			// Si debe avanzar a la izquierda o derecha en el árbol.
 			if (strcmp(frase_info(info_cadena(siguiente(loc, c), c)), frase_info(raiz(b))) > 0)
-				auxCamino(derecho(b), c, siguiente(loc, c)); // TODO: ver a que asignar lo que devuelve la función.
+				auxCamino(derecho(b), c, siguiente(loc, c));
 			else
-				auxCamino(izquierdo(b), c, siguiente(loc, c)); // TODO: ver a que asignar lo que devuelve la función.
+				auxCamino(izquierdo(b), c, siguiente(loc, c));
 
 		// Compruebo si terminé en una hoja.
 		} else if (es_vacio_binario(derecho(b)) && es_vacio_binario(izquierdo(b))) return true;
