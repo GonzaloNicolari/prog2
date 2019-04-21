@@ -177,7 +177,7 @@ static binario_t masDerecho(binario_t padre, binario_t actual) {
 
 static binario_t masIzquierdo(binario_t padre, binario_t actual) {
 	if (!es_vacio_binario(izquierdo(actual)))	actual = masIzquierdo(actual, izquierdo(actual));
-	if (!es_vacio_binario(derecho(actual)))		padre->izq = derecho(actual);
+	if (!es_vacio_binario(derecho(actual)))		padre->der = derecho(actual);
 	return actual;
 }
 
@@ -205,22 +205,22 @@ binario_t remover_de_binario(const char *t, binario_t b) {
 		if (!es_vacio_binario(izquierdo(b))) {
 			if (strcmp(t, frase_info(raiz(izquierdo(b)))) == 0) {
 				binario_t aux	= masDerecho(b, izquierdo(b));
-				aux->izq		= izquierdo(izquierdo(b));
-				aux->der		= derecho(izquierdo(b));
-				binario_t aux2	= izquierdo(b);
-				aux2			= liberar_binario(aux2);
-				b->izq			= aux;
+				if (aux != derecho(b)) {
+					aux->izq		= izquierdo(izquierdo(b));
+					aux->der		= derecho(izquierdo(b));
+				} else b->izq = NULL;
+				aux	= liberar_binario(aux);
 			} else b->izq = remover_de_binario(t, izquierdo(b));
 		}
 	} else {
 		if (!es_vacio_binario(derecho(b))) {
 			if (strcmp(t, frase_info(raiz(derecho(b)))) == 0) {
 				binario_t aux	= masIzquierdo(b, derecho(b));
-				aux->izq		= izquierdo(derecho(b));
-				aux->der		= derecho(derecho(b));
-				binario_t aux2	= derecho(b);
-				aux2			= liberar_binario(aux2);
-				b->der			= aux;
+				if (aux != derecho(b)) {
+					aux->izq		= izquierdo(derecho(b));
+					aux->der		= derecho(derecho(b));
+				} else b->der = NULL;
+				aux	= liberar_binario(aux);
 			} else b->der = remover_de_binario(t, derecho(b));
 		}
 	}
