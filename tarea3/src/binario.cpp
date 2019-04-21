@@ -587,27 +587,40 @@ binario_t cadena_a_binario(cadena_t cad) {
 	El tiempo de ejecución es O(n), donde `n' es la cantidad de elementos de `b'.
  */
 
-static binario_t auxMenores(binario_t braiz, binario_t actual, int clave) {
-	braiz = insertar_en_binario(copia_info(raiz(actual)), braiz);
+static bool esMenor(binario_t, int clave) {
+	return (numero_info(raiz(b) < clave);
+}
+static binario_t auxMenores(int clave, binario_t b, bool esIzq) {
+	if (b != NULL) {
+		auxMenores(clave, izquierdo(b));
 
-	if (!es_vacio_binario(derecho(actual)))			braiz = auxMenores(braiz, derecho(actual), clave);
-	else if (!es_vacio_binario(izquierdo(actual)))	braiz = auxMenores(braiz, izquierdo(actual), clave);
-
-	return braiz;
+		auxMenores(clave, derecho(b));
+	}
+	else {
+		if (esMenor(b, clave)) {
+			return b;
+		}
+	}
 }
 
 binario_t menores(int clave, binario_t b) {
-	// Si la raíz es mayor o igual a clave, entonces busco en el subárbol izquierdo.
-	if (clave >= numero_info(raiz(b))) {
-		if (!es_vacio_binario(izquierdo(b))) b = menores(clave, izquierdo(b));
+	binario_t res;
+	//caso que raiz es menor
+	if (esMenor(b, clave)) {
+		res = b;
+		res->der = auxMenores(clave, derecho(b));
+		res->izq = auxMenores(clave, izquierdo(b));
+		//caso que raiz NO es menor
+	}
+	else {
 
-	// Encontré un elemento (b) menor que clave, a partir de él todos deben agregarse.
-	} else {
-		binario_t res = auxMenores(b, b, clave);
-		return res;
+		if (mayor(esMenor(izquierdo(b)))) res = mayor(izquierdo(b));
+		else
+			res->der = auxMenores(clave, derecho(b), true);
+
+		res->izq = auxMenores(clave, izquierdo(b), false);
 	}
 	return NULL;
-	// TODO: Completar.
 }
 
 static bool auxCamino(binario_t b, cadena_t c, localizador_t loc) {
