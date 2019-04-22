@@ -52,132 +52,15 @@ binario_t remover_mayor(binario_t b) {
 	return b;
 }
 
-/*
-binario_t remover_de_binario(const char *t, binario_t b) {
-
-	binario_t actual	= b;
-	binario_t padre		= crear_binario();
-	binario_t aux;
-
-	// Busco el nodo a remover.
-	while (!es_vacio_binario(actual)) {
-		// Si encontré el valor.
-		if (strcmp(t, frase_info(raiz(actual))) == 0) {
-			// Si no tiene hijos (es una hoja).
-			if (es_vacio_binario(derecho(b)) && es_vacio_binario(izquierdo(b))) {
-				// Si no es la raíz.
-				if (!es_vacio_binario(padre)) {
-					if (derecho(padre) == actual) padre->der = NULL;
-					else {
-						assert(izquierdo(padre) == actual);
-						padre->izq = NULL;
-					}
-				}
-				delete actual;
-				actual = NULL;
-				return b;
-			} else {
-				// Si tiene hijos.
-				padre = actual;
-				// Busco el mayor en el subárbol izquierdo.
-				if (!es_vacio_binario(izquierdo(actual))) {
-					aux = izquierdo(actual);
-					while (!es_vacio_binario(derecho(aux))) {
-						padre	= aux;
-						aux		= derecho(aux);
-					}
-				} else {
-					// Busco el menor en el subárbol derecho.
-					aux = derecho(actual);
-					while (!es_vacio_binario(izquierdo(actual))) {
-						padre	= aux;
-						aux		= izquierdo(actual);
-					}
-				}
-				info_t value		= raiz(actual);
-				actual->dato	= raiz(aux);
-				aux->dato		= value;
-				actual			= aux;
-			}
-		} else {
-			// Sigo buscando.
-			padre = actual;
-			if (strcmp(t, frase_info(raiz(actual))) > 0) actual = derecho(actual);
-			else actual = izquierdo(actual);
-		}
-	}
-	return b;
-}
-*/
-
-/*
 static binario_t masDerecho(binario_t padre, binario_t actual) {
-	if (!es_vacio_binario(derecho(actual)))		return masDerecho(actual, derecho(actual));
-	if (!es_vacio_binario(izquierdo(actual)))	padre->der = izquierdo(actual);
-	else padre->der = NULL;
-	return actual;
-}
-
-static binario_t auxRemoverDeBinario(binario_t padre, binario_t actual, const char *t) {
-	if (!es_vacio_binario(actual)) {
-		if (strcmp(t, frase_info(raiz(actual))) == 0) {
-			if (es_vacio_binario(derecho(actual)) && es_vacio_binario(izquierdo(actual))) {
-				if (!es_vacio_binario(padre)) {
-					if (!es_vacio_binario(derecho(padre))) {
-						if (strcmp(t, frase_info(raiz(derecho(padre)))) == 0) padre->der = NULL;
-					} else if (!es_vacio_binario(izquierdo(padre))) {
-						if (strcmp(t, frase_info(raiz(izquierdo(padre)))) == 0) padre->izq = NULL;
-					}
-				}
-				actual = liberar_binario(actual);
-			} else if (!es_vacio_binario(izquierdo(actual))) {
-				binario_t aux	= masDerecho(actual, izquierdo(actual));
-				aux->izq		= izquierdo(actual);
-				aux->der		= derecho(actual);
-				actual = liberar_binario(actual);
-				return aux;
-			} else {
-				if (!es_vacio_binario(derecho(actual))) {
-					binario_t a_borrar	= actual;
-					actual				= derecho(actual);
-					a_borrar			= liberar_binario(a_borrar);
-				}
-			}
-		} else if (strcmp(t, frase_info(raiz(actual))) > 0) return auxRemoverDeBinario(actual, derecho(actual), t);
-		else return auxRemoverDeBinario(actual, izquierdo(actual), t);
-	}
-	return actual;
-}
-
-binario_t remover_de_binario(const char *t, binario_t b) {
-	if (strcmp(t, frase_info(raiz(b))) == 0) {
-		if (es_vacio_binario(derecho(b)) && es_vacio_binario(izquierdo(b))) b = liberar_binario(b);
-		else if (!es_vacio_binario(izquierdo(b))) {
-			binario_t aux	= masDerecho(b, izquierdo(b));
-			aux->izq		= izquierdo(b);
-			aux->der		= derecho(b);
-			b = liberar_binario(b);
-			return aux;
-		} else {
-			binario_t aux	= derecho(b);
-			b				= liberar_binario(b);
-			return aux;
-		}
-	} else if (strcmp(t, frase_info(raiz(b))) > 0) b->der = auxRemoverDeBinario(b, derecho(b), t);
-	else b->izq = auxRemoverDeBinario(b, izquierdo(b), t);
-	return b;
-}
-*/
-
-static binario_t masDerecho(binario_t padre, binario_t actual) {
-	if (!es_vacio_binario(derecho(actual)))		actual = masDerecho(actual, derecho(actual));
-	if (!es_vacio_binario(izquierdo(actual)))	padre->der = izquierdo(actual);
+	if (!es_vacio_binario(derecho(actual)))			actual = masDerecho(actual, derecho(actual));
+	else if (!es_vacio_binario(izquierdo(actual)))	padre->der = izquierdo(actual);
 	return actual;
 }
 
 static binario_t masIzquierdo(binario_t padre, binario_t actual) {
-	if (!es_vacio_binario(izquierdo(actual)))	actual = masIzquierdo(actual, izquierdo(actual));
-	if (!es_vacio_binario(derecho(actual)))		padre->der = derecho(actual);
+	if (!es_vacio_binario(izquierdo(actual)))		actual = masIzquierdo(actual, izquierdo(actual));
+	else if (!es_vacio_binario(derecho(actual)))	padre->izq = derecho(actual);
 	return actual;
 }
 
@@ -186,44 +69,41 @@ binario_t remover_de_binario(const char *t, binario_t b) {
 		if (es_vacio_binario(derecho(b)) && es_vacio_binario(izquierdo(b))) b = liberar_binario(b);
 		else if (!es_vacio_binario(izquierdo(b))) {
 			binario_t aux = masDerecho(b, izquierdo(b));
-			if (aux != izquierdo(b)) {
-				aux->izq	= izquierdo(b);
-				aux->der	= derecho(b);
-			} else b->izq = NULL;
-			b = liberar_binario(b);
+			if (aux != izquierdo(b)) aux->izq = izquierdo(b);
+			else {
+				if (!es_vacio_binario(izquierdo(aux))) {
+					binario_t aux2	= masDerecho(b, aux);
+					aux2->izq		= izquierdo(aux);
+					aux2->der		= derecho(aux);
+					aux->izq		= aux2;
+				} else b->izq = NULL;
+			}
+			aux->der = derecho(b);
+			info_t a_borrar	= raiz(b);
+			liberar_info(a_borrar);
+			delete b;
 			return aux;
 		} else {
 			binario_t aux = masIzquierdo(b, derecho(b));
 			if (aux != derecho(b)) {
 				aux->izq	= izquierdo(b);
 				aux->der	= derecho(b);
-			} else b->der = NULL;
-			b = liberar_binario(b);
+			} else {
+				if (!es_vacio_binario(derecho(aux))) {
+					binario_t aux2	= masDerecho(b, aux);
+					aux2->izq		= izquierdo(aux);
+					aux2->der		= derecho(aux);
+					aux->izq		= aux2;
+				} else b->der = NULL;
+			}
+			info_t a_borrar	= raiz(b);
+			liberar_info(a_borrar);
+			delete b;
 			return aux;
 		}
 	} else if (strcmp(t, frase_info(raiz(b))) < 0) {
-		if (!es_vacio_binario(izquierdo(b))) {
-			if (strcmp(t, frase_info(raiz(izquierdo(b)))) == 0) {
-				binario_t aux	= masDerecho(b, izquierdo(b));
-				if (aux != derecho(b)) {
-					aux->izq		= izquierdo(izquierdo(b));
-					aux->der		= derecho(izquierdo(b));
-				} else b->izq = NULL;
-				aux	= liberar_binario(aux);
-			} else b->izq = remover_de_binario(t, izquierdo(b));
-		}
-	} else {
-		if (!es_vacio_binario(derecho(b))) {
-			if (strcmp(t, frase_info(raiz(derecho(b)))) == 0) {
-				binario_t aux	= masIzquierdo(b, derecho(b));
-				if (aux != derecho(b)) {
-					aux->izq		= izquierdo(derecho(b));
-					aux->der		= derecho(derecho(b));
-				} else b->der = NULL;
-				aux	= liberar_binario(aux);
-			} else b->der = remover_de_binario(t, derecho(b));
-		}
-	}
+		if (!es_vacio_binario(izquierdo(b)))	b->izq = remover_de_binario(t, izquierdo(b));
+	} else if (!es_vacio_binario(derecho(b)))	b->der = remover_de_binario(t, derecho(b));
 	return b;
 }
 
@@ -586,41 +466,56 @@ binario_t cadena_a_binario(cadena_t cad) {
 	El árbol resultado no comparte memoria con `b'. *)
 	El tiempo de ejecución es O(n), donde `n' es la cantidad de elementos de `b'.
  */
+/*
+static binario_t auxMenores(binario_t braiz, binario_t actual, int clave) {
+	braiz = insertar_en_binario(copia_info(raiz(actual)), braiz);
 
-static bool esMenor(binario_t, int clave) {
-	return (numero_info(raiz(b) < clave);
-}
-static binario_t auxMenores(int clave, binario_t b, bool esIzq) {
-	if (b != NULL) {
-		auxMenores(clave, izquierdo(b));
+	if (!es_vacio_binario(derecho(actual)))			braiz = auxMenores(braiz, derecho(actual), clave);
+	else if (!es_vacio_binario(izquierdo(actual)))	braiz = auxMenores(braiz, izquierdo(actual), clave);
 
-		auxMenores(clave, derecho(b));
-	}
-	else {
-		if (esMenor(b, clave)) {
-			return b;
-		}
-	}
+	return braiz;
 }
 
 binario_t menores(int clave, binario_t b) {
-	binario_t res;
-	//caso que raiz es menor
-	if (esMenor(b, clave)) {
-		res = b;
-		res->der = auxMenores(clave, derecho(b));
-		res->izq = auxMenores(clave, izquierdo(b));
-		//caso que raiz NO es menor
-	}
-	else {
+	// Si la raíz es mayor o igual a clave, entonces busco en el subárbol izquierdo.
+	if (clave >= numero_info(raiz(b))) {
+		if (!es_vacio_binario(izquierdo(b))) b = menores(clave, izquierdo(b));
 
-		if (mayor(esMenor(izquierdo(b)))) res = mayor(izquierdo(b));
-		else
-			res->der = auxMenores(clave, derecho(b), true);
-
-		res->izq = auxMenores(clave, izquierdo(b), false);
+	// Encontré un elemento (b) menor que clave, a partir de él todos deben agregarse.
+	} else {
+		binario_t res = auxMenores(b, b, clave);
+		return res;
 	}
 	return NULL;
+	// TODO: Completar.
+}
+*/
+
+static bool esMenor(binario_t, int clave) { return numero_info(raiz(b)) < clave; }
+
+static binario_t auxMenores(int clave, binario_t b, bool esIzq) {
+	if (b != NULL) {
+		b->izq	= auxMenores(clave, izquierdo(b));
+		b->der	= auxMenores(clave, derecho(b));
+	}
+	// TODO: Completar.
+	return b;
+}
+
+binario_t menores(int clave, binario_t b) {
+	binario_t res = crear_binario();
+	// Caso que raiz es menor.
+	if (esMenor(b, clave)) {
+		res			= b;
+		res->der	= auxMenores(clave, derecho(b));
+		res->izq	= auxMenores(clave, izquierdo(b));
+		// Caso que raiz NO es menor.
+	} else {
+		if (mayor(esMenor(izquierdo(b)))) res = mayor(izquierdo(b));
+		else res->der = auxMenores(clave, derecho(b), true);
+		res->izq = auxMenores(clave, izquierdo(b), false);
+	}
+	return res;
 }
 
 static bool auxCamino(binario_t b, cadena_t c, localizador_t loc) {
