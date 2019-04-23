@@ -111,7 +111,8 @@ binario_t liberar_binario(binario_t b) {
 	if (b != NULL) {
 		b->izq	= liberar_binario(izquierdo(b));
 		b->der	= liberar_binario(derecho(b));
-		liberar_info(raiz(b));
+		info_t a_borrar = raiz(b);
+		liberar_info(a_borrar);
 		delete b;
 		b = NULL;
 	}
