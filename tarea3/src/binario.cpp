@@ -11,7 +11,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <math.h>       /* ceil */
+#include <math.h>	   /* ceil */
 
 
 struct rep_binario {
@@ -111,8 +111,7 @@ binario_t liberar_binario(binario_t b) {
 	if (b != NULL) {
 		b->izq	= liberar_binario(izquierdo(b));
 		b->der	= liberar_binario(derecho(b));
-		info_t a_borrar = raiz(b);
-		liberar_info(a_borrar);
+		liberar_info(raiz(b));
 		delete b;
 		b = NULL;
 	}
@@ -402,7 +401,7 @@ binario_t cadena_a_binario(cadena_t cad) {
 		localizador_t loc = inicio_cadena (cad);
 		for (int i = 0; i < largo; i++) {
 			arr[i] = info_cadena(loc, cad);
-			loc    = siguiente(loc);
+			loc	= siguiente(loc);
 		}
 		binario_t b = crear_binario();
 		return auxCadABin(arr, b, largo, 0);
@@ -467,6 +466,7 @@ binario_t cadena_a_binario(cadena_t cad) {
 	El tiempo de ejecución es O(n), donde `n' es la cantidad de elementos de `b'.
  */
 /*
+
 static binario_t auxMenores(binario_t braiz, binario_t actual, int clave) {
 	braiz = insertar_en_binario(copia_info(raiz(actual)), braiz);
 
@@ -491,8 +491,7 @@ binario_t menores(int clave, binario_t b) {
 }
 */
 
-static bool esMenor(binario_t, int clave) { return numero_info(raiz(b)) < clave; }
-
+/*
 static binario_t auxMenores(int clave, binario_t b, bool esIzq) {
 	if (b != NULL) {
 		b->izq	= auxMenores(clave, izquierdo(b));
@@ -516,6 +515,59 @@ binario_t menores(int clave, binario_t b) {
 		res->izq = auxMenores(clave, izquierdo(b), false);
 	}
 	return res;
+}
+*/
+
+/* Compara el elemento numérico de b con la clave y devuelve un booleano con el resultado de la comparación. */
+static bool esMenor(binario_t b, int clave) { return numero_info(raiz(b)) < clave; }
+
+/*
+	Busca la nueva raíz para el árbol de elementos que cumplen la condición (resultado).
+	Si lo encuentra devuelve el elemento, si no devuelve NULL.
+*/
+static binario_t buscarNuevaRaiz(binario_t actual, int clave) {
+	if (!es_vacio_binario(derecho(actual))) actual = buscarNuevaRaiz(actual, derecho(actual), clave, insertado);
+	if (numero_info(raiz(actual)) < clave) return actual;
+	// Si no encontré una nueva raíz busco en el hijo izquierdo.
+	if (!es_vacio_binario(izquierdo(actual))) actual = buscarNuevaRaiz(actual, izquierdo(actual), clave, insertado);
+	return NULL;
+}
+
+static binario_t auxMenoresDer(binario_t result, binario_t actual, int clave) {
+	if (!es_vacio_binario(actual)) {
+		if (esMenor(actual, clave)) result = insertar_en_binario(copia_info(raiz(actual)), result);
+		actual->izq	= arbol_der(result, izquierdo(actual), clave);
+		actual->der	= arbol_der(result, derecho(actual), clave);
+	}
+	return actual;
+}
+
+static binario_t auxMenoresIzq(binario_t result, binario_t actual, int clave) {
+	if (!es_vacio_binario(actual)) {
+		if (esMenor(actual, clave)) result = insertar_en_binario(copia_info(raiz(actual)), result);
+		else {
+			binario_t nuevaR = buscarNuevaRaiz(actual, clave);
+			if (!es_vacio_binario(nuevaR)) result = insertar_en_binario(copia_info(raiz(nuevaR)), result);
+		}
+		result = auxMenoresDer(result, actual, clave);
+	}
+	return actual;
+}
+
+binario_t menores(int clave, binario_t b) {
+	binario_t result = crear_binario();
+	if (!es_vacio_binario(b)) {
+		if (esMenor(b, clave)) result = insertar_en_binario(copia_info(raiz(b)), result);
+		else {
+			// Obtengo la nueva raiz del árbol a retornar.
+			binario_t nuevaRaiz = buscarNuevaRaiz(izquierdo(b), clave);
+			if (!es_vacio_binario(nuevaRaiz)) result = insertar_en_binario(copia_info(raiz(nuevaRaiz)), result);
+
+			// Ahora sigo con el resto del árbol.
+			
+		}
+	}
+	return result;
 }
 
 static bool auxCamino(binario_t b, cadena_t c, localizador_t loc) {
