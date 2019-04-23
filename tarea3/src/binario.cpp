@@ -542,11 +542,10 @@ bool es_camino(cadena_t c, binario_t b) {
 static void auxNivel(nat actual, nat l, binario_t b, cadena_t cad, localizador_t loc) {
 	if (actual != l) {
 		// Sigo buscando.
-		actual++;
-		auxNivel(actual, l, izquierdo(b), cad, loc);
-		auxNivel(actual, l, derecho(b), cad, loc);
+		auxNivel(actual+1, l, izquierdo(b), cad, loc);
+		auxNivel(actual+1, l, derecho(b), cad, loc);
 	} else
-		cad = insertar_al_final(copia_info(raiz(b)), cad);
+		cad = insertar_al_final(raiz(b), cad);
 }
 
 cadena_t nivel_en_binario(nat l, binario_t b) {
