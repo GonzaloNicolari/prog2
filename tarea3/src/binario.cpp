@@ -526,32 +526,40 @@ static bool esMenor(binario_t b, int clave) { return numero_info(raiz(b)) < clav
 	Si lo encuentra devuelve el elemento, si no devuelve NULL.
 */
 static binario_t buscarNuevaRaiz(binario_t actual, int clave) {
-	if (!es_vacio_binario(derecho(actual))) actual = buscarNuevaRaiz(actual, derecho(actual), clave, insertado);
-	if (numero_info(raiz(actual)) < clave) return actual;
+	if (!es_vacio_binario(derecho(actual))) actual = buscarNuevaRaiz(derecho(actual), clave);
+	if (esMenor(actual, clave)) return actual;
 	// Si no encontré una nueva raíz busco en el hijo izquierdo.
-	if (!es_vacio_binario(izquierdo(actual))) actual = buscarNuevaRaiz(actual, izquierdo(actual), clave, insertado);
+	if (!es_vacio_binario(izquierdo(actual))) actual = buscarNuevaRaiz(izquierdo(actual), clave);
 	return NULL;
 }
 
-static binario_t auxMenoresDer(binario_t result, binario_t actual, int clave) {
+static binario_t auxMenoresRecorrer(binario_t result, binario_t actual, int clave) {
 	if (!es_vacio_binario(actual)) {
-		if (esMenor(actual, clave)) result = insertar_en_binario(copia_info(raiz(actual)), result);
-		actual->izq	= arbol_der(result, izquierdo(actual), clave);
-		actual->der	= arbol_der(result, derecho(actual), clave);
+		if (esMenor(actual, clave))
+			// Verifico que no esté agregado porque podría llegar a ser una raíz obtenida en buscarNuevaRaiz.
+			if (es_vacio_binario(buscar_subarbol(frase_info(raiz(actual)), result))) result = insertar_en_binario(copia_info(raiz(actual)), result);
+		result->izq	= auxMenoresRecorrer(result, izquierdo(actual), clave);
+		result->der	= auxMenoresRecorrer(result, derecho(actual), clave);
 	}
-	return actual;
+	return result;
 }
 
-static binario_t auxMenoresIzq(binario_t result, binario_t actual, int clave) {
+static binario_t auxMenores(binario_t result, binario_t actual, int clave) {
 	if (!es_vacio_binario(actual)) {
-		if (esMenor(actual, clave)) result = insertar_en_binario(copia_info(raiz(actual)), result);
-		else {
-			binario_t nuevaR = buscarNuevaRaiz(actual, clave);
-			if (!es_vacio_binario(nuevaR)) result = insertar_en_binario(copia_info(raiz(nuevaR)), result);
+		if (esMenor(actual, clave)) {
+			// Verifico que no esté agregado porque podría llegar a ser una raíz obtenida en buscarNuevaRaiz.
+			if (es_vacio_binario(buscar_subarbol(frase_info(raiz(actual)), result))) result = insertar_en_binario(copia_info(raiz(actual)), result);
+		} else {
+			binario_t nuevaRaiz = buscarNuevaRaiz(izquierdo(actual), clave);
+			if (!es_vacio_binario(nuevaRaiz)) {
+				// Verifico que no esté agregado porque podría llegar a ser una raíz obtenida en buscarNuevaRaiz.
+				if (es_vacio_binario(buscar_subarbol(frase_info(raiz(nuevaRaiz)), result))) result = insertar_en_binario(copia_info(raiz(nuevaRaiz)), result);
+			}
 		}
-		result = auxMenoresDer(result, actual, clave);
+		result->der = auxMenoresRecorrer(result, derecho(actual), clave);
+		result->izq = auxMenoresRecorrer(result, izquierdo(actual), clave);
 	}
-	return actual;
+	return result;
 }
 
 binario_t menores(int clave, binario_t b) {
@@ -564,7 +572,8 @@ binario_t menores(int clave, binario_t b) {
 			if (!es_vacio_binario(nuevaRaiz)) result = insertar_en_binario(copia_info(raiz(nuevaRaiz)), result);
 
 			// Ahora sigo con el resto del árbol.
-			
+			result->der	= auxMenoresRecorrer(result, derecho(b), clave);
+			result->izq	= auxMenores(result, izquierdo(b), clave);
 		}
 	}
 	return result;
