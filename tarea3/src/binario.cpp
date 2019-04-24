@@ -234,221 +234,6 @@ cadena_t linealizacion(binario_t b) {
 	return result;
 }
 
-/*
-	Devuelve un árbol balanceado cuyos elementos son los que están contenidos en
-	`cad'.
-	En esta función se dice que un árbol está balanceado si
-	a) es vacío;
-	o
-	b)
-		b1) el sub-árbol izquierdo tiene la misma cantidad de elementos o uno más
-			que el	subárbol derecho;
-		y
-		b2) los subárboles izquierdo y derecho están balanceados.
-	DEFINICIÓN ALTERNATIVA DE ÁRBOL BALANCEADO
-	En esta función se dice que un árbol esta balanceado si en cada nodo, la
-	cantidad de elementos de su subárbol izquierdo es igual a, o 1 más que, la
-	cantidad de elementos de su subárbol derecho.
-	Precondición: los elementos de `cad' están en orden lexicográfico creciente
-	estricto según sus datos de texto.
-	El árbol devuelto no comparte memoria con `cad'.
-	El tiempo de ejecución es O(n . log n), siendo `n` la cantidad de elementos
-	de `cad'.
- */
-/*	
-static binario_t insertarElementoDeCadenaEnBinario(binario_t raiz, binario_t *padre, binario_t *actual; cadena_t cad) {
-
-	// Se resuelve mediante el método de bipartición.
-	localizador_t loc;
-	// Si hay mas de un elemento.
-	if (largo > 1) {
-		// Voy al elemento posicionado en la mitad de la cadena si la misma es de largo impar, o al anterior a éste si es par. Ese elemento será la raíz del árbol.
-		if ((i % 2) == 0) loc = kesimo(i - 1, cad);
-		else loc = kesimo(i, cad);
-		i--;
-	}
-
-	actual->dato = info_cadena(loc, cad);
-
-	// Separo la cadena en dos partes (al medio) haciendo lo mismo para cada segmento obtenido.
-	cadena_t cad1	= copiar_segmento(inicio_cadena(cad), loc, cad);
-	cadena_t cad2	= copiar_segmento(loc, final_cadena(cad), cad);
-
-	if (!es_vacio_binario(padre)) {
-		if (!es_vacia_cadena(cad1)) {
-			padre->izq	= actual;
-			actual->izq	= insertarElementoDeCadenaEnBinario(b, padre, actual, cad1);
-		}
-		if (!es_vacia_cadena(cad2)) {
-			padre->der	= actual;
-			actual->der	= insertarElementoDeCadenaEnBinario(b, padre, actual, cad1);
-		}
-	} else {
-		// TODO: Completar para el caso en que es la primera ejecución.
-		if (!es_vacia_cadena(cad1)) actual->izq	= insertarElementoDeCadenaEnBinario(b, padre, actual, cad1);
-		if (!es_vacia_cadena(cad2)) actual->der	= insertarElementoDeCadenaEnBinario(b, padre, actual, cad1);
-	}
-
-	liberar_cadena(cad1);
-	liberar_cadena(cad2);
-
-	return raiz;
-}
-*/
-/*
-static binario_t auxCadABin(binario_t raiz, cadena_t cad, binario_t actual, nat largo, int cont) {
-	if (es_vacio_binario(actual)) actual = insertar_en_binario(kesimo(ceil((largo + cont) / 2), cad));
-	else {
-		actual	= auxCadABin(raiz, cad, derecho(actual), largo, ceil((largo + cont) / 2) + 1);
-		actual	= auxCadABin(raiz, cad, izquierdo(actual), ceil((largo + cont) / 2) - 1, cont);
-	}
-	return raiz;
-}
-
-binario_t cadena_a_binario(cadena_t cad) {
-	binario_t b = crear_binario()
-	if (es_vacia_cadena(cad)) return b;
-	else return auxCadABin(b, cad, b, longitud(cad), 0);
-}
-*/
-/*
-binario_t cadena_a_binario(cadena_t cad) {
-
-	binario_t b = crear_binario();
-	if (es_vacia_cadena(cad)) return b;
-	else return aux_cadena_a_binario(b, cad, longitud(cad));
-}
-*/
-
-/*
-static binario_t aux_CadABin_izq(binario_t raiz, cadena_t cad, localizador_t loc, nat padre, nat largo) {
-	if (padre > 1) {
-		if ((padre % 2) == 0) actual = padre / 2;
-		else actual = ceil(largo / 2);
-
-		loc		= kesimo(actual, cad);
-		b->dato	= info_cadena(loc, cad);
-
-		if (((actual > 0) raiz = aux_CadABin_izq(raiz, cad, loc, actual, largo);
-		if (((padre - actual) / 2) > 0) raiz = aux_CadABin_der(raiz, cad, loc, actual, largo);
-	}
-	return raiz;
-}
-
-static binario_t aux_CadABin_der(binario_t raiz, cadena_t cad, localizador_t loc, nat prev, nat largo) {
-	if (padre < largo) {
-		if (((padre + largo) % 2) == 0) actual	= (padre + largo) / 2;	
-		else actual	= ceil((largo + padre) / 2);
-
-		loc		= kesimo(actual, cad);
-		b->dato	= info_cadena(loc, cad);
-
-		if (((actual < 0) raiz = aux_CadABin_izq(raiz, cad, loc, actual);
-		if (((padre - actual) / 2) > 0) raiz = aux_CadABin_der(raiz, cad, loc, actual);
-	}
-	return raiz;
-}
-
-binario_t cadena_a_binario(cadena_t cad) {
-	binario_t raiz = crear_binario();
-	if (es_vacia_cadena(cad)) return raiz;
-	else {
-		localizador_t loc = inicio_cadena(cad);
-		// Si cad tiene solo un elemento.
-		if (!es_localizador(siguiente(loc))) {
-			raiz->dato	= info_cadena(loc, cad);
-			loc			= NULL;
-			return raiz;
-		} else {
-			// Si hay más de un elemento en cad.
-			// Voy al elemento posicionado en la mitad de la cadena si la misma es de largo impar, o al anterior a éste si es par. Ese elemento será la raíz del árbol.
-			nat largo = longitud(cad);
-			nat actual;
-			if ((largo % 2) == 0) {
-				actual = largo / 2;
-				loc = kesimo(actual, cad);
-			} else {
-				actual	= ceil(largo / 2);
-				loc		= kesimo(actual, cad);
-			}
-
-			raiz->dato	= info_cadena(loc, cad);
-			raiz->izq	= aux_CadABin_izq(crear_binario(), cad, loc, actual, largo);
-			raiz->der	= aux_CadABin_der(crear_binario(), cad, loc, actual, largo);
-		}
-	}
-	return raiz;
-}
-*/
-
-/*
-static binario_t auxCadABin(info_t arr[], binario_t b, int max, int inicio) {
-	if (es_vacio_binario(b)) {
-		b = insertar_en_binario(arr[ceil((max + inicio) / 2)]);
-		if (inicio >= max) return b;
-	} else {
-		b->der = auxCadABin(arr, derecho(b), max, ceil((max+inicio)/2));
-		b->izq = auxCadABin(arr, izquierdo(b), ceil((max+inicio)/2), inicio);
-	}
-}
-
-binario_t cadena_a_binario(cadena_t cad) {
-	if (es_vacia_cadena(cad)) return crear_binario();
-	else {
-		int largo = longitud(cad);
-		info_t arr [largo];
-		localizador_t loc = inicio_cadena (cad);
-		for (int i = 0; i < largo; i++) {
-			arr[i] = info_cadena(loc, cad);
-			loc	= siguiente(loc);
-		}
-		binario_t b = crear_binario();
-		return auxCadABin(arr, b, largo, 0);
-	} 
-}
-*/
-
-/*
-static binario_t auxCadABin(cadena_t cad, binario_t b, int max, int inicio) {
-	if (es_vacio_binario(b)) {
-		b = insertar_en_binario(info_cadena(kesimo(ceil((max + inicio) / 2), cad), cad), b);
-		if (inicio >= max) return b;
-	} else {
-		b->der = auxCadABin(cad, derecho(b), max, ceil((max + inicio) / 2));
-		b->izq = auxCadABin(cad, izquierdo(b), ceil((max + inicio) / 2), inicio);
-	}
-	return b;
-}
-
-binario_t cadena_a_binario(cadena_t cad) {
-	binario_t raiz = crear_binario();
-	if (es_vacia_cadena(cad)) return raiz;
-	else {
-		localizador_t loc = inicio_cadena(cad);
-		// Si cad tiene solo un elemento.
-		if (!es_localizador(siguiente(loc, cad))) {
-			raiz->dato	= info_cadena(loc, cad);
-			loc			= NULL;
-			return raiz;
-		} else {
-			// Si hay más de un elemento en cad.
-			// Voy al elemento posicionado en la mitad de la cadena si la misma es de largo impar, o al anterior a éste si es par. Ese elemento será la raíz del árbol.
-			nat largo = longitud(cad);
-			nat actual;
-			if ((largo % 2) == 0) {
-				actual = largo / 2;
-				loc = kesimo(actual, cad);
-			} else {
-				actual	= ceil(largo / 2);
-				loc		= kesimo(actual, cad);
-			}
-			raiz = auxCadABin(cad, raiz, largo, 0);
-		}
-	}
-	return raiz;
-}
-*/
-
 /* Devuelve la mitad de la cadena. */
 
 static nat medioCadena(nat ini, nat fin) { return ceil(((double)ini + (double)fin) / 2); }
@@ -536,11 +321,13 @@ static bool auxCamino(binario_t b, cadena_t c, localizador_t loc) {
 		// Compruebo si hay mas letras en la cadena.
 		if (es_localizador(siguiente(loc, c))) {
 			// Si debe avanzar a la izquierda o derecha en el árbol.
-			if (strcmp(frase_info(info_cadena(siguiente(loc, c), c)), frase_info(raiz(b))) < 0)
-				auxCamino(derecho(b), c, siguiente(loc, c));
-			else
-				auxCamino(izquierdo(b), c, siguiente(loc, c));
-
+			if (strcmp(frase_info(info_cadena(siguiente(loc, c), c)), frase_info(raiz(b))) > 0) {
+				if (!es_vacio_binario(derecho(b))) return auxCamino(derecho(b), c, siguiente(loc, c));
+				else return false;
+			} else {
+				if (!es_vacio_binario(izquierdo(b))) return auxCamino(izquierdo(b), c, siguiente(loc, c));
+				else return false;
+			}
 		// Compruebo si terminé en una hoja.
 		} else if (es_vacio_binario(derecho(b)) && es_vacio_binario(izquierdo(b))) return true;
 	}
@@ -548,17 +335,7 @@ static bool auxCamino(binario_t b, cadena_t c, localizador_t loc) {
 }
 
 bool es_camino(cadena_t c, binario_t b) {
-	// Si son de distinto largo.
-	//if (altura_binario(b) != longitud(c)) return false;
-	// Esto no lo podemos usar acá porque el tiempo de ejecución de altura_binario es O(n) y el de es_camino debe ser O(log n).
-	// (O(n) > O(log n)).
-
-	//int result = auxCamino(b, c, inicio_cadena(c));
-	//return result == longitud(c);
-	// Esto no lo podemos usar acá porque el tiempo de ejecución de longitud es O(n) y el de es_camino debe ser O(log n).
-	// (O(n) > O(log n)).
-	if (!es_vacio_binario(b)) return auxCamino(b, c, inicio_cadena(c));
-	else return false;
+	return (!es_vacio_binario(b)) ? auxCamino(b, c, inicio_cadena(c)) : false;
 }
 
 static void auxNivel(nat actual, nat l, binario_t b, cadena_t cad, localizador_t loc) {
