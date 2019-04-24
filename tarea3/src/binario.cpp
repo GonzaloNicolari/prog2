@@ -14,8 +14,6 @@
 #include <math.h>		/* ceil */
 #include <algorithm>	/* max */
 
-
-
 struct rep_binario {
 	info_t dato;
 	rep_binario *izq;
@@ -175,24 +173,6 @@ nat altura_binario(binario_t b) {
 	else return 1 + maximo(altura_binario(izquierdo(b)), altura_binario(derecho(b)));
 }
 
-/*
-static int auxCantBin(binario_t b, int &cont) {
-	if (!es_vacio_binario(b)) {
-		cont++;
-		if (!es_vacio_binario(izquierdo(b)))	cont = auxCantBin(izquierdo(b), cont);
-		if (!es_vacio_binario(derecho(b)))		cont = auxCantBin(derecho(b), cont);
-	}
-	//printf("%d", cont);
-	return cont;
-}
-
-nat cantidad_binario(binario_t b) {
-	int cont	= 0;
-	cont		= auxCantBin(b, cont);
-	return cont;
-}
-*/
-
 static int auxCantBin(binario_t b, int cont) {
 	if (!es_vacio_binario(izquierdo(b))) {
 		cont++;
@@ -210,17 +190,25 @@ nat cantidad_binario(binario_t b) {
 	else return auxCantBin(b, 1);
 }
 
-int suma_ultimos_pares(nat i, binario_t b) {
-	if (es_vacio_binario(b)) return 0;
-	else {
-		suma_ultimos_pares(i, derecho(b));
-		suma_ultimos_pares(i, izquierdo(b));
-		if (((numero_info(raiz(b)) % 2) == 0) && (i > 0)) i--;
+static nat auxSumaUltimosPares(binario_t actual, nat i, nat pos ,nat &cont, nat sumaPares) {
+	if (!es_vacio_binario(actual)) {
+		pos++;
+		sumaPares = auxSumaUltimosPares(derecho(actual), i, pos, cont, sumaPares);
+		if ((cont < i) && (numero_info(raiz(actual)) % 2) == 0) {
+			cont++;
+			sumaPares += numero_info(raiz(actual));
+		}
+		sumaPares = auxSumaUltimosPares(izquierdo(actual), i, pos, cont, sumaPares);
 	}
-	return numero_info(raiz(b));
+	return sumaPares;
 }
 
-static void lin(binario_t b,cadena_t c) {
+int suma_ultimos_pares(nat i, binario_t b) {
+	nat cont = 0;
+	return auxSumaUltimosPares(b, i, 0, cont, 0);
+}
+
+static void lin(binario_t b, cadena_t c) {
 	if (!es_vacio_binario(b)) {
 		lin(izquierdo(b), c);
 		insertar_al_final(copia_info(raiz(b)), c);
@@ -235,7 +223,6 @@ cadena_t linealizacion(binario_t b) {
 }
 
 /* Devuelve la mitad de la cadena. */
-
 static nat medioCadena(nat ini, nat fin) { return ceil(((double)ini + (double)fin) / 2); }
 
 static binario_t auxCadenaABinario(nat inicio, cadena_t cad, nat largo) {
