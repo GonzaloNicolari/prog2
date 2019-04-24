@@ -536,7 +536,7 @@ static bool auxCamino(binario_t b, cadena_t c, localizador_t loc) {
 		// Compruebo si hay mas letras en la cadena.
 		if (es_localizador(siguiente(loc, c))) {
 			// Si debe avanzar a la izquierda o derecha en el árbol.
-			if (strcmp(frase_info(info_cadena(siguiente(loc, c), c)), frase_info(raiz(b))) > 0)
+			if (strcmp(frase_info(info_cadena(siguiente(loc, c), c)), frase_info(raiz(b))) < 0)
 				auxCamino(derecho(b), c, siguiente(loc, c));
 			else
 				auxCamino(izquierdo(b), c, siguiente(loc, c));
@@ -557,7 +557,8 @@ bool es_camino(cadena_t c, binario_t b) {
 	//return result == longitud(c);
 	// Esto no lo podemos usar acá porque el tiempo de ejecución de longitud es O(n) y el de es_camino debe ser O(log n).
 	// (O(n) > O(log n)).
-	return auxCamino(b, c, inicio_cadena(c));
+	if (!es_vacio_binario(b)) return auxCamino(b, c, inicio_cadena(c));
+	else return false;
 }
 
 static void auxNivel(nat actual, nat l, binario_t b, cadena_t cad, localizador_t loc) {
