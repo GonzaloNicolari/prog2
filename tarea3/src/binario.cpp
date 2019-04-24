@@ -338,19 +338,22 @@ bool es_camino(cadena_t c, binario_t b) {
 	return (!es_vacio_binario(b)) ? auxCamino(b, c, inicio_cadena(c)) : false;
 }
 
-static void auxNivel(nat actual, nat l, binario_t b, cadena_t cad, localizador_t loc) {
-	if (actual != l) {
-		// Sigo buscando.
+static cadena_t auxNivel(binario_t b, cadena_t cad, localizador_t loc, nat actual, nat l) {
+	if (!es_vacio_binario(b)) {
 		actual++;
-		auxNivel(actual, l, izquierdo(b), cad, loc);
-		auxNivel(actual, l, derecho(b), cad, loc);
-	} else
-		cad = insertar_al_final(copia_info(raiz(b)), cad);
+		if (actual == l) cad = insertar_al_final(copia_info(raiz(b)), cad);
+		else {
+			// Sigo buscando.
+			cad = auxNivel(izquierdo(b), cad, loc, actual, l);
+			cad = auxNivel(derecho(b), cad, loc, actual, l);
+		}
+	}
+	return cad;
 }
 
 cadena_t nivel_en_binario(nat l, binario_t b) {
-	cadena_t cad = crear_cadena();
-	auxNivel(1, l, b, cad, inicio_cadena(cad));
+	cadena_t cad	= crear_cadena();
+	cad				= auxNivel(b, cad, inicio_cadena(cad), 0, l);
 	return cad;
 }
 
