@@ -11,7 +11,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <math.h>	   /* ceil */
+#include <math.h>		/* ceil */
+#include <algorithm>	/* max */
+
 
 
 struct rep_binario {
@@ -121,36 +123,32 @@ binario_t liberar_binario(binario_t b) {
 
 bool es_vacio_binario(binario_t b) { return b == NULL; }
 
-/* 
-static bool avlAux(binario_t b, int diffL, int diffR) {
-	if (izquierdo(b) =! NULL) return avlAux(izquierdo(b), diffL, diffR);
-	else diffL++;
-	if (derecho(b) =! NULL) return avlAux(derecho(b), diffL, diffR);
-	else diffR++;
-	if ((absoluto(diffL - diffR) == 0) || (absoluto(diffL - diffR) == 1)) return true;
-	else return false;
-}
- */
 static int absoluto(int n) { return (n >= 0) ? (n) : (-n); }
 
-static bool avlAux(binario_t b, int diffL, int diffR) {
-	if (!es_vacio_binario(izquierdo(b))) {
-		diffL++;
-		return avlAux(izquierdo(b), diffL, diffR);
+static bool auxEsAVL(binario_t actual, nat &altura) {
+	bool esIzqAVL	= false;
+	bool esDerAVL	= false;
+	nat alturaIzq	= 0;
+	nat alturaDer	= 0;
+
+	if (!es_vacio_binario(actual)) {
+		// Compruebo si los hijos son AVL.
+		esIzqAVL	= auxEsAVL(actual->izq, alturaIzq);
+		esDerAVL	= auxEsAVL(actual->der, alturaDer);
+		altura		= 1 + std::max(alturaDer, alturaIzq);
+
+		return ((absoluto(alturaIzq - alturaDer) == 0) || (absoluto(alturaIzq - alturaDer) == 1)) ? (esIzqAVL && esDerAVL) : false;
+	} else {
+		altura = 0;
+		return true;
 	}
-	if (!es_vacio_binario(derecho(b))) {
-		diffR++;
-		return avlAux(derecho(b), diffL, diffR);
-	}
-	return (absoluto(diffL - diffR) == 0) || (absoluto(diffL - diffR) == 1);
 }
 
 bool es_AVL(binario_t b) {
-	if (es_vacio_binario(b)) return true;
-	else {
-		int i = 0;
-		return avlAux(b, i, i);
-	}
+	if (!es_vacio_binario(b)) {
+		nat aux = 0;
+		return auxEsAVL(b, aux);
+	} else return true;
 }
 
 info_t raiz(binario_t b) { return (b->dato); }
@@ -536,17 +534,17 @@ bool es_camino(cadena_t c, binario_t b) {
 	//return result == longitud(c);
 	// Esto no lo podemos usar acá porque el tiempo de ejecución de longitud es O(n) y el de es_camino debe ser O(log n).
 	// (O(n) > O(log n)).
-	if (!es_vacio_binario(b)){
-		return auxCamino(b, c, inicio_cadena(c));
-	}else return false;}
+	return auxCamino(b, c, inicio_cadena(c));
+}
 
 static void auxNivel(nat actual, nat l, binario_t b, cadena_t cad, localizador_t loc) {
 	if (actual != l) {
 		// Sigo buscando.
-		auxNivel(actual+1, l, izquierdo(b), cad, loc);
-		auxNivel(actual+1, l, derecho(b), cad, loc);
+		actual++;
+		auxNivel(actual, l, izquierdo(b), cad, loc);
+		auxNivel(actual, l, derecho(b), cad, loc);
 	} else
-		cad = insertar_al_final(raiz(b), cad);
+		cad = insertar_al_final(copia_info(raiz(b)), cad);
 }
 
 cadena_t nivel_en_binario(nat l, binario_t b) {
