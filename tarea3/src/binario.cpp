@@ -137,7 +137,7 @@ static bool auxEsAVL(binario_t actual, nat &altura) {
 		esDerAVL	= auxEsAVL(actual->der, alturaDer);
 		altura		= 1 + std::max(alturaDer, alturaIzq);
 
-		return ((absoluto(alturaIzq - alturaDer) == 0) || (absoluto(alturaIzq - alturaDer) == 1)) ? (esIzqAVL && esDerAVL) : false;
+		return (absoluto(alturaIzq - alturaDer) <= 1) ? (esIzqAVL && esDerAVL) : false;
 	} else {
 		altura = 0;
 		return true;
