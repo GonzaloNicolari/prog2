@@ -534,7 +534,8 @@ bool es_camino(cadena_t c, binario_t b) {
 	//return result == longitud(c);
 	// Esto no lo podemos usar acá porque el tiempo de ejecución de longitud es O(n) y el de es_camino debe ser O(log n).
 	// (O(n) > O(log n)).
-	return auxCamino(b, c, inicio_cadena(c));
+	if (!es_vacio_binario(b)) return auxCamino(b, c, inicio_cadena(c));
+	else return false;
 }
 
 static void auxNivel(nat actual, nat l, binario_t b, cadena_t cad, localizador_t loc) {
