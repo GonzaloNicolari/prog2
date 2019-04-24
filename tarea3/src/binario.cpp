@@ -408,6 +408,7 @@ binario_t cadena_a_binario(cadena_t cad) {
 }
 */
 
+/*
 static binario_t auxCadABin(cadena_t cad, binario_t b, int max, int inicio) {
 	if (es_vacio_binario(b)) {
 		b = insertar_en_binario(info_cadena(kesimo(ceil((max + inicio) / 2), cad), cad), b);
@@ -445,6 +446,28 @@ binario_t cadena_a_binario(cadena_t cad) {
 		}
 	}
 	return raiz;
+}
+*/
+
+/* Devuelve la mitad de la cadena. */
+
+static nat medioCadena(nat ini, nat fin) { return ceil(((double)ini + (double)fin) / 2); }
+
+static binario_t auxCadenaABinario(nat inicio, cadena_t cad, nat largo) {
+	if (inicio > largo) return NULL;
+	else {
+		// Obtengo el elemento posicionado en la mitad de la cadena.
+		binario_t result	= new rep_binario;
+		result->dato		= copia_info(info_cadena(kesimo(medioCadena(inicio, largo), cad), cad));
+		// Divido la cadena y sigo con los hijos.
+		result->izq	= auxCadenaABinario(inicio, cad, medioCadena(inicio, largo) - 1);
+		result->der	= auxCadenaABinario(medioCadena(inicio, largo) + 1, cad, largo);
+		return result;
+	}
+}
+
+binario_t cadena_a_binario(cadena_t cad) {
+	return !es_vacia_cadena(cad) ? auxCadenaABinario(1, cad, longitud(cad)) : crear_binario();
 }
 
 /* Compara el elemento numérico de b con la clave y devuelve un booleano con el resultado de la comparación. */
@@ -534,8 +557,7 @@ bool es_camino(cadena_t c, binario_t b) {
 	//return result == longitud(c);
 	// Esto no lo podemos usar acá porque el tiempo de ejecución de longitud es O(n) y el de es_camino debe ser O(log n).
 	// (O(n) > O(log n)).
-	if (!es_vacio_binario(b)) return auxCamino(b, c, inicio_cadena(c));
-	else return false;
+	return auxCamino(b, c, inicio_cadena(c));
 }
 
 static void auxNivel(nat actual, nat l, binario_t b, cadena_t cad, localizador_t loc) {
