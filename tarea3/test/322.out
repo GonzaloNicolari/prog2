@@ -1,0 +1,75 @@
+1>#  prueba de insertar_en_binario, mayor , remover_mayor, remover_de_binario, imprimir_binario.
+2>Vacio.
+3>b es vacío.
+4>b es vacío.
+5>No estaba la frase en 'b'.
+6>Insertado.
+7>No vacío.
+8>
+(10,l)
+9>(10,l)
+10>Removido el mayor.
+11>Vacio.
+12>
+13>No estaba la frase en 'b'.
+14>Insertado.
+15>No vacío.
+16>
+(10,l)
+17>(10,l)
+18>Removido.
+19>Vacio.
+20>
+21>Insertado.
+22>Insertado.
+23>(10,l)
+24>Insertado.
+25>(13,o)
+26>Removido el mayor.
+27>
+(10,l)
+-(8,g)
+28>(10,l)
+29>Insertado.
+30>Insertado.
+31>(10,l)
+32>Removido.
+33>
+(10,l)
+--(9,h)
+-(6,e)
+34>Insertado.
+35>Insertado.
+36>(12,n)
+37>Insertado.
+38>Insertado.
+39>Removido.
+40>
+--(15,q)
+-(12,n)
+(9,h)
+--(7,f)
+-(6,e)
+--(4,b)
+41>Removido.
+42>
+--(15,q)
+-(12,n)
+(7,f)
+-(6,e)
+--(4,b)
+43>Removido.
+44>Removido.
+45>
+--(15,q)
+-(12,n)
+(7,f)
+46>Removido.
+47>
+-(15,q)
+(7,f)
+48>Removido.
+49>
+(15,q)
+50>Removido el mayor.
+51>Fin.

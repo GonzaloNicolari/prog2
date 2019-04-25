@@ -1,0 +1,51 @@
+# prueba de insertar_en_binario, mayor , remover_mayor, remover_de_binario, imprimir_binario
+es_vacio_binario
+mayor
+remover_mayor
+remover_de_binario l
+insertar_en_binario (10,l)
+es_vacio_binario
+imprimir_binario
+mayor
+remover_mayor
+es_vacio_binario
+imprimir_binario
+remover_de_binario l
+insertar_en_binario (10,l)
+es_vacio_binario
+imprimir_binario
+mayor
+remover_de_binario l
+es_vacio_binario
+imprimir_binario
+insertar_en_binario (10,l)
+insertar_en_binario (8,g)
+mayor
+insertar_en_binario (13,o)
+mayor
+remover_mayor
+imprimir_binario
+mayor
+insertar_en_binario (9,h)
+insertar_en_binario (6,e)
+mayor
+remover_de_binario g
+imprimir_binario
+insertar_en_binario (4,b)
+insertar_en_binario (12,n)
+mayor
+insertar_en_binario (15,q)
+insertar_en_binario (7,f)
+remover_de_binario l
+imprimir_binario
+remover_de_binario h
+imprimir_binario
+remover_de_binario e
+remover_de_binario b
+imprimir_binario
+remover_de_binario n
+imprimir_binario
+remover_de_binario f
+imprimir_binario
+remover_mayor
+Fin
