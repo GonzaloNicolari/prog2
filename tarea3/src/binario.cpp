@@ -52,9 +52,13 @@ binario_t remover_mayor(binario_t b) {
 	return b;
 }
 
-static binario_t masDerecho(binario_t padre, binario_t actual) {
-	if (!es_vacio_binario(derecho(actual)))			actual = masDerecho(actual, derecho(actual));
-	else if (!es_vacio_binario(izquierdo(actual)))	padre->der = izquierdo(actual);
+static binario_t masDerecho(binario_t braiz, binario_t padre, binario_t actual) {
+	// Avanzo hasta el más derecho.
+	if (!es_vacio_binario(derecho(actual))) actual = masDerecho(braiz, actual, derecho(actual));
+	// Arreglo el resto del árbol.
+	if (!es_vacio_binario(izquierdo(actual)))
+		if (padre != braiz) padre->der = izquierdo(actual);
+	if (derecho(padre) == actual) padre->der = NULL;
 	return actual;
 }
 
@@ -68,11 +72,11 @@ binario_t remover_de_binario(const char *t, binario_t b) {
 	if (strcmp(t, frase_info(raiz(b))) == 0) {
 		if (es_vacio_binario(derecho(b)) && es_vacio_binario(izquierdo(b))) b = liberar_binario(b);
 		else if (!es_vacio_binario(izquierdo(b))) {
-			binario_t aux = masDerecho(b, izquierdo(b));
+			binario_t aux = masDerecho(b, b, izquierdo(b));
 			if (aux != izquierdo(b)) aux->izq = izquierdo(b);
 			else {
 				if (!es_vacio_binario(izquierdo(aux))) {
-					binario_t aux2	= masDerecho(b, aux);
+					binario_t aux2	= masDerecho(b, b, aux);
 					aux2->izq		= izquierdo(aux);
 					aux2->der		= derecho(aux);
 					aux->izq		= aux2;
@@ -90,7 +94,7 @@ binario_t remover_de_binario(const char *t, binario_t b) {
 				aux->der	= derecho(b);
 			} else {
 				if (!es_vacio_binario(derecho(aux))) {
-					binario_t aux2	= masDerecho(b, aux);
+					binario_t aux2	= masDerecho(b, b, aux);
 					aux2->izq		= izquierdo(aux);
 					aux2->der		= derecho(aux);
 					aux->izq		= aux2;
