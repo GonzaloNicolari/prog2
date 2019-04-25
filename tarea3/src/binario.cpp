@@ -42,9 +42,10 @@ info_t mayor(binario_t b) {
 }
 
 binario_t remover_mayor(binario_t b) {
-	assert(!es_vacio_binario(n));
+	assert(!es_vacio_binario(b));
 	if (derecho(b) == NULL) {
 		binario_t izq = izquierdo(b);
+		//ESTA MAL, PENSAR HOW TO FIX
 		delete(b);
 		b = izq;
 	} else
