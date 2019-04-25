@@ -36,8 +36,8 @@ binario_t insertar_en_binario(info_t i, binario_t b) {
 }
 
 info_t mayor(binario_t b) {
-	if (!es_vacio_binario(derecho(b))) mayor(derecho(b));
-	else mayor(izquierdo(b));
+	if (!es_vacio_binario(b)) 
+		if (!es_vacio_binario(derecho(b))) return mayor(derecho(b));
 	return (raiz(b));
 }
 
@@ -45,7 +45,6 @@ binario_t remover_mayor(binario_t b) {
 	assert(!es_vacio_binario(b));
 	if (derecho(b) == NULL) {
 		binario_t izq = izquierdo(b);
-		//ESTA MAL, PENSAR HOW TO FIX
 		delete(b);
 		b = izq;
 	} else
