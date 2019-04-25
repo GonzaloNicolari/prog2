@@ -52,17 +52,16 @@ binario_t remover_mayor(binario_t b) {
 	return b;
 }
 
-static binario_t masDerecho(binario_t braiz, binario_t padre, binario_t actual) {
+static binario_t masDerecho(binario_t braiz, binario_t &padre, binario_t actual, binario_t result) {
 	// Avanzo hasta el más derecho.
-	if (!es_vacio_binario(derecho(actual))) actual = masDerecho(braiz, actual, derecho(actual));
+	if (!es_vacio_binario(derecho(actual))) result = masDerecho(braiz, actual, derecho(actual), result);
+	else result = actual;
 	// Arreglo el resto del árbol.
-	if (!es_vacio_binario(izquierdo(actual)))
-		if (padre != braiz) padre->der = izquierdo(actual);
-	if (derecho(padre) == actual) padre->der = NULL;
-	return actual;
+	if ((actual == result) && (padre != braiz)) padre->der = izquierdo(actual);
+	return result;
 }
 
-static binario_t masIzquierdo(binario_t padre, binario_t actual) {
+static binario_t masIzquierdo(binario_t &padre, binario_t actual) {
 	if (!es_vacio_binario(izquierdo(actual)))		actual = masIzquierdo(actual, izquierdo(actual));
 	else if (!es_vacio_binario(derecho(actual)))	padre->izq = derecho(actual);
 	return actual;
@@ -72,11 +71,13 @@ binario_t remover_de_binario(const char *t, binario_t b) {
 	if (strcmp(t, frase_info(raiz(b))) == 0) {
 		if (es_vacio_binario(derecho(b)) && es_vacio_binario(izquierdo(b))) b = liberar_binario(b);
 		else if (!es_vacio_binario(izquierdo(b))) {
-			binario_t aux = masDerecho(b, b, izquierdo(b));
+			binario_t aux	= crear_binario();
+			aux				= masDerecho(b, b, izquierdo(b), aux);
 			if (aux != izquierdo(b)) aux->izq = izquierdo(b);
 			else {
 				if (!es_vacio_binario(izquierdo(aux))) {
-					binario_t aux2	= masDerecho(b, b, aux);
+					binario_t aux2	= crear_binario();
+					aux2			= masDerecho(b, b, aux, aux2);
 					aux2->izq		= izquierdo(aux);
 					aux2->der		= derecho(aux);
 					aux->izq		= aux2;
@@ -94,7 +95,8 @@ binario_t remover_de_binario(const char *t, binario_t b) {
 				aux->der	= derecho(b);
 			} else {
 				if (!es_vacio_binario(derecho(aux))) {
-					binario_t aux2	= masDerecho(b, b, aux);
+					binario_t aux2	= crear_binario();
+					aux2			= masDerecho(b, b, aux, aux2);
 					aux2->izq		= izquierdo(aux);
 					aux2->der		= derecho(aux);
 					aux->izq		= aux2;
