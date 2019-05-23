@@ -1,0 +1,43 @@
+1>#  prueba para en_orden_avl, array_a_avl.
+2>
+3>
+1 
+4>
+3 
+1 
+5>
+1 5 
+3 
+6>
+6 
+1 5 
+3 
+7>
+1 5 7 9 11 13 15 17 
+3 8 12 16 
+6 14 
+10 
+8>
+9>Insertado.
+10>10 
+11>Insertado.
+12>10 20 
+13>Insertado.
+14>10 20 30 
+15>Insertado.
+16>Insertado.
+17>Insertado.
+18>Insertado.
+19>Insertado.
+20>Insertado.
+21>Insertado.
+22>Insertado.
+23>Insertado.
+24>Insertado.
+25>Insertado.
+26>Insertado.
+27>Insertado.
+28>Insertado.
+29>Insertado.
+30>3 5 8 9 10 11 12 13 14 15 16 17 18 20 25 30 35 40 
+31>Fin.

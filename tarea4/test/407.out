@@ -1,0 +1,53 @@
+1>#  pruebas para conjunto.
+2>Vacio.
+3>No pertenece.
+4>Creado el singleton.
+5>No vacío.
+6>No pertenece.
+7>Pertenece.
+8>No pertenece.
+9>Union.
+10>No vacío.
+11>Pertenece.
+12>Union.
+13>No vacío.
+14>Pertenece.
+15>Pertenece.
+16>Union.
+17>Pertenece.
+18>Pertenece.
+19>No pertenece.
+20>Diferencia.
+21>Pertenece.
+22>Pertenece.
+23>Diferencia.
+24>No pertenece.
+25>Pertenece.
+26>No vacío.
+27>Diferencia.
+28>Vacio.
+29>No hay elementos en el conjunto.
+30>Arreglo a conjunto con 0 elementos.
+31>Vacio.
+32>Arreglo a conjunto con 1 elementos.
+33>No vacío.
+34>Pertenece.
+35>(2,rr) 
+36>Arreglo a conjunto con 4 elementos.
+37>(2,rr) (5,xx) (8,e) (17,dd) 
+38>Union.
+39>(1,c) (2,rr) (3,tt) (5,xx) (8,e) (17,dd) (24,hh) (45,bb) 
+40>Union.
+41>(1,c) (2,rr) (3,tt) (5,xx) (8,e) (17,dd) (24,hh) (45,bb) 
+42>Union.
+43>(1,c) (2,rr) (3,tt) (4,ee) (5,xx) (8,e) (10,oo) (17,dd) (24,hh) (45,bb) 
+44>Diferencia.
+45>(2,rr) (3,tt) (4,ee) (5,xx) (8,e) (10,oo) (17,dd) (24,hh) 
+46>Diferencia.
+47>(2,rr) (3,tt) (4,ee) (5,xx) (8,e) (10,oo) (17,dd) (24,hh) 
+48>Diferencia.
+49>(2,rr) (24,hh) 
+50>Diferencia.
+51>No hay elementos en el conjunto.
+52>Vacio.
+53>Fin.

@@ -1,0 +1,77 @@
+# prueba para iterador
+reiniciar_iterador
+avanzar_iterador
+esta_definida_actual
+agregar_a_iterador (5,q)
+esta_definida_actual
+actual_en_iterador
+reiniciar_iterador
+actual_en_iterador
+hay_siguiente_en_iterador
+agregar_a_iterador (25,e)
+actual_en_iterador
+hay_siguiente_en_iterador
+reiniciar_iterador
+actual_en_iterador
+avanzar_iterador
+actual_en_iterador
+hay_siguiente_en_iterador
+reiniciar_iterador
+actual_en_iterador
+hay_siguiente_en_iterador
+agregar_a_iterador (45,qqq)
+actual_en_iterador
+avanzar_iterador
+actual_en_iterador
+hay_siguiente_en_iterador
+avanzar_iterador
+actual_en_iterador
+hay_siguiente_en_iterador
+avanzar_iterador
+agregar_a_iterador (5,fsd)
+hay_siguiente_en_iterador
+esta_definida_actual
+reiniciar_iterador
+agregar_a_iterador (12,et)
+agregar_a_iterador (75,gh)
+agregar_a_iterador (25643,urtu)
+agregar_a_iterador (709,cdsf)
+agregar_a_iterador (31,rwr)
+agregar_a_iterador (5,nte)
+agregar_a_iterador (65,cdfew)
+agregar_a_iterador (8,yyr)
+agregar_a_iterador (65653,brq)
+agregar_a_iterador (28,vrfe)
+agregar_a_iterador (-8643,qweqw)
+agregar_a_iterador (98,nty)
+agregar_a_iterador (-42332,brwq)
+agregar_a_iterador (98,fwrwe)
+bloquear_iterador
+agregar_a_iterador (0,++)
+actual_en_iterador
+avanzar_iterador
+avanzar_iterador
+avanzar_iterador
+actual_en_iterador
+avanzar_iterador
+avanzar_iterador
+avanzar_iterador
+avanzar_iterador
+avanzar_iterador
+avanzar_iterador
+avanzar_iterador
+avanzar_iterador
+avanzar_iterador
+avanzar_iterador
+avanzar_iterador
+avanzar_iterador
+avanzar_iterador
+hay_siguiente_en_iterador
+avanzar_iterador
+actual_en_iterador
+hay_siguiente_en_iterador
+actual_en_iterador
+avanzar_iterador
+agregar_a_iterador (0,--)
+hay_siguiente_en_iterador
+Fin

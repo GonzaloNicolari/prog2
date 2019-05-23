@@ -1,0 +1,37 @@
+1>#  pruebas para avl_min.
+2>
+Cantidad: 0.
+3>
+1 
+Cantidad: 1.
+4>
+1 
+2 
+Cantidad: 2.
+5>
+1 
+2 4 
+3 
+Cantidad: 4.
+6>
+1 
+2 4 6 
+3 7 
+5 
+Cantidad: 7.
+7>
+1 
+2 4 6 9 
+3 7 10 12 
+5 11 
+8 
+Cantidad: 12.
+8>
+1 
+2 4 6 9 14 
+3 7 10 12 15 17 19 
+5 11 16 20 
+8 18 
+13 
+Cantidad: 20.
+9>Fin.

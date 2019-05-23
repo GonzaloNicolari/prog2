@@ -1,0 +1,123 @@
+1>#  pruebas para avl.
+2>Vacio.
+3>Cantidad en avl: 0.
+4>Altura de avl: 0.
+5>sub es vacío.
+6>Insertado.
+7>No vacío.
+8>Cantidad en avl: 1.
+9>Altura de avl: 1.
+10>(10,mmm)
+11>Izquierdo es vacío
+12>Derecho es vacío
+13>sub es vacío.
+14>(10,mmm)
+ |  -  | 
+15>Insertado.
+16>Cantidad en avl: 2.
+17>Altura de avl: 2.
+18>(10,mmm)
+19>Izquierdo es vacío
+20>(20,nnn)
+21>(20,nnn)
+ |  -  | 
+22>(10,mmm)
+ |  - (20,nnn)
+23>#  rr en la raíz.
+24>Insertado.
+25>Altura de avl: 2.
+26>(20,nnn)
+27>(10,mmm)
+28>(30,ooo)
+29>(30,ooo)
+ |  -  | 
+30>(20,nnn)
+(10,mmm) - (30,ooo)
+31>(10,mmm)
+ |  -  | 
+32>Insertado.
+33>#  rr en 10.
+34>Insertado.
+35>Altura de avl: 3.
+36>(20,nnn)
+37>(13,mo)
+38>(30,ooo)
+39>(13,mo)
+(10,mmm) - (18,mq)
+40>#  lr en la raíz.
+41>Insertado.
+42>Cantidad en avl: 6.
+43>Altura de avl: 3.
+44>(18,mq)
+45>(13,mo)
+46>(20,nnn)
+47>(13,mo)
+(10,mmm) - (15,mof)
+48>(20,nnn)
+ |  - (30,ooo)
+49>#  rl en 20.
+50>Insertado.
+51>(18,mq)
+52>(13,mo)
+53>(25,no)
+54>(25,no)
+(20,nnn) - (30,ooo)
+55>Insertado.
+56>#  ll en 10.
+57>Insertado.
+58>Altura de avl: 4.
+59>(13,mo)
+(5,hhh) - (15,mof)
+60>(5,hhh)
+(3,eee) - (10,mmm)
+61>(10,mmm)
+ |  -  | 
+62>#  lr en 13.
+63>Insertado.
+64>(10,mmm)
+65>(13,mo)
+ |  - (15,mof)
+66>(5,hhh)
+(3,eee) - (8,hm)
+67>(10,mmm)
+(5,hhh) - (13,mo)
+68>#  ll en la raíz.
+69>Insertado.
+70>Altura de avl: 4.
+71>(10,mmm)
+72>(5,hhh)
+73>(18,mq)
+74>(18,mq)
+(13,mo) - (25,no)
+75>(10,mmm)
+(5,hhh) - (18,mq)
+76>Insertado.
+77>(13,mo)
+(12,mz) - (15,mof)
+78>Insertado.
+79>Altura de avl: 5.
+80>Insertado.
+81>(13,mo)
+(12,mz) - (15,mof)
+82>Insertado.
+83>Cantidad en avl: 15.
+84>(15,mof)
+(14,md) - (16,hz)
+85>Insertado.
+86>#  rl en la raíz.
+87>Insertado.
+88>Altura de avl: 5.
+89>(13,mo)
+90>(10,mmm)
+91>(18,mq)
+92>(18,mq)
+(15,mof) - (25,no)
+93>(10,mmm)
+(5,hhh) - (12,mz)
+94>#  rl en la 30.
+95>Insertado.
+96>Cantidad en avl: 18.
+97>Altura de avl: 5.
+98>(35,saa)
+(30,ooo) - (40,sss)
+99>Fin.

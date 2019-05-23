@@ -1,0 +1,99 @@
+# pruebas para avl
+es_vacio_avl
+cantidad_en_avl
+altura_de_avl
+buscar_en_avl 20
+insertar_en_avl (10,mmm)
+es_vacio_avl
+cantidad_en_avl
+altura_de_avl
+raiz_avl
+izq_avl
+der_avl
+buscar_en_avl 20
+buscar_en_avl 10
+insertar_en_avl (20,nnn)
+cantidad_en_avl
+altura_de_avl
+raiz_avl
+izq_avl
+der_avl
+buscar_en_avl 20
+buscar_en_avl 10
+# rr en la raíz
+insertar_en_avl (30,ooo)
+altura_de_avl
+raiz_avl
+izq_avl
+der_avl
+buscar_en_avl 30
+buscar_en_avl 20
+buscar_en_avl 10
+insertar_en_avl (13,mo)
+# rr en 10
+insertar_en_avl (18,mq)
+altura_de_avl
+raiz_avl
+izq_avl
+der_avl
+buscar_en_avl 13
+# lr en la raíz
+insertar_en_avl (15,mof)
+cantidad_en_avl
+altura_de_avl
+raiz_avl
+izq_avl
+der_avl
+buscar_en_avl 13
+buscar_en_avl 20
+# rl en 20
+insertar_en_avl (25,no)
+raiz_avl
+izq_avl
+der_avl
+buscar_en_avl 25
+insertar_en_avl (5,hhh)
+# ll en 10
+insertar_en_avl (3,eee)
+altura_de_avl
+buscar_en_avl 13
+buscar_en_avl 5
+buscar_en_avl 10
+# lr en 13
+insertar_en_avl (8,hm)
+izq_avl
+buscar_en_avl 13
+buscar_en_avl 5
+buscar_en_avl 10
+# ll en la raíz
+insertar_en_avl (9,hz)
+altura_de_avl
+raiz_avl
+izq_avl
+der_avl
+buscar_en_avl 18
+buscar_en_avl 10
+insertar_en_avl (12,mz)
+buscar_en_avl 13
+insertar_en_avl (16,hz)
+altura_de_avl
+insertar_en_avl (11,my)
+buscar_en_avl 13
+insertar_en_avl (14,md)
+cantidad_en_avl
+buscar_en_avl 15
+insertar_en_avl (40,sss)
+# rl en la raíz
+insertar_en_avl (17,ge)
+altura_de_avl
+raiz_avl
+izq_avl
+der_avl
+buscar_en_avl 18
+buscar_en_avl 10
+# rl en la 30
+insertar_en_avl (35,saa)
+cantidad_en_avl
+altura_de_avl
+buscar_en_avl 35
+Fin

@@ -1,0 +1,102 @@
+1>#  pruebas para imprimir_avl.
+2>
+3>Insertado.
+4>
+40 
+5>Insertado.
+6>
+20 
+40 
+7>Insertado.
+8>
+20 80 
+40 
+9>Insertado.
+10>
+120 
+20 80 
+40 
+11>Insertado.
+12>Insertado.
+13>Insertado.
+14>
+10 
+0 30 120 
+20 80 
+40 
+15>Insertado.
+16>Insertado.
+17>Insertado.
+18>Insertado.
+19>Insertado.
+20>
+55 
+10 50 70 100 
+0 30 60 120 
+20 80 
+40 
+21>Insertado.
+22>Insertado.
+23>Insertado.
+24>Insertado.
+25>Insertado.
+26>Insertado.
+27>Insertado.
+28>Insertado.
+29>
+23 
+-10 22 28 38 55 
+-20 10 25 35 50 70 100 
+0 30 60 120 
+20 80 
+40 
+30>Estructuras reiniciadas.
+31>
+32>Insertado.
+33>
+13 
+34>Insertado.
+35>
+8 
+13 
+36>Insertado.
+37>Insertado.
+38>
+5 
+8 18 
+13 
+39>Insertado.
+40>Insertado.
+41>Insertado.
+42>
+3 
+5 11 16 
+8 18 
+13 
+43>Insertado.
+44>Insertado.
+45>Insertado.
+46>Insertado.
+47>Insertado.
+48>
+2 
+3 7 10 15 
+5 11 16 20 
+8 18 
+13 
+49>Insertado.
+50>Insertado.
+51>Insertado.
+52>Insertado.
+53>Insertado.
+54>Insertado.
+55>Insertado.
+56>Insertado.
+57>
+1 
+2 4 6 9 14 
+3 7 10 12 15 17 19 
+5 11 16 20 
+8 18 
+13 
+58>Fin.

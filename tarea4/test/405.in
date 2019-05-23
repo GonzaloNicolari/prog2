@@ -1,0 +1,31 @@
+# prueba para en_orden_avl, array_a_avl
+arreglo_a_avl 0 .
+arreglo_a_avl 1 (1,q) .
+arreglo_a_avl 2 (1,q) (3,a) .
+arreglo_a_avl 3 (1,q) (3,a) (5,f) .
+arreglo_a_avl 4 (1,q) (3,a) (5,f) (6,z) .
+arreglo_a_avl 15 (1,q) (3,a) (5,f) (6,z) (7,b) (8,c) (9,d) (10,e) (11,f) (12,g) (13,h) (14,i) (15,j) (16,k) (17,l).
+en_orden_avl
+insertar_en_avl (10,mmm)
+en_orden_avl
+insertar_en_avl (20,nnn)
+en_orden_avl
+insertar_en_avl (30,ooo)
+en_orden_avl
+insertar_en_avl (13,mo)
+insertar_en_avl (18,mq)
+insertar_en_avl (15,mof)
+insertar_en_avl (25,no)
+insertar_en_avl (5,hhh)
+insertar_en_avl (3,eee)
+insertar_en_avl (8,hm)
+insertar_en_avl (9,hz)
+insertar_en_avl (12,mz)
+insertar_en_avl (16,hz)
+insertar_en_avl (11,my)
+insertar_en_avl (14,md)
+insertar_en_avl (40,sss)
+insertar_en_avl (17,ge)
+insertar_en_avl (35,saa)
+en_orden_avl
+Fin

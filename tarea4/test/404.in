@@ -1,0 +1,58 @@
+# pruebas para imprimir_avl
+imprimir_avl
+insertar_en_avl (40,jjj) .
+imprimir_avl
+insertar_en_avl (20,jjj) .
+imprimir_avl
+insertar_en_avl (80,jjj) .
+imprimir_avl
+insertar_en_avl (120,jjj) .
+imprimir_avl
+insertar_en_avl (0,jjj) .
+insertar_en_avl (30,jjj) .
+insertar_en_avl (10,jjj) .
+imprimir_avl
+insertar_en_avl (60,jjj) .
+insertar_en_avl (70,jjj) .
+insertar_en_avl (100,jjj) .
+insertar_en_avl (50,jjj) .
+insertar_en_avl (55,jjj) .
+imprimir_avl
+insertar_en_avl (25,jjj) .
+insertar_en_avl (35,jjj) .
+insertar_en_avl (22,jjj) .
+insertar_en_avl (28,jjj) .
+insertar_en_avl (38,jjj) .
+insertar_en_avl (-20,jjj) .
+insertar_en_avl (-10,jjj) .
+insertar_en_avl (23,jjj) .
+imprimir_avl
+reiniciar
+imprimir_avl
+insertar_en_avl (13,jjj) .
+imprimir_avl
+insertar_en_avl (8,jjj) .
+imprimir_avl
+insertar_en_avl (18,jjj) .
+insertar_en_avl (5,jjj) .
+imprimir_avl
+insertar_en_avl (16,jjj) .
+insertar_en_avl (11,jjj) .
+insertar_en_avl (3,jjj) .
+imprimir_avl
+insertar_en_avl (20,jjj) .
+insertar_en_avl (15,jjj) .
+insertar_en_avl (10,jjj) .
+insertar_en_avl (7,jjj) .
+insertar_en_avl (2,jjj) .
+imprimir_avl
+insertar_en_avl (19,jjj) .
+insertar_en_avl (17,jjj) .
+insertar_en_avl (14,jjj) .
+insertar_en_avl (12,jjj) .
+insertar_en_avl (9,jjj) .
+insertar_en_avl (6,jjj) .
+insertar_en_avl (4,jjj) .
+insertar_en_avl (1,jjj) .
+imprimir_avl
+Fin

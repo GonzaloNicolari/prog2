@@ -1,0 +1,52 @@
+# pruebas para cola_avls
+es_vacia_cola_avls
+encolar (1,a) .
+es_vacia_cola_avls
+frente
+desencolar
+es_vacia_cola_avls
+encolar .
+encolar (11,a) (21,b) .
+frente
+desencolar
+frente
+encolar (11,a) (21,b) (31,c) .
+encolar (1,a) .
+encolar (2,b) .
+encolar (3,c) .
+encolar (1,a) .
+encolar .
+encolar .
+encolar (2,b) .
+encolar .
+encolar (2,b) .
+encolar .
+encolar (4,d) .
+encolar .
+encolar (2,b) .
+encolar .
+desencolar
+frente
+desencolar
+frente
+desencolar
+desencolar
+desencolar
+frente
+desencolar
+desencolar
+frente
+desencolar
+frente
+desencolar
+desencolar
+desencolar
+desencolar
+desencolar
+desencolar
+desencolar
+es_vacia_cola_avls
+frente
+desencolar
+es_vacia_cola_avls
+Fin

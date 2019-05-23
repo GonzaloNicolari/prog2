@@ -1,0 +1,439 @@
+1>#  prueba de es_vacio_binario, insertar_en_binario, raiz, cantidad_binario.
+2>Vacio.
+3>0.
+4>Insertado.
+5>(8,r)
+6>No vacío.
+7>1.
+8>Insertado.
+9>Insertado.
+10>3.
+11>Insertado.
+12>4.
+13>Insertado.
+14>Insertado.
+15>Insertado.
+16>Insertado.
+17>Insertado.
+18>9.
+19>(8,r)
+20>Estructuras reiniciadas.
+21>#  prueba de izquierdo, derecho, altura_binario, imprimir_binario, buscar_subarbol.
+22>0.
+23>
+24>Insertado.
+25>1.
+26>
+(8,r)
+27>
+28>
+29>Insertado.
+30>2.
+31>
+-(6,y)
+(8,r)
+32>
+33>
+(6,y)
+34>Insertado.
+35>3.
+36>Insertado.
+37>3.
+38>
+-(6,y)
+--(6,t)
+(8,r)
+-(4,m)
+39>
+(4,m)
+40>
+(6,y)
+-(6,t)
+41>Insertado.
+42>Insertado.
+43>Insertado.
+44>Insertado.
+45>Insertado.
+46>6.
+47>
+-(6,y)
+--(6,t)
+(8,r)
+-(4,m)
+-----(4,j)
+----(4,i)
+---(4,h)
+--(4,g)
+---(4,d)
+48>
+(4,m)
+----(4,j)
+---(4,i)
+--(4,h)
+-(4,g)
+--(4,d)
+49>
+(6,y)
+-(6,t)
+50>Estructuras reiniciadas.
+51>#  prueba de izquierdo, derecho, altura_binario, imprimir_binario, buscar_subarbol.
+52>0.
+53>
+54>sub es vacío.
+55>Insertado.
+56>1.
+57>
+(8,r)
+58>
+59>
+60>sub es vacío.
+61>(8,r)
+62>Insertado.
+63>2.
+64>
+-(6,y)
+(8,r)
+65>
+66>
+(6,y)
+67>sub es vacío.
+68>(8,r)
+69>(6,y)
+70>Insertado.
+71>3.
+72>Insertado.
+73>3.
+74>
+-(6,y)
+--(6,t)
+(8,r)
+-(4,m)
+75>
+(4,m)
+76>
+(6,y)
+-(6,t)
+77>Insertado.
+78>Insertado.
+79>Insertado.
+80>Insertado.
+81>Insertado.
+82>6.
+83>
+-(6,y)
+--(6,t)
+(8,r)
+-(4,m)
+-----(4,j)
+----(4,i)
+---(4,h)
+--(4,g)
+---(4,d)
+84>
+(4,m)
+----(4,j)
+---(4,i)
+--(4,h)
+-(4,g)
+--(4,d)
+85>
+(6,y)
+-(6,t)
+86>(6,t)
+87>sub es vacío.
+88>(4,j)
+89>(4,d)
+90>(6,y)
+91>Estructuras reiniciadas.
+92>#  prueba de remover_de_binario.
+93>Insertado.
+94>Removido.
+95>
+96>Insertado.
+97>Insertado.
+98>Removido.
+99>
+(6,r)
+100>Insertado.
+101>Removido.
+102>
+(6,r)
+103>Insertado.
+104>Removido.
+105>
+(6,y)
+106>Insertado.
+107>Removido.
+108>
+(6,m)
+109>Insertado.
+110>Insertado.
+111>Removido.
+112>
+-(6,y)
+(6,d)
+113>Insertado.
+114>Insertado.
+115>Insertado.
+116>Insertado.
+117>Insertado.
+118>Insertado.
+119>Insertado.
+120>Insertado.
+121>Insertado.
+122>Insertado.
+123>
+-(6,y)
+---(6,r)
+-----(6,p)
+----(6,o)
+--(6,m)
+-----(6,l)
+------(6,k)
+----(6,j)
+-----(6,i)
+------(6,h)
+---(6,g)
+(6,d)
+124>Removido.
+125>
+-(6,y)
+---(6,r)
+-----(6,p)
+----(6,o)
+--(6,l)
+-----(6,k)
+----(6,j)
+-----(6,i)
+------(6,h)
+---(6,g)
+(6,d)
+126>Estructuras reiniciadas.
+127>#  prueba de menores.
+128>
+129>Insertado.
+130>
+131>
+(5,g)
+132>Insertado.
+133>
+134>
+(5,g)
+135>
+-(7,k)
+(5,g)
+136>Insertado.
+137>
+(4,c)
+138>
+(5,g)
+-(4,c)
+139>
+-(7,k)
+(5,g)
+-(4,c)
+140>Insertado.
+141>Insertado.
+142>Insertado.
+143>Insertado.
+144>
+--(6,p)
+---(4,m)
+-(7,k)
+--(8,i)
+---(8,h)
+(5,g)
+-(4,c)
+145>
+-(6,p)
+--(4,m)
+(5,g)
+-(4,c)
+146>Insertado.
+147>
+-(4,m)
+(5,g)
+--(1,e)
+-(4,c)
+148>
+-(4,m)
+(1,e)
+-(4,c)
+149>Insertado.
+150>Insertado.
+151>
+-(4,m)
+(1,e)
+-(4,c)
+--(3,b)
+152>Insertado.
+153>
+--(6,p)
+---(4,m)
+-(7,k)
+--(8,i)
+---(8,h)
+(5,g)
+--(1,e)
+---(2,d)
+-(4,c)
+--(3,b)
+---(9,a)
+154>
+-(4,m)
+(1,e)
+--(2,d)
+-(4,c)
+--(3,b)
+155>Estructuras reiniciadas.
+156>#  prueba de linealizacion.
+157>
+158>Insertado.
+159>Insertado.
+160>Insertado.
+161>Insertado.
+162>(1,ab)(10,aba)(1,abb)(100,abc)
+163>Insertado.
+164>Insertado.
+165>Insertado.
+166>Insertado.
+167>Insertado.
+168>(1,aaaaa)(1,aaaab)(1,aaaaz)(1,aaaza)(1,ab)(10,aba)(1,abaa)(1,abb)(100,abc)
+169>Estructuras reiniciadas.
+170>#  prueba de esAVL.
+171>AVL.
+172>Insertado.
+173>Insertado.
+174>AVL.
+175>Insertado.
+176>No AVL.
+177>Insertado.
+178>No AVL.
+179>Insertado.
+180>No AVL.
+181>Insertado.
+182>#  los dos subarboles son no vacios y AVL. Pero el árbol no es AVL.
+183>No AVL.
+184>Insertado.
+185>Insertado.
+186>#  las alturas de los subárboles son iguales. Pero el árbol no es AVL..
+187>No AVL.
+188>Insertado.
+189>AVL.
+190>Estructuras reiniciadas.
+191>#  prueba cadena_a_binario.
+192>
+193>
+(4,a)
+194>
+-(3,c)
+(2,b)
+-(4,a)
+195>
+-(7,d)
+(3,c)
+-(2,b)
+--(4,a)
+196>
+---(7,o)
+--(1,n)
+---(5,m)
+-(1,l)
+---(3,k)
+--(2,j)
+---(4,i)
+(1,h)
+---(7,g)
+--(1,f)
+---(5,e)
+-(1,d)
+---(3,c)
+--(2,b)
+---(4,a)
+197>
+---(2,p)
+--(7,o)
+---(1,n)
+-(5,m)
+---(1,l)
+--(3,k)
+---(2,j)
+(4,i)
+---(1,h)
+--(7,g)
+---(1,f)
+-(5,e)
+---(1,d)
+--(3,c)
+---(2,b)
+----(4,a)
+198>Estructuras reiniciadas.
+199>#  prueba es_camino.
+200>NO es camino.
+201>Insertado.
+202>Es camino.
+203>Insertado.
+204>Es camino.
+205>Insertado.
+206>NO es camino.
+207>NO es camino.
+208>NO es camino.
+209>Es camino.
+210>Insertado.
+211>Insertado.
+212>Es camino.
+213>Es camino.
+214>NO es camino.
+215>Es camino.
+216>Estructuras reiniciadas.
+217>#  prueba de nivel_en_binario.
+218>
+219>Insertado.
+220>(1,g)
+221>
+222>Insertado.
+223>(1,g)
+224>(2,d)
+225>
+226>Insertado.
+227>(2,d)(2,m)
+228>Insertado.
+229>Insertado.
+230>Insertado.
+231>Insertado.
+232>(3,b)(3,e)(3,k)(3,r)
+233>Insertado.
+234>Insertado.
+235>(1,g)
+236>(2,d)(2,m)
+237>(3,b)(3,e)(3,k)(3,r)
+238>(4,a)(4,z)
+239>
+240>Estructuras reiniciadas.
+241>#  prueba de suma_ultimos_pares.
+242>0
+243>0
+244>Insertado.
+245>0
+246>2
+247>2
+248>Insertado.
+249>0
+250>2
+251>2
+252>Insertado.
+253>0
+254>4
+255>6
+256>Insertado.
+257>Insertado.
+258>Insertado.
+259>Insertado.
+260>2
+261>12
+262>14
+263>Insertado.
+264>14
+265>Insertado.
+266>20
+267>Fin.

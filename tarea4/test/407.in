@@ -1,0 +1,53 @@
+# pruebas para conjunto
+es_vacio_conjunto
+pertenece_conjunto (5,yy)
+singleton (5,yy)
+es_vacio_conjunto
+pertenece_conjunto (2,rr)
+pertenece_conjunto (5,yy)
+pertenece_conjunto (5,xx)
+union_conjunto 0 .
+es_vacio_conjunto
+pertenece_conjunto (5,yy)
+union_conjunto 1 (2,rr) .
+es_vacio_conjunto
+pertenece_conjunto (5,yy)
+pertenece_conjunto (2,rr)
+union_conjunto 1 (5,xx) .
+pertenece_conjunto (5,yy)
+pertenece_conjunto (2,rr)
+pertenece_conjunto (5,xx)
+diferencia 0 .
+pertenece_conjunto (5,yy)
+pertenece_conjunto (2,rr)
+diferencia 1 (5,yy) .
+pertenece_conjunto (5,yy)
+pertenece_conjunto (2,rr)
+es_vacio_conjunto
+diferencia 2 (2,rr) (5,xx) .
+es_vacio_conjunto
+iterador_conjunto
+arreglo_a_conjunto 0 .
+es_vacio_conjunto
+arreglo_a_conjunto 1 (2,rr) .
+es_vacio_conjunto
+pertenece_conjunto (2,rr)
+iterador_conjunto
+arreglo_a_conjunto 4 (2,rr) (5,xx) (8,e) (17,dd) .
+iterador_conjunto
+union_conjunto 5 (1,c) (2,nn) (3,tt) (24,hh) (45,bb) . 
+iterador_conjunto
+union_conjunto 3 (1,d) (3,?) (45,ff) .
+iterador_conjunto
+union_conjunto 5 (1,d) (3,?) (4,ee) (10,oo) (45,ff) .
+iterador_conjunto
+diferencia 3 (1,d) (15,f) (45,ff) .
+iterador_conjunto
+diferencia 3 (1,d) (15,f) (45,ff) .
+iterador_conjunto
+diferencia 6 (3,rr) (4,d) (5,f) (8,ff) (10,gg) (17,xx) .
+iterador_conjunto
+diferencia 2 (2,rr) (24,xx) .
+iterador_conjunto
+es_vacio_conjunto
+Fin

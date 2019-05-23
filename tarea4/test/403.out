@@ -1,0 +1,52 @@
+1>#  pruebas para cola_avls.
+2>cavl está vacia.
+3>Encolado.
+4>cavl NO está vacia.
+5>(1,a)
+6>Desencolado.
+7>cavl está vacia.
+8>Encolado.
+9>Encolado.
+10>Avl vacío.
+11>Desencolado.
+12>(11,a)
+13>Encolado.
+14>Encolado.
+15>Encolado.
+16>Encolado.
+17>Encolado.
+18>Encolado.
+19>Encolado.
+20>Encolado.
+21>Encolado.
+22>Encolado.
+23>Encolado.
+24>Encolado.
+25>Encolado.
+26>Encolado.
+27>Encolado.
+28>Desencolado.
+29>(21,b)
+30>Desencolado.
+31>(1,a)
+32>Desencolado.
+33>Desencolado.
+34>Desencolado.
+35>(1,a)
+36>Desencolado.
+37>Desencolado.
+38>Avl vacío.
+39>Desencolado.
+40>(2,b)
+41>Desencolado.
+42>Desencolado.
+43>Desencolado.
+44>Desencolado.
+45>Desencolado.
+46>Desencolado.
+47>Desencolado.
+48>cavl NO está vacia.
+49>Avl vacío.
+50>Desencolado.
+51>cavl está vacia.
+52>Fin.

@@ -1,0 +1,267 @@
+# prueba de es_vacio_binario, insertar_en_binario, raiz, cantidad_binario
+es_vacio_binario
+cantidad_binario
+insertar_en_binario (8,r)
+raiz
+es_vacio_binario
+cantidad_binario
+insertar_en_binario (6,y)
+insertar_en_binario (6,t)
+cantidad_binario
+insertar_en_binario (4,m)
+cantidad_binario
+insertar_en_binario (4,g)
+insertar_en_binario (4,d)
+insertar_en_binario (4,h)
+insertar_en_binario (4,i)
+insertar_en_binario (4,j)
+cantidad_binario
+raiz
+reiniciar
+# prueba de izquierdo, derecho, altura_binario, imprimir_binario, buscar_subarbol
+altura_binario
+imprimir_binario
+insertar_en_binario (8,r)
+altura_binario
+imprimir_binario
+izquierdo
+derecho
+insertar_en_binario (6,y)
+altura_binario
+imprimir_binario
+izquierdo
+derecho
+insertar_en_binario (6,t)
+altura_binario
+insertar_en_binario (4,m)
+altura_binario
+imprimir_binario
+izquierdo
+derecho
+insertar_en_binario (4,g)
+insertar_en_binario (4,d)
+insertar_en_binario (4,h)
+insertar_en_binario (4,i)
+insertar_en_binario (4,j)
+altura_binario
+imprimir_binario
+izquierdo
+derecho
+reiniciar
+# prueba de izquierdo, derecho, altura_binario, imprimir_binario, buscar_subarbol
+altura_binario
+imprimir_binario
+buscar_subarbol a
+insertar_en_binario (8,r)
+altura_binario
+imprimir_binario
+izquierdo
+derecho
+buscar_subarbol a
+buscar_subarbol r
+insertar_en_binario (6,y)
+altura_binario
+imprimir_binario
+izquierdo
+derecho
+buscar_subarbol a
+buscar_subarbol r
+buscar_subarbol y
+insertar_en_binario (6,t)
+altura_binario
+insertar_en_binario (4,m)
+altura_binario
+imprimir_binario
+izquierdo
+derecho
+insertar_en_binario (4,g)
+insertar_en_binario (4,d)
+insertar_en_binario (4,h)
+insertar_en_binario (4,i)
+insertar_en_binario (4,j)
+altura_binario
+imprimir_binario
+izquierdo
+derecho
+buscar_subarbol t
+buscar_subarbol f
+buscar_subarbol j
+buscar_subarbol d
+buscar_subarbol y
+reiniciar
+# prueba de remover_de_binario
+insertar_en_binario (6,r)
+remover_de_binario r
+imprimir_binario
+insertar_en_binario (6,r)
+insertar_en_binario (6,y)
+remover_de_binario y
+imprimir_binario
+insertar_en_binario (6,m)
+remover_de_binario m
+imprimir_binario
+insertar_en_binario (6,y)
+remover_de_binario r
+imprimir_binario
+insertar_en_binario (6,m)
+remover_de_binario y
+imprimir_binario
+insertar_en_binario (6,d)
+insertar_en_binario (6,y)
+remover_de_binario m
+imprimir_binario
+insertar_en_binario (6,m)
+insertar_en_binario (6,r)
+insertar_en_binario (6,o)
+insertar_en_binario (6,p)
+insertar_en_binario (6,g)
+insertar_en_binario (6,j)
+insertar_en_binario (6,i)
+insertar_en_binario (6,h)
+insertar_en_binario (6,l)
+insertar_en_binario (6,k)
+imprimir_binario
+remover_de_binario m
+imprimir_binario
+reiniciar
+# prueba de menores
+menores 5
+insertar_en_binario (5,g)
+menores 5
+menores 6
+insertar_en_binario (7,k)
+menores 5
+menores 6
+menores 8
+insertar_en_binario (4,c)
+menores 5	    
+menores 6
+menores 8
+insertar_en_binario (8,i)
+insertar_en_binario (8,h)
+insertar_en_binario (6,p)
+insertar_en_binario (4,m)
+imprimir_binario
+menores 7
+insertar_en_binario (1,e)
+menores 6
+menores 5
+insertar_en_binario (3,b)
+insertar_en_binario (9,a)
+menores 5
+insertar_en_binario (2,d)
+imprimir_binario
+menores 5
+reiniciar
+# prueba de linealizacion
+linealizacion
+insertar_en_binario (1,ab)
+insertar_en_binario (100,abc)
+insertar_en_binario (10,aba)
+insertar_en_binario (1,abb)
+linealizacion
+insertar_en_binario (1,abaa)
+insertar_en_binario (1,aaaaa)
+insertar_en_binario (1,aaaab)
+insertar_en_binario (1,aaaaz)
+insertar_en_binario (1,aaaza)
+linealizacion
+reiniciar
+# prueba de esAVL
+es_AVL
+insertar_en_binario (1,ab)
+insertar_en_binario (100,abc)
+es_AVL
+insertar_en_binario (10,aba)
+es_AVL
+insertar_en_binario (1,abb)
+es_AVL
+insertar_en_binario (1,abd)
+es_AVL
+insertar_en_binario (1,aaaaa)
+# los dos subarboles son no vacios y AVL. Pero el árbol no es AVL
+es_AVL
+insertar_en_binario (1,aaaab)
+insertar_en_binario (1,aaaaz)
+# las alturas de los subárboles son iguales. Pero el árbol no es AVL.
+es_AVL
+insertar_en_binario (1,a)
+es_AVL
+reiniciar
+# prueba cadena_a_binario
+cadena_a_binario .
+cadena_a_binario (4,a) .
+cadena_a_binario (4,a) (2,b) (3,c) .
+cadena_a_binario (4,a) (2,b) (3,c) (7,d) .
+cadena_a_binario (4,a) (2,b) (3,c) (1,d) (5,e) (1,f) (7,g) (1,h) (4,i) (2,j) (3,k) (1,l) (5,m) (1,n) (7,o) .
+cadena_a_binario (4,a) (2,b) (3,c) (1,d) (5,e) (1,f) (7,g) (1,h) (4,i) (2,j) (3,k) (1,l) (5,m) (1,n) (7,o) (2,p) .
+reiniciar
+# prueba es_camino
+es_camino (-1, arbol) .
+insertar_en_binario (-1, arbol)
+es_camino (-1, arbol) .
+insertar_en_binario (1, mesa)
+es_camino (-1, arbol) (2, mesa) .
+insertar_en_binario (2, silla)
+es_camino (-1, arbol) (2, silla) .
+es_camino (-1, arbol) (2, mesa) .
+es_camino (1, mesa) (2, silla) .
+es_camino (-1, arbol) (1, mesa) (2, silla) .
+insertar_en_binario (-20, casa)
+insertar_en_binario (100, ancla)
+es_camino (-1, arbol) (1, ancla) .
+es_camino (-1, arbol) (100, ancla) .
+es_camino (-1, arbol) (100, ancla) (-20, casa) .
+es_camino (-1, arbol) (1, mesa) (-20, casa) .
+reiniciar
+# prueba de nivel_en_binario
+nivel_en_binario 1
+insertar_en_binario (1,g)
+nivel_en_binario 1
+nivel_en_binario 2
+insertar_en_binario (2,d)
+nivel_en_binario 1
+nivel_en_binario 2
+nivel_en_binario 3
+insertar_en_binario (2,m)
+nivel_en_binario 2
+insertar_en_binario (3,k)
+insertar_en_binario (3,r)
+insertar_en_binario (3,b)
+insertar_en_binario (3,e)
+nivel_en_binario 3
+insertar_en_binario (4,a)
+insertar_en_binario (4,z)
+nivel_en_binario 1
+nivel_en_binario 2
+nivel_en_binario 3
+nivel_en_binario 4
+nivel_en_binario 5
+reiniciar
+# prueba de suma_ultimos_pares
+suma_ultimos_pares 0
+suma_ultimos_pares 1
+insertar_en_binario (2,g)
+suma_ultimos_pares 0
+suma_ultimos_pares 1
+suma_ultimos_pares 2
+insertar_en_binario (1,m)
+suma_ultimos_pares 0
+suma_ultimos_pares 1
+suma_ultimos_pares 2
+insertar_en_binario (4,s)
+suma_ultimos_pares 0
+suma_ultimos_pares 1
+suma_ultimos_pares 2
+insertar_en_binario (1,i)
+insertar_en_binario (-2,j)
+insertar_en_binario (1,k)
+insertar_en_binario (10,h)
+suma_ultimos_pares 2
+suma_ultimos_pares 3
+suma_ultimos_pares 4
+insertar_en_binario (3,d)
+suma_ultimos_pares 5
+insertar_en_binario (6,f)
+suma_ultimos_pares 5
+Fin
