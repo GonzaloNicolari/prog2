@@ -22,7 +22,6 @@ pila_t crear_pila(int tamanio) {
   Apila `num' en `p'.
   Si es_llena_pila(p) no hace nada.
  */
-
 void apilar (int num, pila_t &p) {
 	if (!es_vacia_pila(p)) {
 		p->array[(p->tope) + 1]	= dato;
