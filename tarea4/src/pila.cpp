@@ -23,8 +23,8 @@ pila_t crear_pila(int tamanio) {
   Si es_llena_pila(p) no hace nada.
  */
 void apilar (int num, pila_t &p) {
-	if (!es_vacia_pila(p)) {
-		p->array[p->tope + 1]	= dato;
+	if (!es_llena_pila(p)) {
+		p->array[p->tope] = num;
 		p->tope++;
 	}
 }
@@ -59,4 +59,4 @@ bool es_llena_pila(pila_t p) { return pila->tope == pila->tamanio; }
   Devuelve el elemento que está en la cima de `p'.
   Precondición: ! es_vacia_pila(p);
  */
-int cima (pila_t p) { return (p->array[p->tope]); }
+int cima (pila_t p) { return (p->array[p->tope - 1]); }
