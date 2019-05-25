@@ -8,22 +8,22 @@
 // Se debe definir en avl.cpp.
 struct rep_avl {
 	info_t dato;
-	rep_avl *izq;
-	rep_avl *der;
 	int altura;
+	int cantidad;
+	avl_t izq, der;
 };
 
 /*
   Devuelve un avl_t vacío (sin elementos).
   El tiempo de ejecución es O(1).
  */
-avl_t crear_avl();
+avl_t crear_avl() { return NULL; }
 
 /*
   Devuelve `true' si y sólo si `avl' es vacío (no tiene elementos).
   El tiempo de ejecución es O(1).
  */
-bool es_vacio_avl(avl_t avl);
+bool es_vacio_avl(avl_t avl) { return avl == NULL; }
 
 /*
   Inserta `i' en `avl' respetando la propiedad de orden definida.
@@ -77,12 +77,43 @@ nat cantidad_en_avl(avl_t avl);
  */
 nat altura_de_avl(avl_t avl);
 
+static info_t *en_orden_rec(info_t *res, nat &tope, avl_t avl) {
+	if (!es_vacio_avl(avl)) {
+		res			= en_orden_rec(res, tope, izq_avl(avl));
+		res[tope]	= raiz_avl(avl);
+		res			= en_orden_rec(res, tope, der_avl(avl));
+	}
+	return res;
+}
+
 /*
   Devuelve un arreglo con los elementos de `avl'.
   Los elementos en el arreglo deben estar en orden creciente según los datos
   numericos.
  */
-info_t *en_orden_avl(avl_t avl);
+info_t *en_orden_avl(avl_t avl) {
+	info_t *res;
+	if (es_vacio_avl(avl)) res = NULL;
+	else {
+		res			= new info_t[cantidad_en_avl(avl)];
+		nat tope	= 0;
+		res			= en_orden_rec(res, tope, avl);
+	}
+	return res;
+}
+
+static avl_t a2avl_rec(info_t *infos, int inf, int sup) {
+	avl_t res:
+	if (inf > sup) res = NULL;
+	else {
+		nat medio	= (info + sup) / 2;
+		res			= new rep_avl;
+		res->dato	= infos[medios];
+		res->izq	= a2avl_rec(infos, inf, medio - 1);
+		res->der	= a2avl_rec(infos, medio + 1, sup);
+		// TODO: ajustar res->altura y res->cantidad.
+	}
+}
 
 /*
   Devuelve un avl_t con los `n' elementos que están en el rango [0 .. n - 1]
@@ -94,7 +125,25 @@ info_t *en_orden_avl(avl_t avl);
   derecho.
   El tiempo de ejecución es O(n).
  */
-avl_t arreglo_a_avl(info_t *infos, nat n);
+avl_t arreglo_a_avl(info_t *infos, nat n) { return a2avl_rec(infos, 0, n - 1); }
+
+struct avl_ultimo {
+	avl_t avl;
+	int ultimo;
+};
+
+static avl_ultimo avl_min_rec(nat h, nat primero) {
+	avl_ultimo res;
+	if (h == o) {
+		res.avl		= NULL;
+		res.ultimo	= primero - 1;
+	} else if (h == 1) {
+		// TODO: completar.
+	} else {
+		// TODO: completar.
+	}
+	return res;
+}
 
 /*
   Devuelve un avl_t de altura `h' con `n' nodos, siendo `n' la mínima cantidad
@@ -106,7 +155,10 @@ avl_t arreglo_a_avl(info_t *infos, nat n);
   El tiempo de ejecución es O(n).
   Ver ejemplos en la letra y en el caso 408.
  */
-avl_t avl_min(nat h);
+avl_t avl_min(nat h) {
+	avl_ultimo res = avl_min_rec(h, 1);
+	return res.avl;
+}
 
 /*
   Imprime los datos numéricos de los nodos de cada nivel de `avl'.
