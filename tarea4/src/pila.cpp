@@ -12,9 +12,9 @@ struct rep_pila {
  */
 pila_t crear_pila(int tamanio) {
 	rep_pila pila	= new rep_pila;
-	pila -> tamanio	= tamanio;
-	pila -> tope	= 0;
-	pila -> array	= new int[tamanio];
+	pila->tamanio	= tamanio;
+	pila->tope		= 0;
+	pila->array		= new int[tamanio];
 	return pila;
 }
 
@@ -24,9 +24,9 @@ pila_t crear_pila(int tamanio) {
  */
 void apilar (int num, pila_t &p) {
 	if (!es_vacia_pila(p)) {
-		p->array[(p->tope) + 1]	= dato;
-		p->tope					= (p->tope) + 1;
-	}	
+		p->array[p->tope + 1]	= dato;
+		p->tope					= p->tope + 1;
+	}
 }
 
 /*
@@ -35,13 +35,16 @@ void apilar (int num, pila_t &p) {
  */
 void desapilar(pila_t &p) {
 	if (!es_vacia_pila(p) {	
-		p->array[p->tope]	= NULL;
-		p->tope				= (p->tope) + 1;
+		p->array[p->tope] = NULL;
+		p->tope--;
 	}
 }
 
 /* Libera la memoria asignada a `p'. */
-void liberar_pila(pila_t &p) { delete p; }
+void liberar_pila(pila_t &p) {
+	delete[] p->array;
+	delete p;
+	}
 
 /* Devuelve `true' si y sólo si `p' es vacía (no tiene elementos). */
 bool es_vacia_pila(pila_t) { return pila->tope == 0; }
@@ -50,7 +53,7 @@ bool es_vacia_pila(pila_t) { return pila->tope == 0; }
   Devuelve `true' si y sólo si la cantidad de elementos en `p' es `tamanio'
   (siendo `tamanio' el valor del parámetro con que fue creada `p').
  */
-bool es_llena_pila(pila_t p) { return ((pila->tope) + 1 == pila->tamanio); }
+bool es_llena_pila(pila_t p) { return ((pila->tope + 1) == pila->tamanio); }
 
 /*
   Devuelve el elemento que está en la cima de `p'.
