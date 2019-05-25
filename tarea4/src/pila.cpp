@@ -11,7 +11,7 @@ struct rep_pila {
   Devuelve una pila_t vacía (sin elementos) que puede tener hasta `tamanio' elementos.
  */
 pila_t crear_pila(int tamanio) {
-	rep_pila pila	= new rep_pila;
+	rep_pila pila	= new rep_pila();
 	pila->tamanio	= tamanio;
 	pila->tope		= 0;
 	pila->array		= new int[tamanio];
@@ -24,8 +24,8 @@ pila_t crear_pila(int tamanio) {
  */
 void apilar (int num, pila_t &p) {
 	if (!es_llena_pila(p)) {
-		p->array[p->tope] = num;
 		p->tope++;
+		p->array[p->tope] = num;
 	}
 }
 
