@@ -44,7 +44,7 @@ void desapilar(pila_t &p) {
 void liberar_pila(pila_t &p) {
 	delete[] p->array;
 	delete p;
-	}
+}
 
 /* Devuelve `true' si y sólo si `p' es vacía (no tiene elementos). */
 bool es_vacia_pila(pila_t) { return pila->tope == 0; }
