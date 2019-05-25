@@ -1,9 +1,6 @@
-/*
-  Módulo de implementación de `iterador_t'.
-
-  Laboratorio de Programación 2.
-  InCo-FIng-UDELAR
- */
+/* 46450368			- 48579580 */
+// Nicolás Saliba	- Gonzalo Nicolari.
+// Instituto de Computación - Facultad de Ingeniería, Laboratorio de Programación 2.
 
 #include "../include/info.h"
 #include "../include/iterador.h"
