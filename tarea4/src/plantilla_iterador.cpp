@@ -5,6 +5,7 @@
   InCo-FIng-UDELAR
  */
 
+#include "../include/info.h"
 #include "../include/iterador.h"
 
 #include <assert.h>
