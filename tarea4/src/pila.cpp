@@ -53,7 +53,7 @@ bool es_vacia_pila(pila_t) { return pila->tope == 0; }
   Devuelve `true' si y sólo si la cantidad de elementos en `p' es `tamanio'
   (siendo `tamanio' el valor del parámetro con que fue creada `p').
  */
-bool es_llena_pila(pila_t p) { return ((pila->tope + 1) == pila->tamanio); }
+bool es_llena_pila(pila_t p) { return pila->tope == pila->tamanio; }
 
 /*
   Devuelve el elemento que está en la cima de `p'.
