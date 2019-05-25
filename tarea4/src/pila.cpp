@@ -22,10 +22,10 @@ pila_t crear_pila(int tamanio) {
   Apila `num' en `p'.
   Si es_llena_pila(p) no hace nada.
  */
-void apilar (int num, pila_t &p) {
+void apilar(int num, pila_t &p) {
 	if (!es_llena_pila(p)) {
-		p->tope++;
 		p->array[p->tope] = num;
+		p->tope++;
 	}
 }
 
@@ -34,9 +34,9 @@ void apilar (int num, pila_t &p) {
   Si es_vacia_pila(p) no hace nada.
  */
 void desapilar(pila_t &p) {
-	if (!es_vacia_pila(p) {	
-		p->array[p->tope] = NULL;
+	if (!es_vacia_pila(p) {
 		p->tope--;
+		p->array[p->tope] = NULL;
 	}
 }
 
@@ -47,7 +47,7 @@ void liberar_pila(pila_t &p) {
 }
 
 /* Devuelve `true' si y sólo si `p' es vacía (no tiene elementos). */
-bool es_vacia_pila(pila_t) { return pila->tope == 0; }
+bool es_vacia_pila(pila_t p) { return p->tope == 0; }
 
 /*
   Devuelve `true' si y sólo si la cantidad de elementos en `p' es `tamanio'
@@ -59,4 +59,4 @@ bool es_llena_pila(pila_t p) { return pila->tope == pila->tamanio; }
   Devuelve el elemento que está en la cima de `p'.
   Precondición: ! es_vacia_pila(p);
  */
-int cima (pila_t p) { return (p->array[p->tope - 1]); }
+int cima(pila_t p) { return (p->array[p->tope - 1]); }
