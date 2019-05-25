@@ -4,6 +4,7 @@
 
 #include "../include/info.h"
 #include "../include/iterador.h"
+#include "../include/avl.h"
 
 struct rep_conjunto {
 	avl_t arbol;
@@ -15,13 +16,20 @@ struct rep_conjunto {
   Devuelve un conjunto_t vacío (sin elementos).
   El tiempo de ejecución es O(1).
  */
-conjunto_t crear_conjunto();
+conjunto_t crear_conjunto(){
+	conjunto_t conjunto = new conjunto_t;
+	return conjunto;
+}
 
 /*
   Devuelve un conjunto_t cuyo único elemento es `i'.
   El tiempo de ejecución es O(1).
  */
-conjunto_t singleton(info_t i);
+conjunto_t singleton(info_t i){
+	conjunto_t conjunto = crear_conjunto();
+	insertar_en_avl(i, conjunto -> arbol);
+	return conjunto;
+}
 
 /*
   Devuelve un conjunto_t con los elementos que pertenecen a  `c1' o `c2'.
@@ -32,7 +40,21 @@ conjunto_t singleton(info_t i);
   resultado.
   El conjunto_t devuelto no comparte memoria ni con `c1' no con `c2'.
  */
-conjunto_t union_conjunto(conjunto_t c1, conjunto_t c2);
+static void auxUnion_Conjunto(conjunto_t &conjunto, avl_t arbol){
+	if(!es_vacio_avl(izq_avl(arbol))) { 
+		auxUnion_Conjunto(conjunto, izq_avl(arbol)); 
+	}
+	if(!es_vacio_avl(der_avl(arbol))) { 
+		auxUnion_Conjunto(conjunto, der_avl(arbol)); 
+	}
+	insertar_en_avl(arbol -> dato, conjunto -> arbol);
+}
+conjunto_t union_conjunto(conjunto_t c1, conjunto_t c2){
+	conjunto_t conjunto = crear_conjunto();
+	auxUnion_Conjunto(conjunto, c1);
+	auxUnion_Conjunto(conjunto, c2);
+	return conjunto;
+}
 
 /*
   Devuelve un conjunto_t con los elementos de `c1' cuyos datos numéricos no
@@ -42,7 +64,11 @@ conjunto_t union_conjunto(conjunto_t c1, conjunto_t c2);
   resultado.
   El conjunto_t devuelto no comparte memoria ni con `c1' no con `c2'.
  */
-conjunto_t diferencia(conjunto_t c1, conjunto_t c2);
+conjunto_t diferencia(conjunto_t c1, conjunto_t c2){
+	
+	
+	
+}
 
 /*
   Libera la memoria asignada a `c' y la de todos sus elementos.
@@ -81,7 +107,7 @@ conjunto_t arreglo_a_conjunto(info_t *infos, nat n);
  */
 iterador_t iterador_conjunto(conjunto_t c) {
 	iterador_t res	= crear_iterador();
-	info_t *infos	= en_orden_avl(c-arbol);
+	info_t *infos	= en_orden_avl(c->arbol);
 	for (nat i = 0; i < cantidad_en_avl(c->arbol); i++) agregar_a_iterador(infos[i], res);
 	bloquear_iterador(res);
 	delete[] infos;
