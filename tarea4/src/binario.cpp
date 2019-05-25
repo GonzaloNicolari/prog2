@@ -328,7 +328,8 @@ static bool auxCamino(binario_t b, cadena_t c, localizador_t loc) {
 }
 
 bool es_camino(cadena_t c, binario_t b) {
-	return (!es_vacio_binario(b)) ? auxCamino(b, c, inicio_cadena(c)) : false;
+	if (es_vacio_binario(b) && es_vacia_cadena(c)) return true;
+	else return (!es_vacio_binario(b)) ? auxCamino(b, c, inicio_cadena(c)) : false;
 }
 
 static cadena_t auxNivel(binario_t b, cadena_t cad, localizador_t loc, nat actual, nat l) {
