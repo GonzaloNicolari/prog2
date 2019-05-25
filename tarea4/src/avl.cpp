@@ -2,8 +2,6 @@
 // Nicolás Saliba	- Gonzalo Nicolari.
 // Instituto de Computación - Facultad de Ingeniería, Laboratorio de Programación 2.
 
-// Representación de `avl_t'.
-// Se debe definir en avl.cpp.
 struct rep_avl {
 	info_t dato;
 	int altura;
