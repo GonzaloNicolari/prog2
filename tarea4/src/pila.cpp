@@ -25,7 +25,7 @@ pila_t crear_pila(int tamanio) {
 void apilar (int num, pila_t &p) {
 	if (!es_vacia_pila(p)) {
 		p->array[p->tope + 1]	= dato;
-		p->tope					= p->tope + 1;
+		p->tope++;
 	}
 }
 
