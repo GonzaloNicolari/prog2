@@ -118,7 +118,7 @@ static avl_t a2avl_rec(info_t *infos, int inf, int sup) {
 	else {
 		nat medio	= (info + sup) / 2;
 		res			= new rep_avl;
-		res->dato	= infos[medios];
+		res->dato	= infos[medio];
 		res->izq	= a2avl_rec(infos, inf, medio - 1);
 		res->der	= a2avl_rec(infos, medio + 1, sup);
 		// TODO: ajustar res->altura y res->cantidad.
