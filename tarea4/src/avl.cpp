@@ -27,8 +27,33 @@ bool es_vacio_avl(avl_t avl) { return avl == NULL; }
 	El tiempo de ejecución es O(log n), donde `n' es la cantidad de elementos
 	de `avl'.
 */
+static void auxInsertar_en_avl(info_t i, avl_t &avl){
+	if(es_vacio_avl(avl)){
+		avl_t arbol = crear_avl();
+		arbol -> dato     = i;
+		arbol -> cantidad = 1;
+		arbol -> altura   = 0;
+	}else{
+		if(cantidad_en_avl(avl) % 2 == 0){
+			auxInsertar_en_avl(i, izq_avl(avl));
+			arbol -> cantidad = arbol -> cantidad + 1; 
+		}else{
+			auxInsertar_en_avl(i, der_avl(avl));
+			arbol -> cantidad = arbol -> cantidad  +1;
+		}
+	}
+}
 void insertar_en_avl(info_t i, avl_t &avl) {
-	
+	if(es_vacio_avl(avl)){
+		avl -> dato     = i;
+		avl -> altura   = 0;
+		avl -> cantidad = 1;
+		return avl;
+	}else{
+		auxInsertar_en_avl(i, avl);
+		return avl
+	}
+
 }
 
 /*
