@@ -53,7 +53,15 @@ void insertar_en_avl(info_t i, avl_t &avl) {
 	`avl'.
  */
 avl_t buscar_en_avl(int clave, avl_t avl) {
-	
+	if(es_vacio_avl(avl)){
+		return crear_avl();
+	}else(
+		if(numero_info(avl -> dato) == clave) return avl;
+		else{
+			buscar_en_avl(clave, izq_avl(avl));
+			buscar_en_avl(clave, der_avl(avl));
+		}
+	)
 }
 
 /*
