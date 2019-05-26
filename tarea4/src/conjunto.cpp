@@ -55,8 +55,10 @@ static void auxUnion_Conjunto(conjunto_t &conjunto, avl_t arbol){
 	if(!es_vacio_avl(der_avl(arbol))) { 
 		auxUnion_Conjunto(conjunto, der_avl(arbol)); 
 	}
-	info_t info = copia_info(arbol -> dato);
-	insertar_en_avl(info, conjunto -> arbol);
+	if (buscar_en_avl(numero_info(arbol -> dato), conjunto -> arbol) == NULL){
+		info_t info = copia_info(arbol -> dato);
+		insertar_en_avl(info, conjunto -> arbol);
+	}
 }
 conjunto_t union_conjunto(conjunto_t c1, conjunto_t c2){
 	conjunto_t conjunto = crear_conjunto();
