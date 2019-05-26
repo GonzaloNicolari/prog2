@@ -4,8 +4,7 @@
 
 struct rep_avl {
 	info_t dato;
-	int altura;
-	int cantidad;
+	int altura, cantidad;
 	avl_t izq, der;
 };
 
@@ -29,8 +28,7 @@ bool es_vacio_avl(avl_t avl) { return avl == NULL; }
 	de `avl'.
 */
 void insertar_en_avl(info_t i, avl_t &avl) {
-	assert(es_vacio_avl(buscar_en_avl(numero_info(i), avl));
-	assert(es_vacio_avl(numero_info(i) != INT_MAX));
+	
 }
 
 /*
@@ -49,30 +47,21 @@ avl_t buscar_en_avl(int clave, avl_t avl) {
 	Precondición: ! es_vacio_avl(b).
 	El tiempo de ejecución es O(1).
  */
-info_t raiz_avl(avl_t avl) {
-	assert(!es_vacio_avl(avl));
-	return avl->dato
-}
+info_t raiz_avl(avl_t avl) { return avl->dato }
 
 /*
 	Devuelve el subárbol izquierdo de `avl'.
 	Precondición: ! es_vacio_avl(avl).
 	El tiempo de ejecución es O(1).
  */
-avl_t izq_avl(avl_t avl) {
-	assert(!es_vacio_avl(avl));
-	return avl->izq;
-}
+avl_t izq_avl(avl_t avl) { return avl->izq; }
 
 /*
 	Devuelve el subárbol derecho de `avl'.
 	Precondición: ! es_vacio_avl(avl).
 	El tiempo de ejecución es O(1).
  */
-avl_t der_avl(avl_t avl) {
-	assert(!es_vacio_avl(avl));
-	return avl->der;
-}
+avl_t der_avl(avl_t avl) { 	return avl->der; }
 
 /*
 	Devuelve la cantidad de elementos en `avl'.
@@ -81,7 +70,7 @@ avl_t der_avl(avl_t avl) {
 nat cantidad_en_avl(avl_t avl) { return avl->cantidad; }
 
 /*
-	Devuelve la altura de	`avl'.
+	Devuelve la altura de `avl'.
 	La altura de un árbol vacío es 0.
 	El tiempo de ejecución es O(1).
  */
@@ -116,12 +105,14 @@ static avl_t a2avl_rec(info_t *infos, int inf, int sup) {
 	avl_t res:
 	if (inf > sup) res = NULL;
 	else {
-		nat medio	= (info + sup) / 2;
-		res			= new rep_avl;
-		res->dato	= infos[medio];
-		res->izq	= a2avl_rec(infos, inf, medio - 1);
-		res->der	= a2avl_rec(infos, medio + 1, sup);
+		nat medio		= (info + sup) / 2;
+		res				= new rep_avl;
+		res->dato		= infos[medio];
+		res->izq		= a2avl_r  ec(infos, inf, medio - 1);
+		res->der		= a2avl_rec(infos, medio + 1, sup);
 		// TODO: ajustar res->altura y res->cantidad.
+		res->altura		= ;
+		res->cantidad	= ;
 	}
 }
 
