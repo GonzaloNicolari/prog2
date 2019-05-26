@@ -2,6 +2,10 @@
 // Nicolás Saliba	- Gonzalo Nicolari.
 // Instituto de Computación - Facultad de Ingeniería, Laboratorio de Programación 2.
 
+#include "../include/info.h"
+#include "../include/iterador.h"
+#include "../include/avl.h"
+
 struct rep_avl {
 	info_t dato;
 	int altura, cantidad;
@@ -12,7 +16,10 @@ struct rep_avl {
 	Devuelve un avl_t vacío (sin elementos).
 	El tiempo de ejecución es O(1).
  */
-avl_t crear_avl() { return NULL; } // TODO: revisar si hay que hacer algo más.
+avl_t crear_avl() {
+	avl_t arbol = new avl_t;
+	return arbol; 
+} // TODO: revisar si hay que hacer algo más.
 
 /*
 	Devuelve `true' si y sólo si `avl' es vacío (no tiene elementos).
@@ -27,6 +34,7 @@ bool es_vacio_avl(avl_t avl) { return avl == NULL; }
 	El tiempo de ejecución es O(log n), donde `n' es la cantidad de elementos
 	de `avl'.
 */
+
 void insertar_en_avl(info_t i, avl_t &avl) {
 	if(es_vacio_avl(avl)){
 		avl 			= crear_avl();
@@ -99,7 +107,20 @@ info_t *en_orden_avl(avl_t avl) {
 	return res;
 }
 
-
+static avl_t a2avl_rec(info_t *infos, int inf, int sup) {
+	avl_t res:
+	if (inf > sup) res = NULL;
+	else {
+		nat medio		= (info + sup) / 2;
+		res				= new rep_avl;
+		res->dato		= infos[medio];
+		res->izq		= a2avl_r  ec(infos, inf, medio - 1);
+		res->der		= a2avl_rec(infos, medio + 1, sup);
+		// TODO: ajustar res->altura y res->cantidad.
+		res->altura		= ;
+		res->cantidad	= ;
+	}
+}
 
 /*
 	Devuelve un avl_t con los `n' elementos que están en el rango [0 .. n - 1]
@@ -179,5 +200,11 @@ void imprimir_avl(avl_t avl) {
 	`avl'.
  */
 void liberar_avl(avl_t &avl) {
-	
+	if(es_vacio_avl(avl)){
+		liberar_info(avl -> dato);
+		delete avl;
+	}else{
+		liberar_avl(izq_avl(avl);
+		liberar_avl(der_avl(avl);
+	}
 }
