@@ -6,9 +6,7 @@
 #include "../include/iterador.h"
 #include "../include/avl.h"
 
-struct rep_conjunto {
-	avl_t arbol;
-};
+struct rep_conjunto { avl_t arbol; };
 
 /* Constructoras */
 
@@ -16,20 +14,30 @@ struct rep_conjunto {
   Devuelve un conjunto_t vacío (sin elementos).
   El tiempo de ejecución es O(1).
  */
-conjunto_t crear_conjunto(){
+conjunto_t crear_conjunto() { return NULL; }
+/*
+conjunto_t crear_conjunto() {
 	conjunto_t conjunto = new conjunto_t;
 	return conjunto;
 }
+*/
 
 /*
   Devuelve un conjunto_t cuyo único elemento es `i'.
   El tiempo de ejecución es O(1).
  */
-conjunto_t singleton(info_t i){
-	conjunto_t conjunto = crear_conjunto();
-	insertar_en_avl(i, conjunto -> arbol);
+conjunto_t singleton(info_t i) {
+	conjunto_t c = crear_conjunto();
+	insertar_en_avl(i, conjunto);
 	return conjunto;
 }
+/*
+conjunto_t singleton(info_t i){
+	conjunto_t conjunto = crear_conjunto();
+	insertar_en_avl(i, conjunto->arbol);	// Conjunto ya es un árbol avl, los elementos son: dato, altura, cantidad, der, izq
+	return conjunto;
+}
+*/
 
 /*
   Devuelve un conjunto_t con los elementos que pertenecen a  `c1' o `c2'.
