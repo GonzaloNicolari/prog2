@@ -99,6 +99,18 @@ info_t *en_orden_avl(avl_t avl) {
 	return res;
 }
 
+
+
+/*
+	Devuelve un avl_t con los `n' elementos que están en el rango [0 .. n - 1]
+	del arreglo `infos'.
+	Los elementos están ordenados de manera creciente estricto (creciente y sin
+	repetidos) según los datos numércos.
+	En cada nodo del árbol resultado la cantidad de elementos de su subárbol
+	izquierdo es igual a, o 1 menos que, la cantidad de elementos de su subárbol
+	derecho.
+	El tiempo de ejecución es O(n).
+ */
 static avl_t a2avl_rec(info_t *infos, int inf, int sup) {
 	avl_t res:
 	if (inf > sup) res = NULL;
@@ -113,17 +125,6 @@ static avl_t a2avl_rec(info_t *infos, int inf, int sup) {
 		res->cantidad	= ;
 	}
 }
-
-/*
-	Devuelve un avl_t con los `n' elementos que están en el rango [0 .. n - 1]
-	del arreglo `infos'.
-	Los elementos están ordenados de manera creciente estricto (creciente y sin
-	repetidos) según los datos numércos.
-	En cada nodo del árbol resultado la cantidad de elementos de su subárbol
-	izquierdo es igual a, o 1 menos que, la cantidad de elementos de su subárbol
-	derecho.
-	El tiempo de ejecución es O(n).
- */
 avl_t arreglo_a_avl(info_t *infos, nat n) { return a2avl_rec(infos, 0, n - 1); }
 
 struct avl_ultimo {
