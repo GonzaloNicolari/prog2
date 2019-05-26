@@ -89,7 +89,11 @@ conjunto_t diferencia(conjunto_t c1, conjunto_t c2){
   Libera la memoria asignada a `c' y la de todos sus elementos.
   El tiempo de ejecución es O(n), siendo `n' la cantidad de elementos de `c'.
  */
-void liberar_conjunto(conjunto_t &c){ delete c; }
+void liberar_conjunto(conjunto_t &c){
+	liberar_avl(c -> arbol);
+	delete c;
+}
+
 
 /*
   Devuelve `true' si y sólo si `info' es un elemento de `c'.
