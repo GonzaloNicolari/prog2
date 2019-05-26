@@ -72,30 +72,38 @@ conjunto_t union_conjunto(conjunto_t c1, conjunto_t c2){
   resultado.
   El conjunto_t devuelto no comparte memoria ni con `c1' no con `c2'.
  */
+static void auxDiferencia(avl_t arbol1, avl_t arbol2, avl_t &arbolResult){
+	if(!es_vacio_avl(izq_avl(arbol1))) 	auxDiferencia(izq_avl(arbol1), arbol2, arbolResult); 
+	if(!es_vacio_avl(der_avl(arbol1)))  auxDiferencia(der_avl(arbol1), arbol2, arbolResult); 
+	if (buscar_en_avl(numero_info(arbol1 -> dato), arbol2) == NULL) insertar_en_avl(arbol1 -> dato, arbolResult);
+}
 conjunto_t diferencia(conjunto_t c1, conjunto_t c2){
-	
-	
-	
+	conjunto_t conjunto = crear_conjunto();
+	auxDiferencia(c1 -> arbol, c2 -> arbol, conjunto -> arbol);
 }
 
 /*
   Libera la memoria asignada a `c' y la de todos sus elementos.
   El tiempo de ejecución es O(n), siendo `n' la cantidad de elementos de `c'.
  */
-void liberar_conjunto(conjunto_t &c);
+void liberar_conjunto(conjunto_t &c){ delete c; }
 
 /*
   Devuelve `true' si y sólo si `info' es un elemento de `c'.
   El tiempo de ejecución es O(log n), siendo `n' es la cantidad de
   elementos de `c'.
  */
-bool pertenece_conjunto(info_t info, conjunto_t s);
+static avl_t auxPertenece_conjunto(conjunto_t s){ return (s->arbol); }
+bool pertenece_conjunto(info_t info, conjunto_t s){ 
+	return (buscar_en_avl(numero_info(auxPertenece_conjunto(s) -> dato), arbol2) != NULL);
+}
+
 
 /*
   Devuelve `true' si y sólo `c' es vacío (no tiene elementos).
   El tiempo de ejecución es O(1).
  */
-bool es_vacio_conjunto(conjunto_t c);
+bool es_vacio_conjunto(conjunto_t c){ return (c == NULL); }
 
 /*
   Devuelve un conjunto_t con los `n' elementos que están en en el rango
@@ -104,7 +112,13 @@ bool es_vacio_conjunto(conjunto_t c);
   repetidos) según los datos numércos.
   El tiempo de ejecución es O(n).
  */
-conjunto_t arreglo_a_conjunto(info_t *infos, nat n);
+conjunto_t arreglo_a_conjunto(info_t *infos, nat n){
+	conjunto_t conjunto = crear_conjunto();
+	for (int i = 0; i < n; i++){
+		insertar_en_avl(infos[i], conjunto);
+	}
+	return conjunto;
+}
 
 /*
   Devuelve un iterador_t de los elementos de `c'.
