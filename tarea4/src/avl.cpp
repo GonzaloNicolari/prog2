@@ -64,38 +64,14 @@ avl_t buscar_en_avl(int clave, avl_t avl) {
 	)
 }
 
-/*
-	Devuelve el elemento asociado a la raíz de `avl'.
-	Precondición: ! es_vacio_avl(b).
-	El tiempo de ejecución es O(1).
- */
 info_t raiz_avl(avl_t avl) { return avl->dato }
 
-/*
-	Devuelve el subárbol izquierdo de `avl'.
-	Precondición: ! es_vacio_avl(avl).
-	El tiempo de ejecución es O(1).
- */
 avl_t izq_avl(avl_t avl) { return avl->izq; }
 
-/*
-	Devuelve el subárbol derecho de `avl'.
-	Precondición: ! es_vacio_avl(avl).
-	El tiempo de ejecución es O(1).
- */
 avl_t der_avl(avl_t avl) { 	return avl->der; }
 
-/*
-	Devuelve la cantidad de elementos en `avl'.
-	El tiempo de ejecución es O(1).
- */
 nat cantidad_en_avl(avl_t avl) { return avl->cantidad; }
 
-/*
-	Devuelve la altura de `avl'.
-	La altura de un árbol vacío es 0.
-	El tiempo de ejecución es O(1).
- */
 nat altura_de_avl(avl_t avl) { return avl->altura }
 
 static info_t *en_orden_rec(info_t *res, nat &tope, avl_t avl) {
