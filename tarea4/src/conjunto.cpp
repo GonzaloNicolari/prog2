@@ -6,7 +6,9 @@
 #include "../include/iterador.h"
 #include "../include/avl.h"
 
-struct rep_conjunto { avl_t arbol; };
+struct rep_conjunto {
+	avl_t arbol;
+};
 
 /* Constructoras */
 
@@ -14,30 +16,20 @@ struct rep_conjunto { avl_t arbol; };
   Devuelve un conjunto_t vacío (sin elementos).
   El tiempo de ejecución es O(1).
  */
-conjunto_t crear_conjunto() { return NULL; }
-/*
-conjunto_t crear_conjunto() {
+conjunto_t crear_conjunto(){
 	conjunto_t conjunto = new conjunto_t;
 	return conjunto;
 }
-*/
 
 /*
   Devuelve un conjunto_t cuyo único elemento es `i'.
   El tiempo de ejecución es O(1).
  */
-conjunto_t singleton(info_t i) {
-	conjunto_t c = crear_conjunto();
-	insertar_en_avl(i, conjunto);
-	return conjunto;
-}
-/*
 conjunto_t singleton(info_t i){
 	conjunto_t conjunto = crear_conjunto();
-	insertar_en_avl(i, conjunto->arbol);	// Conjunto ya es un árbol avl, los elementos son: dato, altura, cantidad, der, izq
+	insertar_en_avl(i, conjunto -> arbol);
 	return conjunto;
 }
-*/
 
 /*
   Devuelve un conjunto_t con los elementos que pertenecen a  `c1' o `c2'.
@@ -94,17 +86,17 @@ void liberar_conjunto(conjunto_t &c){
 	delete c;
 }
 
-
 /*
   Devuelve `true' si y sólo si `info' es un elemento de `c'.
   El tiempo de ejecución es O(log n), siendo `n' es la cantidad de
   elementos de `c'.
  */
-static avl_t auxPertenece_conjunto(conjunto_t s){ return (s->arbol); }
-bool pertenece_conjunto(info_t info, conjunto_t s){ 
+static avl_t auxPertenece_conjunto(conjunto_t s){
+	return (s->arbol);
+}
+bool pertenece_conjunto(info_t info, conjunto_t s){
 	return (buscar_en_avl(numero_info(auxPertenece_conjunto(s) -> dato), arbol2) != NULL);
 }
-
 
 /*
   Devuelve `true' si y sólo `c' es vacío (no tiene elementos).
