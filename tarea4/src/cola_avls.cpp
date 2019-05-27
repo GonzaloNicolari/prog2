@@ -40,7 +40,7 @@ void encolar(avl_t b, cola_avls_t &c) {
   NO libera la memoria del elemento removido.
   Si es_vacia_cola_binarios(c) no hace nada.
  */
-void desencolar(cola_avls_t &c) { c = c -> siguiente; }
+void desencolar(cola_avls_t &c) { c = c->siguiente; }
 
 /* Libera la memoria asignada a `c', pero NO la de sus elementos. */
 void liberar_cola_avls(cola_avls_t &c) {
