@@ -52,11 +52,8 @@ conjunto_t union_conjunto(conjunto_t c1, conjunto_t c2) {
 }
 
 /*
-  Devuelve un conjunto_t con los elementos de `c1' cuyos datos numéricos no
-  pertenecen a `c2'.
-  El tiempo de ejecucion es O(n1 + n2 + n.log n), siendo `n1' y `n2' la
-  cantidad de elementos de `c1' y `c2' respectivamente y `n' la del conjunto_t
-  resultado.
+  Devuelve un conjunto_t con los elementos de `c1' cuyos datos numéricos no pertenecen a `c2'.
+  El tiempo de ejecucion es O(n1 + n2 + n.log n), siendo `n1' y `n2' la cantidad de elementos de `c1' y `c2' respectivamente y `n' la del conjunto_t resultado.
   El conjunto_t devuelto no comparte memoria ni con `c1' no con `c2'.
  */
 static void auxDiferencia(avl_t arbol1, avl_t arbol2, avl_t &arbolResult) {
@@ -81,8 +78,7 @@ void liberar_conjunto(conjunto_t &c) {
 
 /*
   Devuelve `true' si y sólo si `info' es un elemento de `c'.
-  El tiempo de ejecución es O(log n), siendo `n' es la cantidad de
-  elementos de `c'.
+  El tiempo de ejecución es O(log n), siendo `n' es la cantidad de elementos de `c'.
  */
 static avl_t auxPertenece_conjunto(conjunto_t s) { return (s->arbol); }
 
