@@ -5,7 +5,7 @@
 struct rep_pila {
 	int* array;
 	int tope, tamanio;
-}
+};
 
 /*
   Devuelve una pila_t vacía (sin elementos) que puede tener hasta `tamanio' elementos.
