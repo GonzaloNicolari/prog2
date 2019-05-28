@@ -124,7 +124,7 @@ avl_t buscar_en_avl(int clave, avl_t avl) {
 
 info_t raiz_avl(avl_t avl) {
 	assert(!es_vacio_avl(b));
-	return avl->dato
+	return avl->dato;
 }
 
 avl_t izq_avl(avl_t avl) {
@@ -137,9 +137,9 @@ avl_t der_avl(avl_t avl) {
 	return avl->der;
 }
 
-nat cantidad_en_avl(avl_t avl) { return es_vacio_avl(avl) 0 ; avl->cantidad; }
+nat cantidad_en_avl(avl_t avl) { return es_vacio_avl(avl) ? 0 : avl->cantidad; }
 
-nat altura_de_avl(avl_t avl) { return es_vacio_avl(avl) ? 0 ; avl->altura; }
+nat altura_de_avl(avl_t avl) { return es_vacio_avl(avl) ? 0 : avl->altura; }
 
 static info_t *en_orden_rec(info_t *res, nat &tope, avl_t avl) {
 	if (!es_vacio_avl(avl)) {
@@ -166,7 +166,7 @@ info_t *en_orden_avl(avl_t avl) {
 }
 
 static avl_t a2avl_rec(info_t *infos, int inf, int sup) {
-	avl_t res:
+	avl_t res;
 	if (inf > sup) res = NULL;
 	else {
 		nat medio	= (info + sup) / 2;
