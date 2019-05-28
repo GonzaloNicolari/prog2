@@ -5,6 +5,11 @@
 #include "../include/info.h"
 #include "../include/iterador.h"
 #include "../include/avl.h"
+#include "../include/conjunto.h"
+
+#include <assert.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 struct rep_conjunto { avl_t arbol; };
 
@@ -41,13 +46,13 @@ conjunto_t singleton(info_t i) {
 static void auxUnion_Conjunto(conjunto_t &c, avl_t arbol) {
 	if (!es_vacio_avl(izq_avl(arbol))) auxUnion_Conjunto(c, izq_avl(arbol));
 	if (!es_vacio_avl(der_avl(arbol))) auxUnion_Conjunto(c, der_avl(arbol));
-	if (buscar_en_avl(numero_info(arbol->dato), c->arbol) == NULL) insertar_en_avl(copia_info(arbol->dato), c->arbol);
+	if (buscar_en_avl(numero_info(arbol->dato),c->arbol) == NULL) insertar_en_avl(copia_info(arbol->dato),c->arbol);
 }
 
 conjunto_t union_conjunto(conjunto_t c1, conjunto_t c2) {
 	conjunto_t c = crear_conjunto();
-	auxUnion_Conjunto(c, c1);
-	auxUnion_Conjunto(c, c2);
+	auxUnion_Conjunto(c, c1->arbol);
+	auxUnion_Conjunto(c, c2->arbol);
 	return c;
 }
 
@@ -65,6 +70,7 @@ static void auxDiferencia(avl_t arbol1, avl_t arbol2, avl_t &arbolResult) {
 conjunto_t diferencia(conjunto_t c1, conjunto_t c2) {
 	conjunto_t conjunto = crear_conjunto();
 	auxDiferencia(c1->arbol, c2->arbol, conjunto->arbol);
+	return conjunto;
 }
 
 /*
@@ -82,7 +88,7 @@ void liberar_conjunto(conjunto_t &c) {
  */
 static avl_t auxPertenece_conjunto(conjunto_t s) { return (s->arbol); }
 
-bool pertenece_conjunto(info_t info, conjunto_t s) { return (buscar_en_avl(numero_info(auxPertenece_conjunto(s) -> dato), arbol2) != NULL); }
+bool pertenece_conjunto(info_t info, conjunto_t s) { return (buscar_en_avl(numero_info(auxPertenece_conjunto(s) -> dato),s->arbol) != NULL); }
 
 /*
   Devuelve `true' si y sólo `c' es vacío (no tiene elementos).
@@ -97,7 +103,7 @@ bool es_vacio_conjunto(conjunto_t c) { return (c == NULL); }
  */
 conjunto_t arreglo_a_conjunto(info_t *infos, nat n) {
 	conjunto_t conjunto = crear_conjunto();
-	for (int i = 0; i < n; i++) insertar_en_avl(infos[i], conjunto);
+	for (nat i = 0; i < n; i++) insertar_en_avl(infos[i], conjunto->arbol);
 	return conjunto;
 }
 
