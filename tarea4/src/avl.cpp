@@ -19,7 +19,7 @@ avl_t crear_avl() { return NULL; }
 
 bool es_vacio_avl(avl_t avl) { return avl == NULL; }
 
-void rotarRR(avl_t &a) {
+void rotarD(avl_t &a) {
 	avl_t aux			= a->der->izq;
 	a->der->izq			= a;
 	a->der->cantidad	= 0;
@@ -29,7 +29,7 @@ void rotarRR(avl_t &a) {
 	a					= aux2;
 }
 
-void rotarLL(avl_t &a) {
+void rotarI(avl_t &a) {
 	avl_t aux			= a->izq->der;
 	a->izq->der			= a;
 	a->izq->cantidad	= 0;
@@ -158,7 +158,7 @@ info_t *en_orden_avl(avl_t avl) {
 	info_t *res;
 	if (es_vacio_avl(avl)) res = NULL;
 	else {
-		res			= new info_t[cantidad_en_avl(avl)];
+		res			= new info_t[avl->cantidad];
 		nat tope	= 0;
 		res			= en_orden_rec(res, tope, avl);
 	}
