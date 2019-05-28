@@ -8,10 +8,23 @@
 
 #include <stdlib.h>
 
+struct nodo {
+    avl_t arbol;
+    struct nodo *sig;
+};
+
+struct rep_cola_avls {
+    nodo *delante;
+    nodo *atras;
+};
+
+
+/*
 struct rep_cola_avls {
 	avl_t arbol;
 	cola_avls_t *siguiente;
 };
+*/
 
 /*  Devuelve una cola_avls_t vacía (sin elementos). */
 cola_avls_t crear_cola_avls() {
@@ -24,17 +37,23 @@ cola_avls_t crear_cola_avls() {
 /* Encola `avl' en `c'. */
 void encolar(avl_t b, cola_avls_t &c) {
 	if (!es_vacio_avl(b)) {
+		cola_avls_t cavl	= new (struct nodo);
+		cavl->arbol			= b;
+		cavl->sig			= NULL;
+		if (c->delante == NULL) c->delante = cavl;
+		else c->atras->sig = aux;
+		c->atras = aux;
+	}
+}
+/*
+void encolar(avl_t b, cola_avls_t &c) {
+	if (!es_vacio_avl(b)) {
 		if (!es_vacia_cola_avls(c)) encolar(b, c->siguiente->arbol);
 		else {
 			cola_avls_t cavl	= crear_cola_avls();
 			cavl->arbol			= b;
 		}
 	}
-}
-/*
-void encolar(avl_t b, cola_avls_t &c) {
-	if (es_vacia_cola_avls(c->siguiente)) c->siguiente->arbol = b;
-	else encolar(b, siguienteEnCola(c));
 }
 */
 
@@ -47,7 +66,7 @@ void desencolar(cola_avls_t &c) { c = c->siguiente; }
 
 /* Libera la memoria asignada a `c', pero NO la de sus elementos. */
 void liberar_cola_avls(cola_avls_t &c) {
-	cola_avls_t *a_borrar;
+	cola_avls_t a_borrar;
 	while (c->arbol != NULL) {
 		a_borrar	= c;
 		c			= c->siguiente;
