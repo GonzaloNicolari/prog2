@@ -14,7 +14,6 @@ struct rep_info {
 };
 
 info_t crear_info(int num, char *frase) {
-
 	info_t nueva	= new rep_info;
 	nueva->num		= num;
 	nueva->frase	= frase; // Comparte memoria con el parámetro.
@@ -22,7 +21,6 @@ info_t crear_info(int num, char *frase) {
 }
 
 info_t copia_info(info_t info) {
-
 	info_t copia	= new rep_info;
 	copia->num		= info->num; // No comparte memoria con info.
 	copia->frase	= new char[strlen(info->frase) + 1];
@@ -31,7 +29,6 @@ info_t copia_info(info_t info) {
 }
 
 void liberar_info(info_t &info) {
-
 	delete[] info->frase;
 	delete info;
 }
@@ -45,7 +42,6 @@ bool son_iguales(info_t i1, info_t i2) { return (i1->num == i2->num) && (!strcmp
 bool es_valida_info(info_t info) { return (info->num != INT_MAX); }
 
 char *info_a_texto(info_t info) {
-
 	char copia_num[11];
 	sprintf(copia_num, "%d", info->num);
 	char *texto = new char[strlen(copia_num) + strlen(info->frase) + 4];
@@ -58,7 +54,6 @@ char *info_a_texto(info_t info) {
 }
 
 info_t leer_info(int max) {
-
 	info_t leido;
 	int num;
 	char simbolo;
