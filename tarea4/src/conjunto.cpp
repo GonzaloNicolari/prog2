@@ -53,10 +53,10 @@ conjunto_t union_conjunto(conjunto_t c1, conjunto_t c2) {
   El tiempo de ejecucion es O(n1 + n2 + n.log n), siendo `n1' y `n2' la cantidad de elementos de `c1' y `c2' respectivamente y `n' la del conjunto_t resultado.
   El conjunto_t devuelto no comparte memoria ni con `c1' no con `c2'.
  */
-static void auxDiferencia(avl_t arbol1, avl_t arbol2, avl_t &arbolResult) {
-	if(!es_vacio_avl(izq_avl(arbol1))) 	auxDiferencia(izq_avl(arbol1), arbol2, arbolResult);
-	if(!es_vacio_avl(der_avl(arbol1)))  auxDiferencia(der_avl(arbol1), arbol2, arbolResult);
-	if ((buscar_en_avl(numero_info(arbol1->dato), arbol2) == NULL) && (numero_info(arbol1->dato) != INT_MAX)) insertar_en_avl(arbol1->dato, arbolResult);
+static void auxDiferencia(avl_t arbol1, avl_t arbol2, avl_t &res) {
+	if(!es_vacio_avl(izq_avl(arbol1))) 	auxDiferencia(izq_avl(arbol1), arbol2, res);
+	if(!es_vacio_avl(der_avl(arbol1)))  auxDiferencia(der_avl(arbol1), arbol2, res);
+	if ((buscar_en_avl(numero_info(arbol1->dato), arbol2) == NULL) && (numero_info(arbol1->dato) != INT_MAX)) insertar_en_avl(arbol1->dato, res);
 }
 
 conjunto_t diferencia(conjunto_t c1, conjunto_t c2) {
