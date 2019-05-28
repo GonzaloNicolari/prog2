@@ -2,6 +2,7 @@
 // Nicolás Saliba	- Gonzalo Nicolari.
 // Instituto de Computación - Facultad de Ingeniería, Laboratorio de Programación 2.
 
+#include "../include/avl.h"
 #include "../include/info.h"
 
 #include <assert.h>
@@ -30,7 +31,7 @@ void rotarRR(avl_t &a) {
 
 void rotarLL(avl_t &a) {
 	avl_t aux			= a->izq->der;
-	avl->izq->der		= a;
+	a->izq->der			= a;
 	a->izq->cantidad	= 0;
 	avl_t aux2			= a->izq;
 	a->izq				= aux;
@@ -73,7 +74,7 @@ void insertarAux(info_t i, avl_t &avl, bool &agregado) {
 				}
 				case -1: {
 					avl->cantidad	= 0;
-					agregado		= dalse;
+					agregado		= false;
 					break;
 				}
 			}
@@ -106,7 +107,7 @@ void insertarAux(info_t i, avl_t &avl, bool &agregado) {
 }
 
 void insertar_en_avl(info_t i, avl_t &avl) {
-	assert(es_vacio_avl(buscar_en_avl(numero_info(i), avl));
+	assert(es_vacio_avl(buscar_en_avl(numero_info(i), avl)));
 	assert(numero_info(i) != INT_MAX);
 	bool b = false;
 	insertarAux(i, avl, b);
