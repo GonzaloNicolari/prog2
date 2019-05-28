@@ -48,12 +48,12 @@ void desencolar(cola_avls_t &c) { c->inicio = c->inicio->siguiente; }
 
 /* Libera la memoria asignada a `c', pero NO la de sus elementos. */
 void liberar_cola_avls(cola_avls_t &c) {
-	nodo a_borrar;
-	nodo rec = c->inicio;
-	while (rec != NULL) {
-		a_borrar	= c;
+	nodo *a_borrar;
+	nodo *rec = c->inicio;
+	while (!es_vacio_avl(rec->arbol)) {
+		a_borrar	= rec;
 		rec			= rec->siguiente;
-		delete(a_borrar);
+		delete a_borrar;
 	}
 	delete c;
 }
@@ -65,4 +65,4 @@ bool es_vacia_cola_avls(cola_avls_t c) { return (c->inicio == NULL) && (c->final
   Devuelve el elemento que está en el frente de `c'.
   Precondición: ! es_vacia_cola_binarios(c);
  */
-avl_t frente(cola_avls_t c) { return c->arbol; }
+avl_t frente(cola_avls_t c) { return c->inicio->arbol; }
