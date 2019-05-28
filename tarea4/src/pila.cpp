@@ -45,7 +45,7 @@ void apilar(int num, pila_t &p) {
  */
 void desapilar(pila_t &p) {
 	if (!es_vacia_pila(p)) {
-		p -> array[p->tope] = NULL;
+		p -> array[p->tope] = 0;
 		p -> tope--;
 	}
 }
