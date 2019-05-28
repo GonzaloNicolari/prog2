@@ -1,12 +1,12 @@
 /* 46450368			- 48579580 */
 // Nicolás Saliba	- Gonzalo Nicolari.
 // Instituto de Computación - Facultad de Ingeniería, Laboratorio de Programación 2.
+
+#include "../include/pila.h"
+
 #include <assert.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stddef.h>
-#include "../include/pila.h"
 
 struct rep_pila {
 	int *array;
@@ -33,8 +33,8 @@ pila_t crear_pila(int tamanio) {
  */
 void apilar(int num, pila_t &p) {
 	if (!es_llena_pila(p)) {
-		p -> array [p -> tope] = num;
-		p -> tope++;
+		p->array [p->tope] = num;
+		p->tope++;
 	}
 }
 
