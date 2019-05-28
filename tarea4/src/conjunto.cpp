@@ -38,7 +38,7 @@ conjunto_t singleton(info_t i) {
 static void auxUnion_Conjunto(conjunto_t &c, avl_t arbol) {
 	if (!es_vacio_avl(izq_avl(arbol))) auxUnion_Conjunto(c, izq_avl(arbol));
 	if (!es_vacio_avl(der_avl(arbol))) auxUnion_Conjunto(c, der_avl(arbol));
-	if (buscar_en_avl(numero_info(arbol->dato), c->arbol) == NULL) insertar_en_avl(copia_info(arbol->dato), c->arbol);
+	if ((buscar_en_avl(numero_info(arbol->dato), c->arbol) == NULL) && (numero_info(arbol->dato) != INT_MAX)) insertar_en_avl(copia_info(arbol->dato), c->arbol);
 }
 
 conjunto_t union_conjunto(conjunto_t c1, conjunto_t c2) {
