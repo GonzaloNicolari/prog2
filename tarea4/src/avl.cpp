@@ -201,10 +201,10 @@ static avl_ultimo avl_min_rec(nat h, nat primero) {
 		res.ultimo	= primero - 1;
 	} else if (h == 1) {
 		// TODO: completar.
-		res.avl					= new rep_avl;
+		res.avl					= crear_avl();
 		res.avl->dato->frase	= "";
 		res.avl->der			= NULL;
-		res.avl->izq			= new rep_avl;
+		res.avl->izq			= crear_avl();
 		avl_t iz				= res.avl->izq;
 		iz->dato				= "";
 		iz->izq					= NULL;
