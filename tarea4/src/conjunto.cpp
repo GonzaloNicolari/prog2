@@ -8,6 +8,7 @@
 #include "../include/conjunto.h"
 
 #include <stdlib.h>
+#include <limits.h>
 
 struct rep_conjunto { avl_t arbol; };
 
