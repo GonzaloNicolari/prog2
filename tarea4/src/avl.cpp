@@ -59,10 +59,10 @@ void insertarAux(info_t i, avl_t &avl, bool &agregado) {
 		if (agregado) {
 			switch (avl->cantidad) {
 				case 1: {
-					if (avl->izq->cantidad == 1) rotarLL(avl);
+					if (avl->izq->cantidad == 1) rotarI(avl);
 					else {
-						rotarRR(avl->izq);
-						rotarLL(avl);
+						rotarD(avl->izq);
+						rotarI(avl);
 					}
 					agregado = false;
 					break;
@@ -95,9 +95,9 @@ void insertarAux(info_t i, avl_t &avl, bool &agregado) {
 				}
 				case -1: {
 					if (avl->der->cantidad == 1) {
-						rotarLL(avl->der);
-						rotarRR(avl);
-					} else rotarRR(avl);
+						rotarI(avl->der);
+						rotarD(avl);
+					} else rotarD(avl);
 					agregado = false;
 					break;
 				}
@@ -194,7 +194,7 @@ struct avl_ultimo {
 	int ultimo;
 };
 
-static avl_ultimo avl_min_rec(nat h, nat primero) {
+/*static avl_ultimo avl_min_rec(nat h, nat primero) {
 	avl_ultimo res;
 	if (h == 0) {
 		res.avl		= NULL;
@@ -202,18 +202,16 @@ static avl_ultimo avl_min_rec(nat h, nat primero) {
 	} else if (h == 1) {
 		// TODO: completar.
 		res.avl					= crear_avl();
-		res.avl->dato->frase	= "";
 		res.avl->der			= NULL;
 		res.avl->izq			= crear_avl();
 		avl_t iz				= res.avl->izq;
-		iz->dato				= "";
 		iz->izq					= NULL;
 		iz->der					= NULL;
 	} else {
 		// TODO: completar.
 	}
 	return res;
-}
+}*/
 
 /*
 	Devuelve un avl_t de altura `h' con `n' nodos, siendo `n' la mínima cantidad de elementos que puede tener un avl de altura `h'.
@@ -223,9 +221,21 @@ static avl_ultimo avl_min_rec(nat h, nat primero) {
 	El tiempo de ejecución es O(n).
 	Ver ejemplos en la letra y en el caso 408.
  */
+static void auxAvl_min(nat h, avl_t &arbol, nat inicio){
+	if (h == inicio+1){
+		arbol = crear_avl();
+		arbol -> altura = 0;
+		arbol -> cantidad = 1;
+	}else {
+		auxAvl_min(h, arbol -> izq, inicio+1);
+		auxAvl_min(h, arbol -> der, inicio+1);
+	}
+}
+
 avl_t avl_min(nat h) {
-	avl_ultimo res = avl_min_rec(h, 1);
-	return res.avl;
+	avl_t arbol = crear_avl();
+	auxAvl_min(h, arbol, 1);
+	return arbol;
 }
 
 /*
@@ -235,14 +245,19 @@ avl_t avl_min(nat h) {
 	El tiempo de ejecución es O(n), siendo `n' la cantidad de nodos de `avl'.
 	Ver ejemplos en la letra y en el caso 404.
  */
-void imprimir_avl(avl_t avl) {
-	
-}
+void imprimir_avl(avl_t avl){
 
+}
 /*
 	Libera la memoria asignada a `avl' y la de sus elementos.
 	El tiempo de ejecución es O(n), donde `n' es la cantidad de elementos de `avl'.
  */
 void liberar_avl(avl_t &avl) {
-	
+	if(es_vacio_avl(avl)){
+		liberar_info(avl->dato);
+		delete avl;
+	}else{
+		liberar_avl(avl->izq);
+		liberar_avl(avl->der);
+	}
 }
