@@ -7,15 +7,6 @@
 #include "../include/cola_avls.h"
 
 #include <stdlib.h>
-/* 46450368			- 48579580 */
-// Nicolás Saliba	- Gonzalo Nicolari.
-// Instituto de Computación - Facultad de Ingeniería, Laboratorio de Programación 2.
-
-#include "../include/avl.h"
-#include "../include/info.h"
-#include "../include/cola_avls.h"
-
-#include <stdlib.h>
 
 struct nodo {
 	avl_t	arbol;
