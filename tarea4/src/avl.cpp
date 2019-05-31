@@ -140,14 +140,14 @@ void insertarAux(info_t i, avl_t &avl, bool &agregado) {
 
 
 	// Left right case.
-	if (fact_bal > 1 && numero_info(i) > numero_info(avl->izq->dato)) {
+	if (fact_bal > 1 && avl->izq != NULL && numero_info(i) > numero_info(avl->izq->dato)) {
 	rotarI(avl->izq);
 
 	rotarD(avl);
 	}
 
 	// Left right case.
-	if (fact_bal < -1 && numero_info(i) < numero_info(avl->der->dato)) {
+	if (fact_bal < -1 && avl->der != NULL && numero_info(i) < numero_info(avl->der->dato)) {
 	rotarD(avl->der);
 
 	rotarI(avl);
