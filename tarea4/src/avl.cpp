@@ -48,7 +48,7 @@ nat altura_de_avl(avl_t avl) { return es_vacio_avl(avl) ? 0 : avl->altura; }
 
 
 
-void rotarD(avl_t &a) {
+static avl_t rotarD(avl_t a) {
 
 	avl_t aux		= a->izq;
 	avl_t aux2		= aux->der;
@@ -62,12 +62,13 @@ void rotarD(avl_t &a) {
 	aux->altura		= std::max(altura_de_avl(aux->izq), altura_de_avl(aux->der)) + 1;
 
 	aux->cantidad	= cantidad_en_avl(aux->izq) + cantidad_en_avl(aux->der) + 1;
+	return aux;
 
 }
 
 
 
-void rotarI(avl_t &a) {
+static avl_t rotarI(avl_t a) {
 
 	avl_t aux		= a->der;
 	avl_t aux2		= aux->izq;
@@ -81,6 +82,7 @@ void rotarI(avl_t &a) {
 	aux->altura		= std::max(altura_de_avl(aux->izq), altura_de_avl(aux->der)) + 1;
 
 	aux->cantidad	= cantidad_en_avl(aux->izq) + cantidad_en_avl(aux->der) + 1;
+	return aux;
 
 }
 
@@ -127,30 +129,29 @@ void insertarAux(info_t i, avl_t &avl, bool &agregado) {
 
 
 	avl->altura = std::max(altura_de_avl(avl->izq), altura_de_avl(avl->der)) + 1;
-	avl->cantidad = std::max(cantidad_en_avl(avl->izq), cantidad_en_avl(avl->der)) + 1;
+	avl->cantidad = cantidad_en_avl(avl->izq) + cantidad_en_avl(avl->der) + 1;
 
 	int fact_bal = balance_de_avl(avl);
+	//printf("%d\n", fact_bal);
 
 	// Left left case.
-	if (fact_bal > 1 && numero_info(i) < numero_info(avl->izq->dato)) rotarD(avl);
+	if (fact_bal > 1 && numero_info(i) < numero_info(avl->izq->dato)) avl = rotarD(avl);
 	
 	// Right right case.
-	if (fact_bal < -1 && numero_info(i) > numero_info(avl->der->dato)) rotarI(avl);
-
-
+	if (fact_bal < -1 && numero_info(i) > numero_info(avl->der->dato)) avl = rotarI(avl);
 
 	// Left right case.
 	if (fact_bal > 1 && avl->izq != NULL && numero_info(i) > numero_info(avl->izq->dato)) {
-	rotarI(avl->izq);
+	avl->izq	= rotarI(avl->izq);
 
-	rotarD(avl);
+	avl			= rotarD(avl);
 	}
 
 	// Left right case.
 	if (fact_bal < -1 && avl->der != NULL && numero_info(i) < numero_info(avl->der->dato)) {
-	rotarD(avl->der);
+	avl->der	= rotarD(avl->der);
 
-	rotarI(avl);
+	avl			= rotarI(avl);
 	}
 }
 
