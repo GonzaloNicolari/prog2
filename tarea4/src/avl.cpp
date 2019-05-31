@@ -109,8 +109,7 @@ void insertarAux(info_t i, avl_t &avl, bool &agregado) {
 void insertar_en_avl(info_t i, avl_t &avl) {
 	assert(es_vacio_avl(buscar_en_avl(numero_info(i), avl)));
 	assert(numero_info(i) != INT_MAX);
-	bool b = false;
-	insertarAux(i, avl, b);
+	insertarAux(i, avl, false);
 }
 
 avl_t buscar_en_avl(int clave, avl_t avl) {
