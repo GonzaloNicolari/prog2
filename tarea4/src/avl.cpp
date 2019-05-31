@@ -47,8 +47,10 @@ nat cantidad_en_avl(avl_t avl) { return es_vacio_avl(avl) ? 0 : avl->cantidad; }
 nat altura_de_avl(avl_t avl) { return es_vacio_avl(avl) ? 0 : avl->altura; }
 
 
+static int balance_de_avl(avl_t a) { return a == NULL ? 0 : altura_de_avl(a->izq) - altura_de_avl(a->der); }
 
-static avl_t rotarD(avl_t a) {
+
+static avl_t rotarD(avl_t a, int &fb) {
 
 	avl_t aux		= a->izq;
 	avl_t aux2		= aux->der;
@@ -62,13 +64,14 @@ static avl_t rotarD(avl_t a) {
 	aux->altura		= std::max(altura_de_avl(aux->izq), altura_de_avl(aux->der)) + 1;
 
 	aux->cantidad	= cantidad_en_avl(aux->izq) + cantidad_en_avl(aux->der) + 1;
+	fb				= balance_de_avl(aux);
 	return aux;
 
 }
 
 
 
-static avl_t rotarI(avl_t a) {
+static avl_t rotarI(avl_t a, int &fb) {
 
 	avl_t aux		= a->der;
 	avl_t aux2		= aux->izq;
@@ -82,13 +85,10 @@ static avl_t rotarI(avl_t a) {
 	aux->altura		= std::max(altura_de_avl(aux->izq), altura_de_avl(aux->der)) + 1;
 
 	aux->cantidad	= cantidad_en_avl(aux->izq) + cantidad_en_avl(aux->der) + 1;
+	fb				= balance_de_avl(aux);
 	return aux;
 
 }
-
-
-
-static int balance_de_avl(avl_t a) { return a == NULL ? 0 : altura_de_avl(a->izq) - altura_de_avl(a->der); }
 
 
 
@@ -104,7 +104,12 @@ static int balance_de_avl(avl_t a) { return a == NULL ? 0 : altura_de_avl(a->izq
 
 */
 
-void insertarAux(info_t i, avl_t &avl, bool &agregado) {
+void insertar_en_avl(info_t i, avl_t &avl) {
+
+	assert(es_vacio_avl(buscar_en_avl(numero_info(i), avl)));
+
+	assert(numero_info(i) != INT_MAX);
+
 
 	if (es_vacio_avl(avl)) {
 
@@ -120,11 +125,9 @@ void insertarAux(info_t i, avl_t &avl, bool &agregado) {
 
 		avl->der		= NULL;
 
-		agregado		= true;
+	} else if (numero_info(i) < numero_info(avl->dato)) insertar_en_avl(i, avl->izq);
 
-	} else if (numero_info(i) < numero_info(avl->dato)) insertarAux(i, avl->izq, agregado);
-
-	else insertarAux(i, avl->der, agregado);
+	else insertar_en_avl(i, avl->der);
 
 
 
@@ -135,36 +138,24 @@ void insertarAux(info_t i, avl_t &avl, bool &agregado) {
 	//printf("%d\n", fact_bal);
 
 	// Left left case.
-	if (fact_bal > 1 && numero_info(i) < numero_info(avl->izq->dato)) avl = rotarD(avl);
+	if (fact_bal > 1 && numero_info(i) < numero_info(avl->izq->dato)) avl = rotarD(avl, fact_bal);
 	
 	// Right right case.
-	if (fact_bal < -1 && numero_info(i) > numero_info(avl->der->dato)) avl = rotarI(avl);
+	if (fact_bal < -1 && numero_info(i) > numero_info(avl->der->dato)) avl = rotarI(avl, fact_bal);
 
 	// Left right case.
 	if (fact_bal > 1 && avl->izq != NULL && numero_info(i) > numero_info(avl->izq->dato)) {
-	avl->izq	= rotarI(avl->izq);
+	avl->izq	= rotarI(avl->izq, fact_bal);
 
-	avl			= rotarD(avl);
+	avl			= rotarD(avl, fact_bal);
 	}
 
 	// Left right case.
 	if (fact_bal < -1 && avl->der != NULL && numero_info(i) < numero_info(avl->der->dato)) {
-	avl->der	= rotarD(avl->der);
+	avl->der	= rotarD(avl->der, fact_bal);
 
-	avl			= rotarI(avl);
+	avl			= rotarI(avl, fact_bal);
 	}
-}
-
-
-void insertar_en_avl(info_t i, avl_t &avl) {
-
-	assert(es_vacio_avl(buscar_en_avl(numero_info(i), avl)));
-
-	assert(numero_info(i) != INT_MAX);
-
-	bool b = false;
-
-	insertarAux(i, avl, b);
 
 }
 
