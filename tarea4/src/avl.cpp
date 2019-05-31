@@ -40,6 +40,12 @@ avl_t crear_avl() { return NULL; }
 
 bool es_vacio_avl(avl_t avl) { return avl == NULL; }
 
+nat cantidad_en_avl(avl_t avl) { return es_vacio_avl(avl) ? 0 : avl->cantidad; }
+
+
+
+nat altura_de_avl(avl_t avl) { return es_vacio_avl(avl) ? 0 : avl->altura; }
+
 
 
 void rotarD(avl_t &a) {
@@ -121,7 +127,7 @@ void insertarAux(info_t i, avl_t &avl, bool &agregado) {
 
 
 	avl->altura = std::max(altura_de_avl(avl->izq), altura_de_avl(avl->der)) + 1;
-	avl->cantidad = std::max(cantidad_de_avl(avl->izq), cantidad_de_avl(avl->der)) + 1;
+	avl->cantidad = std::max(cantidad_en_avl(avl->izq), cantidad_en_avl(avl->der)) + 1;
 
 	int fact_bal = balance_de_avl(avl);
 
@@ -208,14 +214,6 @@ avl_t der_avl(avl_t avl) {
 	return avl->der;
 
 }
-
-
-
-nat cantidad_en_avl(avl_t avl) { return es_vacio_avl(avl) ? 0 : avl->cantidad; }
-
-
-
-nat altura_de_avl(avl_t avl) { return es_vacio_avl(avl) ? 0 : avl->altura; }
 
 
 
