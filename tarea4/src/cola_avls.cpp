@@ -20,7 +20,7 @@ struct rep_cola_avls {
 
 /*  Devuelve una cola_avls_t vacía (sin elementos). */
 cola_avls_t crear_cola_avls() {
-	cola_avls_t c	= new rep_cola_avls;
+	rep_cola_avls *c	= new rep_cola_avls;
 	c->inicio		= NULL;
 	c->final		= NULL;
 	return c;
