@@ -217,7 +217,25 @@ avl_t avl_min(nat h) {
  */
 void imprimir_avl(avl_t avl) {
 	if (!es_vacio_avl(avl)) {
-		pila_t p			= crear_pila(INT_MAX);
+		cola_avls_t cavl = crear_cola_avls();
+		encolar(avl, cavl);
+		encolar(NULL, cavl);
+		while (!es_vacia_cola_avls(cavl)) {
+			avl_t a = frente(cavl);
+			if (!es_vacio_avl(a)) {
+				printf("%d\n", numero_info(raiz_avl(a)));
+				if (!es_vacio_avl(avl->izq)) encolar(avl->izq, cavl);
+				if (!es_vacio_avl(avl->der)) encolar(avl->der, cavl);
+				desencolar(cavl);
+			} else {
+				encolar(NULL, cavl);
+				printf("\n");
+			}
+		}
+	}
+	/*
+	if (!es_vacio_avl(avl)) {
+		pila_t p			= crear_pila(5000);//INT_MAX
 		cola_avls_t cavl	= crear_cola_avls();
 		encolar(avl, cavl);
 		while (!es_vacia_cola_avls(cavl)) {
@@ -228,12 +246,13 @@ void imprimir_avl(avl_t avl) {
 			if (!es_vacio_avl(avl->der)) encolar(avl->der, cavl);
 		}
 		while (!es_vacia_pila(p)) {
-			printf("%d", cima(p));
+			printf("%d\n", cima(p));
 			desapilar(p);
 		}
 		liberar_pila(p);
 		liberar_cola_avls(cavl);
 	}
+	*/
 }
 
 /*
@@ -241,5 +260,10 @@ void imprimir_avl(avl_t avl) {
 	El tiempo de ejecución es O(n), donde `n' es la cantidad de elementos de `avl'.
  */
 void liberar_avl(avl_t &avl) {
-	
+	if (es_vacioavl) {
+		liberar_avl(avl->der);
+		liberar_avl(avl->izq);
+		liberar_info(avl->dato);
+		delete avl;
+	}
 }
