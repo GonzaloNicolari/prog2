@@ -260,10 +260,10 @@ void imprimir_avl(avl_t avl) {
 	El tiempo de ejecución es O(n), donde `n' es la cantidad de elementos de `avl'.
  */
 void liberar_avl(avl_t &avl) {
-	if (es_vacioavl) {
+	if (!es_vacio_avl(avl)) {
 		liberar_avl(avl->der);
 		liberar_avl(avl->izq);
 		liberar_info(avl->dato);
-		delete avl;
+		delete (avl);
 	}
 }
