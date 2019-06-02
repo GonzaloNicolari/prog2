@@ -28,7 +28,7 @@ struct rep_avl {
 
 	nat altura, cantidad;
 
-	avl_t izq, der;
+	rep_avl *izq, *der;
 
 };
 
@@ -40,6 +40,8 @@ avl_t crear_avl() { return NULL; }
 
 bool es_vacio_avl(avl_t avl) { return avl == NULL; }
 
+
+
 nat cantidad_en_avl(avl_t avl) { return es_vacio_avl(avl) ? 0 : avl->cantidad; }
 
 
@@ -47,24 +49,31 @@ nat cantidad_en_avl(avl_t avl) { return es_vacio_avl(avl) ? 0 : avl->cantidad; }
 nat altura_de_avl(avl_t avl) { return es_vacio_avl(avl) ? 0 : avl->altura; }
 
 
+
 static int balance_de_avl(avl_t a) { return a == NULL ? 0 : altura_de_avl(a->izq) - altura_de_avl(a->der); }
+
 
 
 static avl_t rotarD(avl_t a, int &fb) {
 
 	avl_t aux		= a->izq;
+
 	avl_t aux2		= aux->der;
 
 	aux->der		= a;
 
 	a->izq			= aux2;
+
 	a->altura		= std::max(altura_de_avl(a->izq), altura_de_avl(a->der)) + 1;
 
 	a->cantidad		= cantidad_en_avl(a->izq) + cantidad_en_avl(a->der) + 1;
+
 	aux->altura		= std::max(altura_de_avl(aux->izq), altura_de_avl(aux->der)) + 1;
 
 	aux->cantidad	= cantidad_en_avl(aux->izq) + cantidad_en_avl(aux->der) + 1;
+
 	fb				= balance_de_avl(aux);
+
 	return aux;
 
 }
@@ -74,18 +83,23 @@ static avl_t rotarD(avl_t a, int &fb) {
 static avl_t rotarI(avl_t a, int &fb) {
 
 	avl_t aux		= a->der;
+
 	avl_t aux2		= aux->izq;
 
 	aux->izq		= a;
 
 	a->der			= aux2;
+
 	a->altura		= std::max(altura_de_avl(a->izq), altura_de_avl(a->der)) + 1;
 
 	a->cantidad		= cantidad_en_avl(a->izq) + cantidad_en_avl(a->der) + 1;
+
 	aux->altura		= std::max(altura_de_avl(aux->izq), altura_de_avl(aux->der)) + 1;
 
 	aux->cantidad	= cantidad_en_avl(aux->izq) + cantidad_en_avl(aux->der) + 1;
+
 	fb				= balance_de_avl(aux);
+
 	return aux;
 
 }
@@ -131,30 +145,46 @@ void insertar_en_avl(info_t i, avl_t &avl) {
 
 
 
-	avl->altura = std::max(altura_de_avl(avl->izq), altura_de_avl(avl->der)) + 1;
-	avl->cantidad = cantidad_en_avl(avl->izq) + cantidad_en_avl(avl->der) + 1;
+	avl->altura		= std::max(altura_de_avl(avl->izq), altura_de_avl(avl->der)) + 1;
 
-	int fact_bal = balance_de_avl(avl);
-	//printf("%d\n", fact_bal);
+	avl->cantidad	= cantidad_en_avl(avl->izq) + cantidad_en_avl(avl->der) + 1;
+
+	int fact_bal	= balance_de_avl(avl);
+
+
 
 	// Left left case.
+
 	if (fact_bal > 1 && numero_info(i) < numero_info(avl->izq->dato)) avl = rotarD(avl, fact_bal);
+
 	
+
 	// Right right case.
-	if (fact_bal < -1 && numero_info(i) > numero_info(avl->der->dato)) avl = rotarI(avl, fact_bal);
+
+	else if (fact_bal < -1 && numero_info(i) > numero_info(avl->der->dato)) avl = rotarI(avl, fact_bal);
+
+
 
 	// Left right case.
-	if (fact_bal > 1 && avl->izq != NULL && numero_info(i) > numero_info(avl->izq->dato)) {
-	avl->izq	= rotarI(avl->izq, fact_bal);
 
-	avl			= rotarD(avl, fact_bal);
+	else if (fact_bal > 1 && avl->izq != NULL && numero_info(i) > numero_info(avl->izq->dato)) {
+
+		avl->izq	= rotarI(avl->izq, fact_bal);
+
+		avl			= rotarD(avl, fact_bal);
+
 	}
 
-	// Left right case.
-	if (fact_bal < -1 && avl->der != NULL && numero_info(i) < numero_info(avl->der->dato)) {
-	avl->der	= rotarD(avl->der, fact_bal);
 
-	avl			= rotarI(avl, fact_bal);
+
+	// Left right case.
+
+	else if (fact_bal < -1 && avl->der != NULL && numero_info(i) < numero_info(avl->der->dato)) {
+
+		avl->der	= rotarD(avl->der, fact_bal);
+
+		avl			= rotarI(avl, fact_bal);
+
 	}
 
 }
