@@ -4,10 +4,14 @@
 
 #include "../include/avl.h"
 #include "../include/info.h"
+#include "../include/pila.h"
+#include "../include/cola_avls.h"
+
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <algorithm>
+#include <limits.h>
 
 struct rep_avl {
 	info_t dato;
@@ -212,7 +216,24 @@ avl_t avl_min(nat h) {
 	Ver ejemplos en la letra y en el caso 404.
  */
 void imprimir_avl(avl_t avl) {
-	
+	if (!es_vacio_avl(avl)) {
+		pila_t p			= crear_pila(INT_MAX);
+		cola_avls_t cavl	= crear_cola_avls();
+		encolar(avl, cavl);
+		while (!es_vacia_cola_avls(cavl)) {
+			avl = frente(cavl);
+			desencolar(cavl);
+			apilar(numero_info(avl->dato), p);
+			if (!es_vacio_avl(avl->izq)) encolar(avl->izq, cavl);
+			if (!es_vacio_avl(avl->der)) encolar(avl->der, cavl);
+		}
+		while (!es_vacia_pila(p)) {
+			printf("%d", cima(p));
+			desapilar(p);
+		}
+		liberar_pila(p);
+		liberar_cola_avls(cavl);
+	}
 }
 
 /*
