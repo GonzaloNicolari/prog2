@@ -13,8 +13,6 @@ struct nodo {
 	nodo	*siguiente;
 };
 
-//typedef struct nodo *localizador_t;
-
 struct rep_cola_avls {
     nodo *inicio;
     nodo *final;
@@ -45,19 +43,23 @@ void encolar(avl_t b, cola_avls_t &c) {
  */
 void desencolar(cola_avls_t &c) {
 	if (!es_vacia_cola_avls(c)) {
-		c->inicio = c->inicio->siguiente;
-		if (c->inicio == NULL) c->final = NULL;
+		if (c->inicio == c->final) {
+			delete c->inicio;
+			c->inicio	= NULL;
+			c->final	= NULL;
+		} else c->inicio = c->inicio->siguiente;
 	}
 }
 
 /* Libera la memoria asignada a `c', pero NO la de sus elementos. */
 void liberar_cola_avls(cola_avls_t &c) {
-	nodo *a_borrar;
-	nodo *rec = c->inicio;
-	while (rec != NULL) {
-		a_borrar	= rec;
-		rec			= rec->siguiente;
-		delete(a_borrar);
+	if (!es_vacia_cola_avls(c)) {
+		nodo *rec = c->inicio;
+		while (rec != NULL) {
+			c->inicio = rec->siguiente;
+			delete rec;
+			rec = c->inicio;
+		}
 	}
 	delete c;
 }
