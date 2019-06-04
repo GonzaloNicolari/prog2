@@ -26,7 +26,7 @@ iterador_t crear_iterador() {
 	res->fin		= NULL;
 	res->bloqueado	= false;
 	return res;
-} // crear_iterador
+}
 
 void liberar_iterador(iterador_t &iter) {
 	iter->actual = iter->inicio;
@@ -37,7 +37,7 @@ void liberar_iterador(iterador_t &iter) {
 		delete a_borrar;
 	}
 	delete iter;
-} // liberar_iterador
+}
 
 void bloquear_iterador(iterador_t &iter) { iter->bloqueado = true; }
 
@@ -50,7 +50,7 @@ void agregar_a_iterador(info_t info, iterador_t &iter) {
 		else iter->inicio = nuevo;
 		iter->fin = nuevo;
 	}
-} // agregar_a_iterador
+}
 
 void reiniciar_iterador(iterador_t &iter) {
 	if (iter->inicio != NULL) iter->actual = iter->inicio;
@@ -61,12 +61,12 @@ void avanzar_iterador(iterador_t &iter) { if (iter->actual != NULL) iter->actual
 
 info_t actual_en_iterador(iterador_t &iter) {
 	assert(esta_definida_actual(iter));
-	return (iter->actual != NULL) ? (iter->actual->dato) : NULL;
+	return (iter->actual != NULL) ? iter->actual->dato : NULL;
 }
 
 bool hay_siguiente_en_iterador(iterador_t iter) {
 	assert(esta_definida_actual(iter));
-	return (iter->actual->sig != NULL);
+	return iter->actual->sig != NULL;
 }
 
 bool esta_definida_actual(iterador_t iter) { return iter->actual != NULL; }
