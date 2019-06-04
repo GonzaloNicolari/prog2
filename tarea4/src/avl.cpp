@@ -63,7 +63,7 @@ static avl_t rotarI(avl_t a, int &fb) {
 */
 void insertar_en_avl(info_t i, avl_t &avl) {
 	assert(es_vacio_avl(buscar_en_avl(numero_info(i), avl)));
-	assert(numero_info(i) != INT_MAX);
+	assert(es_valida_info(i));
 	if (es_vacio_avl(avl)) {
 		avl				= new rep_avl;
 		avl->cantidad	= 1;
@@ -125,7 +125,8 @@ static info_t *en_orden_rec(info_t *res, nat &tope, avl_t avl) {
 	if (!es_vacio_avl(avl)) {
 		res			= en_orden_rec(res, tope, izq_avl(avl));
 		res[tope]	= raiz_avl(avl);
-		res			= en_orden_rec(res, tope, der_avl(avl));
+		tope++;
+		res = en_orden_rec(res, tope, der_avl(avl));
 	}
 	return res;
 }
@@ -154,10 +155,10 @@ static avl_t a2avl_rec(info_t *infos, int inf, int sup) {
 		res->dato	= infos[medio];
 		res->izq	= a2avl_rec(infos, inf, medio - 1);
 		res->der	= a2avl_rec(infos, medio + 1, sup);
-		res->altura	= 0;
+		//res->altura	= ;
 		//res->cantidad = 1.44 * altura;
 	}
-	res->altura++;
+	//res->altura++;
 	return res;
 }
 
@@ -216,44 +217,93 @@ avl_t avl_min(nat h) {
 	Ver ejemplos en la letra y en el caso 404.
  */
 void imprimir_avl(avl_t avl) {
-	if (!es_vacio_avl(avl)) {
-		cola_avls_t cavl = crear_cola_avls();
-		encolar(avl, cavl);
-		encolar(NULL, cavl);
-		while (!es_vacia_cola_avls(cavl)) {
-			avl_t a = frente(cavl);
-			if (!es_vacio_avl(a)) {
-				printf("%d\n", numero_info(raiz_avl(a)));
-				if (!es_vacio_avl(avl->izq)) encolar(avl->izq, cavl);
-				if (!es_vacio_avl(avl->der)) encolar(avl->der, cavl);
-				desencolar(cavl);
-			} else {
-				encolar(NULL, cavl);
-				printf("\n");
-			}
-		}
-	}
 	/*
 	if (!es_vacio_avl(avl)) {
-		pila_t p			= crear_pila(5000);//INT_MAX
+		pila_t p			= crear_pila(avl->altura + avl->cantidad);
+		avl_t flag			= new rep_avl;
+		flag->dato			= crear_info(INT_MAX, NULL);
 		cola_avls_t cavl	= crear_cola_avls();
 		encolar(avl, cavl);
+		encolar(flag, cavl);
 		while (!es_vacia_cola_avls(cavl)) {
 			avl = frente(cavl);
-			desencolar(cavl);
-			apilar(numero_info(avl->dato), p);
-			if (!es_vacio_avl(avl->izq)) encolar(avl->izq, cavl);
-			if (!es_vacio_avl(avl->der)) encolar(avl->der, cavl);
+			if (avl != NULL) {
+				apilar(numero_info(avl->dato), p);
+				if (!es_vacio_avl(avl->der)) encolar(avl->der, cavl);
+				if (!es_vacio_avl(avl->izq)) encolar(avl->izq, cavl);
+				desencolar(cavl);
+			} else {
+				encolar(flag, cavl);
+				print("\n");
+			}
 		}
 		while (!es_vacia_pila(p)) {
-			printf("%d\n", cima(p));
+			if (cima(p) != INT_MAX) printf("%d ", cima(p));
+			else printf("\n");
 			desapilar(p);
 		}
 		liberar_pila(p);
 		liberar_cola_avls(cavl);
 	}
 	*/
+	
+	if (!es_vacio_avl(avl)) {
+		pila_t p			= crear_pila(avl->altura + avl->cantidad);
+		cola_avls_t cavl	= crear_cola_avls();
+		encolar(avl, cavl);
+		while (!es_vacia_cola_avls(cavl)) {
+			avl = frente(cavl);
+			desencolar(cavl);
+			apilar(numero_info(avl->dato), p);
+			if (!es_vacio_avl(avl->der)) encolar(avl->der, cavl);
+			if (!es_vacio_avl(avl->izq)) encolar(avl->izq, cavl);
+			apilar(INT_MAX, p);
+		}
+		while (!es_vacia_pila(p)) {
+			if (cima(p) != INT_MAX) printf("%d ", cima(p));
+			else printf("\n");
+			desapilar(p);
+		}
+		liberar_pila(p);
+		liberar_cola_avls(cavl);
+	}
+	
 }
+
+/*
+static void imprimir_nivel(avl_t a, nat n) {
+    if (!es_vacio_avl(a)) { 
+        if (n == 0)
+            printf("\n");
+        if ((a->izq == NULL) && (a->der == NULL)) {
+                nat i = 0;
+                while (i != n){
+                    printf("%c",'-');
+                    i++;
+                }
+                printf("(%d,%s)\n", numero_info(a->dato), frase_info(a->dato));
+        }else{
+            imprimir_nivel(a->der, n+1);
+            nat i = 0;
+            while (i != n) {
+                printf("%c",'-');
+                i++;
+            }
+            printf("(%d,%s)\n", numero_info(a->dato), frase_info(a->dato));
+            imprimir_nivel(a->izq, n+1);
+        }
+    }
+}
+
+void imprimir_avl(avl_t avl) {
+    if (avl == NULL){
+        printf("\n");
+    } else {
+        int a = 0;
+        imprimir_nivel(avl, a);
+    }
+}
+*/
 
 /*
 	Libera la memoria asignada a `avl' y la de sus elementos.
@@ -261,9 +311,9 @@ void imprimir_avl(avl_t avl) {
  */
 void liberar_avl(avl_t &avl) {
 	if (!es_vacio_avl(avl)) {
+		liberar_info(avl->dato);
 		liberar_avl(avl->der);
 		liberar_avl(avl->izq);
-		liberar_info(avl->dato);
 		delete (avl);
 	}
 }
