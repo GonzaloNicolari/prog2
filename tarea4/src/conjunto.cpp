@@ -80,19 +80,12 @@ conjunto_t union_conjunto(conjunto_t c1, conjunto_t c2) {
 		iterador_t it2 = iterador_conjunto(c2);
 		reiniciar_iterador(it2);
 		while (esta_definida_actual(it2)) {
-			if (buscar_en_avl(numero_info(actual_en_iterador(it2)), c->arbol) == NULL)
-				insertar_en_avl(copia_info(actual_en_iterador(it2)), c->arbol);
+			if (buscar_en_avl(numero_info(actual_en_iterador(it2)), c->arbol) == NULL) insertar_en_avl(copia_info(actual_en_iterador(it2)), c->arbol);
 			avanzar_iterador(it2);
 		}
 		liberar_iterador(it2);
 	}
 	return c;
-}
-
-static void auxDiferencia(avl_t arbol1, avl_t arbol2, avl_t &res) {
-	if (!es_vacio_avl(izq_avl(arbol1)))	auxDiferencia(izq_avl(arbol1), arbol2, res);
-	if (!es_vacio_avl(der_avl(arbol1)))	auxDiferencia(der_avl(arbol1), arbol2, res);
-	if ((buscar_en_avl(numero_info(raiz_avl(arbol1)), arbol2) == NULL) && es_valida_info(raiz_avl(arbol1))) insertar_en_avl(raiz_avl(arbol1), res);
 }
 
 /*
@@ -103,8 +96,22 @@ static void auxDiferencia(avl_t arbol1, avl_t arbol2, avl_t &res) {
 conjunto_t diferencia(conjunto_t c1, conjunto_t c2) {
 	conjunto_t c	= new rep_conjunto();
 	c->arbol		= crear_avl();
-	if (c1 != NULL && c2 != NULL) auxDiferencia(c1->arbol, c2->arbol, c->arbol);
-	else if (c1 != NULL) insertar_en_avl(copia_info(raiz_avl(c1->arbol)), c->arbol);
+	if (c1 != NULL) {
+		iterador_t it = iterador_conjunto(c1);
+		reiniciar_iterador(it);
+		if (c2 != NULL) {
+			while (esta_definida_actual(it)) {
+				if (buscar_en_avl(numero_info(actual_en_iterador(it)), c2->arbol) == NULL) insertar_en_avl(copia_info(actual_en_iterador(it)), c->arbol);
+				avanzar_iterador(it);
+			}
+		} else {
+			while (esta_definida_actual(it)) {
+				insertar_en_avl(copia_info(actual_en_iterador(it)), c->arbol);
+				avanzar_iterador(it);
+			}
+			liberar_iterador(it);
+		}
+	}
 	return c;
 }
 
