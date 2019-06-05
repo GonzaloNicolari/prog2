@@ -25,31 +25,10 @@ conjunto_t crear_conjunto() { return NULL; }
   El tiempo de ejecución es O(1).
  */
 conjunto_t singleton(info_t i) {
-	conjunto_t c	= new rep_conjunto();
-	c->arbol		= crear_avl();
+	conjunto_t c = new rep_conjunto();
 	if (i != NULL && es_valida_info(i)) insertar_en_avl(i, c->arbol);
 	return c;
 }
-/*
-static void auxUnion_Conjunto(conjunto_t &c, avl_t a) {//, bool flag) {
-	
-	if (!es_vacio_avl(izq_avl(a))) auxUnion_Conjunto(c, izq_avl(a), flag);
-	if (!es_vacio_avl(der_avl(a))) auxUnion_Conjunto(c, der_avl(a), flag);
-	if (flag) {
-		if ((buscar_en_avl(numero_info(raiz_avl(a)), c->arbol) == NULL) && es_valida_info(raiz_avl(a))) 
-			insertar_en_avl(copia_info(raiz_avl(a)), c->arbol);
-	} else insertar_en_avl(copia_info(raiz_avl(a)), c->arbol);
-	
-
-	
-	if (!es_vacio_avl(a)) {
-		auxUnion_Conjunto(c, izq_avl(a));
-		auxUnion_Conjunto(c, der_avl(a));
-		if (buscar_en_avl(numero_info(raiz_avl(a)), c->arbol) == NULL) insertar_en_avl(copia_info(raiz_avl(a)), c->arbol);
-	}
-	
-}
-*/
 
 /*
   Devuelve un conjunto_t con los elementos que pertenecen a `c1' o `c2'.
@@ -58,15 +37,7 @@ static void auxUnion_Conjunto(conjunto_t &c, avl_t a) {//, bool flag) {
   El conjunto_t devuelto no comparte memoria ni con `c1' no con `c2'.
  */
 conjunto_t union_conjunto(conjunto_t c1, conjunto_t c2) {
-	/*
-	conjunto_t c	= new rep_conjunto();
-	c->arbol		= crear_avl();
-	if (c1 != NULL) auxUnion_Conjunto(c, c1->arbol);//, false);
-	if (c2 != NULL) auxUnion_Conjunto(c, c2->arbol);//, true);
-	return c;
-	*/
-	conjunto_t c	= new rep_conjunto();
-	c->arbol		= crear_avl();
+	conjunto_t c = new rep_conjunto();
 	if (c1 != NULL) {
 		iterador_t it1 = iterador_conjunto(c1);
 		reiniciar_iterador(it1);
@@ -94,8 +65,7 @@ conjunto_t union_conjunto(conjunto_t c1, conjunto_t c2) {
   El conjunto_t devuelto no comparte memoria ni con `c1' no con `c2'.
  */
 conjunto_t diferencia(conjunto_t c1, conjunto_t c2) {
-	conjunto_t c	= new rep_conjunto();
-	c->arbol		= crear_avl();
+	conjunto_t c = new rep_conjunto();
 	if (c1 != NULL) {
 		iterador_t it = iterador_conjunto(c1);
 		reiniciar_iterador(it);
@@ -109,8 +79,8 @@ conjunto_t diferencia(conjunto_t c1, conjunto_t c2) {
 				insertar_en_avl(copia_info(actual_en_iterador(it)), c->arbol);
 				avanzar_iterador(it);
 			}
-			liberar_iterador(it);
 		}
+		liberar_iterador(it);
 	}
 	return c;
 }
@@ -148,8 +118,7 @@ bool es_vacio_conjunto(conjunto_t c) { return c == NULL; }
   El tiempo de ejecución es O(n).
  */
 conjunto_t arreglo_a_conjunto(info_t *infos, nat n) {
-	conjunto_t c	= new rep_conjunto();
-	c->arbol		= crear_avl();
+	conjunto_t c = new rep_conjunto();
 	for (nat i = 0; i < n; i++)
 		if (es_valida_info(infos[i])) insertar_en_avl(infos[i], c->arbol);
 	return c;
