@@ -217,57 +217,6 @@ avl_t avl_min(nat h) {
 	Ver ejemplos en la letra y en el caso 404.
  */
 void imprimir_avl(avl_t avl) {
-	/*
-	if (!es_vacio_avl(avl)) {
-		pila_t p			= crear_pila(avl->altura + avl->cantidad);
-		avl_t flag			= new rep_avl;
-		flag->dato			= crear_info(INT_MAX, NULL);
-		cola_avls_t cavl	= crear_cola_avls();
-		encolar(avl, cavl);
-		encolar(flag, cavl);
-		while (!es_vacia_cola_avls(cavl)) {
-			avl = frente(cavl);
-			if (avl != NULL) {
-				apilar(numero_info(avl->dato), p);
-				if (!es_vacio_avl(avl->der)) encolar(avl->der, cavl);
-				if (!es_vacio_avl(avl->izq)) encolar(avl->izq, cavl);
-				desencolar(cavl);
-			} else {
-				encolar(flag, cavl);
-				print("\n");
-			}
-		}
-		while (!es_vacia_pila(p)) {
-			if (cima(p) != INT_MAX) printf("%d ", cima(p));
-			else printf("\n");
-			desapilar(p);
-		}
-		liberar_pila(p);
-		liberar_cola_avls(cavl);
-	}
-	*/
-	/*
-	if (!es_vacio_avl(avl)) {
-		pila_t p			= crear_pila(avl->altura + avl->cantidad);
-		cola_avls_t cavl	= crear_cola_avls();
-		encolar(avl, cavl);
-		while (!es_vacia_cola_avls(cavl)) {
-			avl = frente(cavl);
-			desencolar(cavl);
-			apilar(numero_info(avl->dato), p);
-			if (!es_vacio_avl(avl->der)) encolar(avl->der, cavl);
-			if (!es_vacio_avl(avl->izq)) encolar(avl->izq, cavl);
-			apilar(INT_MAX, p);
-		}
-		while (!es_vacia_pila(p)) {
-			if (cima(p) != INT_MAX) printf("%d ", cima(p));
-			else printf("\n");
-			desapilar(p);
-		}
-		liberar_pila(p);
-		liberar_cola_avls(cavl);
-	}
-	*/
 	if (!es_vacio_avl(avl)) {
 		pila_t p			= crear_pila(avl->altura + avl->cantidad);
 		cola_avls_t cavl	= crear_cola_avls();
@@ -304,44 +253,7 @@ void imprimir_avl(avl_t avl) {
 		liberar_pila(p);
 		liberar_cola_avls(cavl);
 	}
-	
-	
 }
-
-/*
-static void imprimir_nivel(avl_t a, nat n) {
-    if (!es_vacio_avl(a)) { 
-        if (n == 0)
-            printf("\n");
-        if ((a->izq == NULL) && (a->der == NULL)) {
-                nat i = 0;
-                while (i != n){
-                    printf("%c",'-');
-                    i++;
-                }
-                printf("(%d,%s)\n", numero_info(a->dato), frase_info(a->dato));
-        }else{
-            imprimir_nivel(a->der, n+1);
-            nat i = 0;
-            while (i != n) {
-                printf("%c",'-');
-                i++;
-            }
-            printf("(%d,%s)\n", numero_info(a->dato), frase_info(a->dato));
-            imprimir_nivel(a->izq, n+1);
-        }
-    }
-}
-
-void imprimir_avl(avl_t avl) {
-    if (avl == NULL){
-        printf("\n");
-    } else {
-        int a = 0;
-        imprimir_nivel(avl, a);
-    }
-}
-*/
 
 /*
 	Libera la memoria asignada a `avl' y la de sus elementos.
