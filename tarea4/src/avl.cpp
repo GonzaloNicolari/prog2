@@ -150,15 +150,14 @@ static avl_t a2avl_rec(info_t *infos, int inf, int sup) {
 	avl_t res;
 	if (inf > sup) res = NULL;
 	else {
-		nat medio	= (inf + sup) / 2;
-		res			= new rep_avl;
-		res->dato	= infos[medio];
-		res->izq	= a2avl_rec(infos, inf, medio - 1);
-		res->der	= a2avl_rec(infos, medio + 1, sup);
-		//res->altura	= ;
-		//res->cantidad = 1.44 * altura;
+		nat medio		= (inf + sup) / 2;
+		res				= new rep_avl;
+		res->dato		= infos[medio];
+		res->izq		= a2avl_rec(infos, inf, medio - 1);
+		res->der		= a2avl_rec(infos, medio + 1, sup);
+		res->altura		= std::max(altura_de_avl(res->izq), altura_de_avl(res->der)) + 1;
+		res->cantidad	= cantidad_en_avl(res->izq) + cantidad_en_avl(res->der) + 1;
 	}
-	//res->altura++;
 	return res;
 }
 
