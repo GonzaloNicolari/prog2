@@ -31,7 +31,10 @@ void encolar(avl_t b, cola_avls_t &c) {
 	nodo *cavl		= new nodo;
 	cavl->arbol		= b;
 	cavl->siguiente	= NULL;
-	if (es_vacia_cola_avls(c)) c->inicio = cavl;
+	if (es_vacia_cola_avls(c)){
+		c->inicio = cavl;
+		c->final  = cavl;
+	}
 	else c->final->siguiente = cavl;
 	c->final = cavl;
 }
