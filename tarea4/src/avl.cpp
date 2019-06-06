@@ -246,7 +246,7 @@ void imprimir_avl(avl_t avl) {
 		liberar_cola_avls(cavl);
 	}
 	*/
-	
+	/*
 	if (!es_vacio_avl(avl)) {
 		pila_t p			= crear_pila(avl->altura + avl->cantidad);
 		cola_avls_t cavl	= crear_cola_avls();
@@ -267,6 +267,44 @@ void imprimir_avl(avl_t avl) {
 		liberar_pila(p);
 		liberar_cola_avls(cavl);
 	}
+	*/
+	if (!es_vacio_avl(avl)) {
+		pila_t p			= crear_pila(avl->altura + avl->cantidad);
+		cola_avls_t cavl	= crear_cola_avls();
+		int prox_nivel		= 1;
+		int restantes		= 1;
+		int actual_nivel	= 0;
+		encolar(avl, cavl);
+		while (!es_vacia_cola_avls(cavl)) {
+			if (restantes == 0) {
+				restantes		= prox_nivel;
+				prox_nivel		= 0;
+				actual_nivel	= 0;
+				apilar(INT_MAX, p);
+			}
+			apilar(numero_info(avl->dato), p);
+			actual_nivel++;
+			avl = frente(cavl);
+			desencolar(cavl);
+			if (!es_vacio_avl(avl->der)) {
+				prox_nivel++;
+				encolar(avl->der, cavl);
+			}
+			if (!es_vacio_avl(avl->izq)) {
+				prox_nivel++;
+				encolar(avl->izq, cavl);
+			}
+			restantes--;
+		}
+		while (!es_vacia_pila(p)) {
+			if (cima(p) != INT_MAX) printf("%d ", cima(p));
+			else printf("\n");
+			desapilar(p);
+		}
+		liberar_pila(p);
+		liberar_cola_avls(cavl);
+	}
+	
 	
 }
 
