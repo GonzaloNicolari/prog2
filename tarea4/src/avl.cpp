@@ -218,9 +218,9 @@ avl_t avl_min(nat h) {
  */
 void imprimir_avl(avl_t avl) {
 	if (!es_vacio_avl(avl)) {
-		pila_t p			= crear_pila(avl->altura + avl->cantidad);
+		pila_t p			= crear_pila(avl->altura + avl->cantidad - 1);
 		cola_avls_t cavl	= crear_cola_avls();
-		int prox_nivel		= 1;
+		int prox_nivel		= 0;
 		int restantes		= 1;
 		int actual_nivel	= 0;
 		encolar(avl, cavl);
@@ -231,9 +231,9 @@ void imprimir_avl(avl_t avl) {
 				actual_nivel	= 0;
 				apilar(INT_MAX, p);
 			}
+			avl = frente(cavl);
 			apilar(numero_info(avl->dato), p);
 			actual_nivel++;
-			avl = frente(cavl);
 			desencolar(cavl);
 			if (!es_vacio_avl(avl->der)) {
 				prox_nivel++;
@@ -252,6 +252,7 @@ void imprimir_avl(avl_t avl) {
 		}
 		liberar_pila(p);
 		liberar_cola_avls(cavl);
+		printf("\n");
 	}
 }
 
