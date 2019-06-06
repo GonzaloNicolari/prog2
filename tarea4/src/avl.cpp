@@ -180,17 +180,21 @@ static avl_ultimo avl_min_rec(nat h, nat primero) {
 		res.avl		= NULL;
 		res.ultimo	= primero - 1;
 	} else if (h == 1) {
-		// TODO: completar.
-		res.avl					= new rep_avl;
-		//res.avl->dato->frase	= "";
-		res.avl->der			= NULL;
-		res.avl->izq			= new rep_avl;
-		avl_t iz				= res.avl->izq;
-		//iz->dato->frase		= "";
-		iz->izq					= NULL;
-		iz->der					= NULL;
+		info_t i = crear_info(h, NULL);
+		insertar_en_avl(i, res.avl);
+		res.ultimo			= h;
+		avl_ultimo nuevoIzq	= avl_min_rec(h - 1, primero);
+		res.avl->izq		= nuevoIzq.avl;
+		//res.avl->der		= avl_min(h - 2);
+		res.avl->der		= NULL;
 	} else {
-		// TODO: completar.
+		info_t i		= crear_info(h, NULL);
+		insertar_en_avl(i, res.avl);
+		res.ultimo			= h;
+		avl_ultimo nuevoIzq	= avl_min_rec(h - 1, primero);
+		res.avl->izq		= nuevoIzq.avl;
+		avl_ultimo nuevoDer	= avl_min_rec(h - 2, primero);
+		res.avl->der		= nuevoDer.avl;
 	}
 	return res;
 }
