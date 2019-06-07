@@ -198,13 +198,17 @@ static avl_ultimo avl_min_rec(nat h, nat primero) {
 		info_t i			= crear_nulo(h);
 		res.avl				= new rep_avl;
 		res.avl->dato		= i;
-		avl_ultimo avlD		= avl_min_rec(h - 1, primero);
-		res.avl->izq		= avlD.avl;
-		avl_ultimo avlI		= avl_min_rec(h - 2, primero);
-		res.avl->der		= avlI.avl;
+		
+		avl_ultimo avlI		= avl_min_rec(h - 1, primero);
+		res.avl->izq		= avlI.avl;
+		
+		avl_ultimo avlD		= avl_min_rec(h - 2, res.ultimo + 1);
+		res.avl->der		= avlD.avl;
+		
 		res.avl->altura		= std::max(altura_de_avl(res.avl->izq), altura_de_avl(res.avl->der)) + 1;
 		res.avl->cantidad	= cantidad_en_avl(res.avl->izq) + cantidad_en_avl(res.avl->der) + 1;
-		res.ultimo			= std::max(avlD.ultimo, numero_info(i));
+		
+		res.ultimo			= std::max(avlD.ultimo, numero_info(res.avl->dato));
 	}
 	return res;
 }
