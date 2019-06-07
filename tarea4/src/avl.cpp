@@ -174,27 +174,37 @@ struct avl_ultimo {
 	int ultimo;
 };
 
+static info_t crear_nulo(nat h) {
+	char *nulo	= new char[1];
+	nulo[0]		= '\0';
+	return crear_info(h, nulo);
+}
+
 static avl_ultimo avl_min_rec(nat h, nat primero) {
 	avl_ultimo res;
 	if (h == 0) {
 		res.avl		= NULL;
 		res.ultimo	= primero - 1;
 	} else if (h == 1) {
-		info_t i = crear_info(h, NULL);
-		insertar_en_avl(i, res.avl);
-		res.ultimo			= h;
-		avl_ultimo nuevoIzq	= avl_min_rec(h - 1, primero);
-		res.avl->izq		= nuevoIzq.avl;
-		//res.avl->der		= avl_min(h - 2);
+		info_t i			= crear_nulo(h);
+		res.avl				= new rep_avl;
+		res.avl->cantidad	= 1;
+		res.avl->altura		= 1;
+		res.avl->dato		= i;
+		res.avl->izq		= NULL;
 		res.avl->der		= NULL;
-	} else {
-		info_t i		= crear_info(h, NULL);
-		insertar_en_avl(i, res.avl);
 		res.ultimo			= h;
-		avl_ultimo nuevoIzq	= avl_min_rec(h - 1, primero);
-		res.avl->izq		= nuevoIzq.avl;
-		avl_ultimo nuevoDer	= avl_min_rec(h - 2, primero);
-		res.avl->der		= nuevoDer.avl;
+	} else {
+		info_t i			= crear_nulo(h);
+		res.avl				= new rep_avl;
+		res.avl->dato		= i;
+		avl_ultimo avlD		= avl_min_rec(h - 1, primero);
+		res.avl->izq		= avlD.avl;
+		avl_ultimo avlI		= avl_min_rec(h - 2, primero);
+		res.avl->der		= avlI.avl;
+		res.avl->altura		= std::max(altura_de_avl(res.avl->izq), altura_de_avl(res.avl->der)) + 1;
+		res.avl->cantidad	= cantidad_en_avl(res.avl->izq) + cantidad_en_avl(res.avl->der) + 1;
+		res.ultimo			= std::max(avlD.ultimo, numero_info(i));
 	}
 	return res;
 }
